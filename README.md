@@ -10,6 +10,10 @@ https://github.com/panique/mini3
 
 Que por cotna da sua clareza me permitiu entender como se cria um bom aplicativo em PHP usando MVC.
 
+## Índice do Livro
+
+[indice.pdf](indice.pdf)
+
 ## Livro
 
 [phpoo.pdf](phpoo.pdf)
