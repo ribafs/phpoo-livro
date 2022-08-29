@@ -34,3 +34,10 @@ Na pasta Repositório
 - PHPModerno
 - Tutoriais
 
+## Sugestões
+
+Serão bem vindas. Use o forum para isso - [https://github.com/ribafs/phpoo-livro/discussions](https://github.com/ribafs/phpoo-livro/discussions)
+
+## Licença
+
+MIT
