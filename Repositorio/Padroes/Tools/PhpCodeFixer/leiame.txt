@@ -1,0 +1,21 @@
+Download
+https://github.com/wapmorgan/PhpCodeFixer/releases
+
+composer install
+
+chmod +x bin/phpcf
+
+cp bin/phpcf /usr/local/bin/phpcf
+
+bin/phpcf arquivoOudiretorio
+bin/phpcf /backup/www/adminer.php
+
+Ajuda
+
+bin/phpcf -h
+
+Procura
+- Usage of deprecated functionality (functions / variables / ini-directives / constants).
+- Usage of functions with changed behavior.
+- Usage of reserved identifiers in newer versions.
+

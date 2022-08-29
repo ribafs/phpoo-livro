@@ -1,0 +1,32 @@
+Autoload no PHP 7.2
+
+classes/
+    Pessoa.php
+    Veiculo.php
+
+classes/Pessoa.php
+class Pessoa{
+    public $nome;
+}
+
+classes/Veiculo.php
+class Veiculo{
+    public $placa;
+}
+
+exemplo.php
+
+function meu_autoloader($class){
+    require_once 'classes' . $class . '.php';
+}
+
+spl_autoload_register('meu_autoloader');
+
+// Daqui pra frente terei acesso a todas as classes da pasta classes sem usar include
+
+$p = Pessoa();
+
+$v = Veiculo();
+
+https://www.youtube.com/watch?v=uLH4skT16m8
+

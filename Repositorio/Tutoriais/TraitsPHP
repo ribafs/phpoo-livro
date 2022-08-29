@@ -1,0 +1,57 @@
+Usando Traits em PHP
+
+O PHP só permite herança única. Em outras palavras, uma classe pode estender apenas uma outra classe. Mas e se você precisar inclui algo que não pertence à classe pai? Antes do PHP 5.4, você teria que ser criativo, mas em 5.4 Traços foram introduzidos. As características permitem que você basicamente "copie e cole" uma parte de uma classe em sua classe principal.
+
+Traits em PHP são uma forma de reutilizar código e de suprir a falta de herança múltipla até a versão 5.4 do PHP.
+Eles permitem a reutilização horizontal de código através de classes independentes.
+
+Então aqui temos MrEd, que já está estendendo Horse. Mas nem todos os cavalos falam, então temos uma Característica para isso. Vamos observe o que isso está fazendo
+Primeiro, definimos nossa característica. Podemos usá-lo com autoload e namespaces (veja também Referenciando uma classe ou função em um namespace). Em seguida, incluímos em nossa classe MrEd com a palavra-chave use.
+
+Você notará que MrEd começa a usar as funções e variáveis ​​Talk sem defini-las. Lembre-se do que nós disse sobre copiar e colar? Essas funções e variáveis ​​são todas definidas dentro da classe agora, como se esta classe tivesse os definiu.
+
+As características estão mais intimamente relacionadas às classes abstratas, pois você pode definir variáveis ​​e funções. Você também não pode instanciar uma característica diretamente (ou seja, nova característica ()). Traços não podem forçar uma classe a definir implicitamente uma função como um Uma classe abstrata ou uma interface pode. Os traços são apenas para definições explícitas (uma vez que você pode implementar tantos 
+
+Interfaces como você deseja, consulte Interfaces).
+
+Quando devo usar uma característica?
+
+A primeira coisa que você deve fazer, ao considerar uma Característica, é se perguntar esta importante questão
+
+Posso evitar o uso de uma característica reestruturando meu código?
+
+Na maioria das vezes, a resposta será sim. Traits são casos extremos causados ​​por herança única. O tentação de mau uso ou uso excessivo As características podem ser altas. Mas considere que um traço apresenta outra fonte para o seu código, o que significa que há outra camada de complexidade. No exemplo aqui, estamos lidando apenas com 3 classes. Mas Traços significam que agora você pode lidar com muito mais do que isso. Para cada característica, sua classe se torna muito mais difícil
+para lidar com isso, já que agora você deve consultar cada Característica para descobrir o que ela define (e, potencialmente, onde um colisão ocorreu, consulte Resolução de Conflitos). Idealmente, você deve manter o mínimo possível de Características em seu código.
+
+Traços para facilitar a reutilização de código horizontal
+
+Exemplo
+
+<?php
+trait Ola
+{
+    function digaOla() {
+        echo "Olá";
+    }
+}
+
+trait Mundo
+{
+    function digaMundo() {
+        echo " Mundo";
+    }
+}
+
+class MeuMundo
+{
+    use Ola, Mundo;
+}
+
+$mundo = new MeuMundo();
+echo $mundo->digaOla() . $mundo->digaMundo(); //Olá Mundo
+
+Mais detalhes:
+https://www.sitepoint.com/using-traits-in-php-5-4/
+https://pt.slideshare.net/flaviogomesdasilvalisboa/traits-no-php-54-muito-alm-da-herana
+http://www.w3programmers.com/multiple-inheritance-in-php-using-traits/
+

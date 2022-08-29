@@ -1,0 +1,13 @@
+Declaração de Variáveis
+
+As vezes programadores tentam tornar seu código mais limpo declarando variáveis predefinidas com um nome diferente. O que isso faz na realidade e dobrar o consumo de memória do script. No exemplo abaixo, digamos que uma string de exemplo contém 1MB de dado válido, copiando a variável você aumenta o consumo de memória durante a execução para 2MB.
+
+<?php
+$about = 'Uma string com texto bem longo';
+echo $about;    // usa 2MB de memória
+
+// vs
+
+echo 'Uma string com texto bem longo';        // usa 1MB de memória
+
+Criar uma variável somente se necessário. Se vamos usar ao lado, não há necessidade de criar a variável, como acima

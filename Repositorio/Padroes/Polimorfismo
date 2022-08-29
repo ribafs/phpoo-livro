@@ -1,0 +1,4 @@
+Felype Rennan
+Outro exemplo de polimorfismo é uma interface USB: Ali naquele USB tu pode conectar qualquer coisa que tenha um plugue USB e vai funcionar, pode ser um mouse, pode ser um teclado, desde que o plugue seja o mesmo, vai funcionar. É essa a premissa do polimorfismo: Abrir uma conexão desacoplada entre classes que deve funcionar, independente de qual classe específica é, desde que a implementação da interface seja cumprida
+
+Grupo Clube de Programadores

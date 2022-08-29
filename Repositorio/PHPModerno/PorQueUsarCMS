@@ -1,0 +1,23 @@
+Formas principais de fazer um site:
+    1. Criá-lo com arquivos HTML estáticos; 
+    2. Programar todo o site, com uma linguagem de programação e um banco de dados; 
+    3. Utilizar um Sistema de Gerenciamento de Conteúdo (CMS), como o WordPress, ou Joomla; 
+
+Criar páginas estáticas tem vários problemas:
+    • Adicionar uma página nova pode exigir alterações manuais em todas as outras páginas; 
+    • Mudar elementos como menus e headers, também vão exigir mudanças em todas as outras páginas (a não ser que você use iframes, mas se você faz isso, meus pêsames); 
+    • Quando o cliente decidir mudar o visual e estrutura do site, vai haver muito retrabalho. É melhor jogar tudo fora e começar outro novo; 
+    • Fica muito mais fácil de acontecerem erros, devido a links quebrados, ou tags escritas incorretamente (afinal, qualquer um pode errar uma tag, às 3h da manhã, tendo que entregar tudo às 8h); 
+    • Segurança e técnicas novas de otimização serão difíceis de serem adicionadas, devido aos primeiros itens desta lista; 
+
+Os bons CMS’s já trazem funções como:
+    • Gerenciamento de usuários, logins, permissões 
+    • Categorização de conteúdos 
+    • Construção de menus 
+    • Temas visuais para todas as páginas 
+    • Mecanismos de imagens e vídeos para as páginas 
+    • Sistemas de blogs 
+    • Formulários de contato 
+    • Tradução e internacionalização 
+
+https://webdevacademy.com.br/artigos/por-que-usar-cms/

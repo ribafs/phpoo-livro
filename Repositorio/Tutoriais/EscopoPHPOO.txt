@@ -1,0 +1,273 @@
+Escopo no PHP
+
+Tanto em orientação a objetos quando estruturado
+
+No PHPOO existem escopos diferentes do PHP estruturado
+	- private, protected e public
+
+Quando criarmos uma propriedade numa classe tipo private
+  private $somenteaqui;
+
+private - Todos os métodos da classe podem acessá-la, para ler seu valor e para alterá-lo assim:
+  $this->somenteaqui;
+
+Mas somente nesta classe esta propriedade pode ser vista e em nenhuma outra classe mais.
+
+protected - Quando criamos uma propriedade numa classe do tipo protected
+  protected $familia
+
+Todos os métodos da própria classe podem acessar esta propriedade
+  $this->familia;
+
+Mas também todas as classes que estendem esta classe terão acesso a esta propriedade.
+
+public - Tanto nesta classe quanto em todas as outras esta propriedade é acessível
+  $this->publico
+
+As mesmas propriedades valem também para os métodos, pois podemos usar private, public e protected nos métodos e nas propriedades.
+
+Exemplo:
+
+class pessoa {
+	private $nome;
+	public $altura;
+	protected $posicao_social;
+	private $cpf;
+
+	function __construct($pessoa_nome) {
+		$this->nome = $pessoa_nome;
+	}
+
+	function set_nome($novo_nome) {
+		$this->nome = $novo_nome;
+	}
+
+	function get_nome() {
+		return $this->nome;
+	}
+}
+
+$pedro = new pessoa("Pedro Mesquita");
+echo "Nome completo do Pedro: " . $pedro->get_nome();
+
+	/* Como $cpf foi declarado private, a linha abaixo deverá gerar um erro.
+	Descomente para testar!
+	*/
+	//echo "Diga-me algo particular: " . $pedro->cpf;
+
+Exemplo de Herança
+
+<?php
+class Veiculos
+{
+  protected $numRodas;
+  protected $numPortas;
+  protected $cor;
+  protected $fabricante;
+  protected $modelo;
+  protected $chassi;
+  protected $preco;
+
+  protected function mostrarPreco(){
+    return $this->preco;
+  }
+
+  protected function funcionar(){
+    return 'Funcionando ...';
+  }
+
+}
+
+// Qualquer classe que extenda esta herdará todos seus métodos e propriedades
+
+require_once 'Motocicletas.php';
+
+$moto = new Motocicletas();
+
+$moto->cor();
+
+require_once 'Testes.php';
+$veiculo = new Veiculos();
+$veiculo->numRodas;
+// Receberá o erro: Fatal error: Uncaught Error: Cannot access protected property Veiculos::$numRoda
+
+
+<?php
+class Motocicletas extends Veiculos
+{
+  protected function testes(){
+    $this->numRodas = 2;
+    $this->numPortas = 0;
+    $this->cor = 'preta';
+    $this->fabricante = 'Honda';
+    $this->modelo = 'ML 125';
+    $this->preco = 65000;
+    print $this->numRodas;
+    print '<hr>';
+    print $this->mostrarPreco();
+  }
+
+  public function cor(){
+    $this->cor = 'preta';
+    print $this->cor;
+  }
+}
+
+// Classe que não herda de Veiculos para teste
+<?php
+
+class Testes
+{
+  public function testes(){
+    $this->numRodas = 2;
+print '<hr>';
+    print $this->numRodas;
+  
+  }
+}
+
+Outro exemplo de herança
+
+<?php
+// Retangulo é mais genérico, enquanto que quadrado é uma especialização de retângulos
+class Retangulos
+{
+    // Declare  properties
+    protected $comprimento = 0;
+    protected $largura = 0;
+    
+    // Method to get the perimeter
+    public function getPerimetro(){
+        return (2 * ($this->comprimento + $this->largura));
+    }
+    
+    // Method to get the area
+    public function getArea(){
+        return ($this->comprimento * $this->largura);
+    }
+}
+
+<?php
+
+require_once 'Retangulos.php';
+
+class Quadrados extends Retangulos
+{
+    public function __construct(){
+      $this->largura = 50;
+      $this->comprimento = 30;
+    }
+
+    public function largura(){     
+      return $this->largura;
+    }
+
+    public function comprimento(){     
+      return $this->comprimento;
+    }
+    
+    public function perimetro(){
+        $ret = $this->getPerimetro();
+        return $ret;
+    }
+
+    public function area(){
+      $ret = $this->getArea();
+      return $ret;
+    }
+}
+
+$ret = new Quadrados();
+
+print 'Largura - '.$ret->largura();
+print '<hr>';
+print 'Comprimento - '.$ret->comprimento();
+print '<hr>';
+
+print 'Perímetro - '.$ret->perimetro();
+print '<hr>';
+print 'Área - '.$ret->area();
+
+//print $ret->largura;// Acusará erro por ser protected
+
+
+Escopo de propriedades dentro e fora dos métodos/funções
+
+<?php
+     $globalNome = 'Ribamar';
+
+     function ola() {
+         $localNome = ' FS';
+         echo 'Olá,'. $localNome.'!<br>';
+     }
+
+     ola();
+     echo "O valor da \$globalNome é: '$globalNome'<br>";
+     echo "O valor da \$localNome é: '$localNome'<br>";// Acusará erro, pois $localNome é visível somente dentro da função ola()
+     
+ function minhaFuncao() {
+    global $globalNome;
+    return $ret = '$globalNome vale '.$globalNome;
+ }     
+ print minhaFuncao();
+?>
+
+Explicando SuperGlobais
+
+O PHP fornece um conjunto especial de arrays globais contendo várias informações úteis. Esses arrays são conhecidos como superglobais, porque eles são acessíveis em qualquer lugar no seu código – inclusive dentro de funções – e você nem precisa declará-los como global usando a palavra-chave global.
+
+Arqui está a lista completa de superglobais disponíveis no PHP, a partir da versão 5.3:
+
+    $GLOBALS: Contém uma lista de todas as variáveis globais disponíveis no script
+    $_GET: Contém uma lista de todos os campos do formulário enviado pelo navegador usando o pedido GET.
+    $_POST: Contém uma lista de todos os campos do formulário enviado pelo navegador usando o pedido POST.
+    $_COOKIE: Contém uma lista de todos os cookies enviados pelo navegador.
+    $_REQUEST: Contém todas as chaves e valores das variáveis $_GET, $_GET e $_COOKIEcombinados.
+    $_FILES: Contém uma lista dos arquivos enviados pelo navegador.
+    $_SESSION: Permite armazenar e recuperar variáveis na sessão atual do navegador.
+    $_SERVER: Contém informações do servidor, como nome do arquivo em execução, bem como o endereço IP do navegador.
+    $_ENV: Contém uma lista de variáveis de ambiente passadas pelo navegador. Podem ser variáveis fornecidas pelo Shell, assim como as variáveis CGI.
+
+Constantes
+
+PHP estruturado
+define('NOME', 'valor');
+
+PHP orientado a objetos
+const NOME = 'Ribamar';
+
+Chamando:
+
+echo NOME;
+
+echo NomeClasse::NOME;
+
+
+Constante mágica 	Definição
+__LINE__ 	Conterá o número da linha do script na qual ela foi declarada.
+__FILE__ 	Conterá o caminho completo para o arquivo PHP no qual ela foi declarada.
+__DIR__ 	Conterá o diretório do arquivo no qual ela foi declarada.
+__FUNCTION__ 	Conterá o nome da função na qual ela foi declarada.
+__CLASS__ 	Conterá o nome da classe na qual ela foi declarada.
+__METHOD__ 	Conterá o nome da classe e do método no qual ela foi declarada.
+__NAMESPACE__ 	Conterá o nome namespace no qual ela foi declarada.
+__TRAIT__ 	Conterá o nome do trait no qual ela foi declarada.
+NomeDaClasse::class 	Conterá o nome completo da classe no qual ela foi declarada.
+
+//Declaração das constantes
+define( 'NOME', 'Ribamar FS' ); //Declarada a constante NOME com o valor Alex Sander, do tipo String
+define ('ALTURA', 1.70); //Declarada a constante ALTURA com o valor 1.76, do tipo float
+define('ATIVO', true); //Declarada a constante ATIVO com o valor true, do tipo boolean
+ 
+const ATIVO = true; //Declarada em OO a constante ATIVO com o valor true, do tipo boolean
+
+echo ATIVO; /* É impresso o valor 1, como ATIVO é do tipo boolean o PHP o
+             converte o true para 1 e caso fosse false o valor seria 0 */             
+ 
+//Declaração da classe Empresa
+class Empresa {
+  const NOME_EMPRESA = 'Linux & Cia'; //Declarada a constante NOME_EMPRESA do tipo String
+  const ANO = 2020; //Declarada a constante ANO com o valor 2020, do tipo int
+}
+     
+

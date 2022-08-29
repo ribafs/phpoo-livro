@@ -1,0 +1,11 @@
+Lista de Boas Práticas do desenvolvedor moderno.
+##Fluxo de desenvolvimento
+    1. Crie um novo branch no seu repositório local. 
+    2. Implemente suas mudanças 
+    3. Faça um push do seu branch para o repositório remoto 
+    4. Submeta um Pull Request (no caso do GitHub, na página do repositório ou utilizando a aplicação desktop) 
+    5. Aguarde a revisão do mesmo por outros desenvolvedores da sua equipe 
+    6. Caso alguma mudança seja solicitada, implemente-a. 
+    7. Seus colegas de equipe integrarão seu código quando ele estiver ok. 
+
+https://github.com/coopera/boas-praticas

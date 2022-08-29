@@ -1,0 +1,60 @@
+http://blog.ultimatephp.com.br/mvc-php-orientado-a-objetos/
+Do Beraldo
+
+Requer um virtualhost exclusivo, então pode rodar sob o servidor nativo do php:
+php -S localhost:8000 index.php
+ou
+php -S localhost:8000
+
+Criar a estrutura:
+	
+├── app: diretório base da estrutura MVC
+│   ├── Controllers: diretório dos controllers
+│   │   └── UsersController.php
+│   ├── DB.php: classe para acesso ao banco de dados
+│   ├── Models: diretório de Models
+│   │   └── User.php
+│   ├── View.php: classe para geração de Views
+│   ├── Views: diretório de views
+│   │   ├── template.php
+│   │   ├── users.create.php
+│   │   ├── users.edit.php
+│   │   └── users.index.php
+│   └── helpers.php: arquivo com funções genéricas
+├── composer.json: arquivo de configuração do Composer
+├── index.php: arquivo onde definiremos as rotas
+├── init.php: arquivo de inicialização
+└── vendor: diretório do Composer, com todas as dependências
+
+composer require slim/slim
+
+Após instalar mudar o composer.json para isso:
+
+{
+    "require": {
+        "slim/slim": "^3.12"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\" : "app/"
+        },
+        "files": [
+            "app/helpers.php"
+        ]
+    }
+}
+
+Acima
+"App\\" : "app/"
+Namespace  diretório 
+
+Ou seja, cria um mapeamento entre um namespace e um diretório, de forma que quando usa
+App
+Está usando o diretório app
+
+Executar
+composer dump-autoload
+
+A versão do slim hoje é a 3.12, mas pode ser diferente
+
+

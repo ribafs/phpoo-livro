@@ -1,0 +1,341 @@
+simple Router class for PHP. with the support of Controllers and Middlewares.
+
+Total Downloads Latest Stable Version Latest Unstable Version License
+Features
+
+    Supports GET, POST, PUT, DELETE, OPTIONS, PATCH, HEAD, AJAX and ANY request methods
+    Controllers support (Example: HomeController@about)
+    Before and after Route Middlewares support
+    Static Route Patterns
+    Dynamic Route Patterns
+    Easy-to-use patterns
+    Adding a new pattern supports. (with RegExp)
+    Namespaces supports.
+    Group Routing
+    Custom 404 handling
+    Debug mode (Error message open/close)
+
+
+2. Getting Started
+İzni Burak Demirtaş edited this page 28 days ago · 3 revisions
+Install
+
+composer.json file:
+
+{
+    "require": {
+        "izniburak/router": "^1"
+    }
+}
+
+after run the install command.
+
+$ composer install
+
+OR run the following command directly.
+
+$ composer require izniburak/router
+
+Quick Usage
+
+require 'vendor/autoload.php';
+
+$router = new Buki\Router();
+
+$router->get('/', function() {
+    return 'Hello World!';
+});
+$router->get('/controller', 'TestController@main');
+
+$router->run();
+
+And add this code to the .htaccess file:
+
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ index.php [L]
+
+Congratulations! Now, you can use PHP-Router.
+
+If you have a problem, you can contact me or open new issue.
+Paths and Namespaces
+
+Default configurations of Buki\Router class for namespaces and paths are as follows;
+
+[
+  'paths' => [
+    'controllers' => 'Controllers',
+    'middlewares' => 'Middlewares',
+  ],
+  'namespaces' => [
+    'controllers' => '',
+    'middlewares' => '',
+  ]
+]
+
+So,
+
+    Controllers path: Controllers
+    Middlewares path: Middlewares
+    Controllers namespaces: none
+    Middlewares namespaces: none
+
+If you would like to define paths and namespaces for Controllers and Middlewares, you can do this at below:
+
+require 'vendor/autoload.php';
+
+$router = new \Buki\Router([
+  'paths' => [
+    'controllers' => 'app/Controllers',
+    'middlewares' => 'app/Middlewares',
+  ],
+  'namespaces' => [
+    'controllers' => 'App\Controllers',
+    'middlewares' => 'App\Middlewares',
+  ]
+]);
+
+$router->get('/', function() {
+    return 'Hello World!';
+});
+
+$router->run();
+
+Other Settings
+
+[
+  'base_folder' => '',
+  'main_method' => 'main',
+  'paths' => [
+    'controllers' => 'Controllers',
+    'middlewares' => 'Middlewares',
+  ],
+  'namespaces' => [
+    'controllers' => '',
+    'middlewares' => '',
+  ]
+]
+
+All settings that you can configure are as above.
+
+    base_folder => Application base folder. (For example: Directory where index.php file of your app) Default value: getcwd();
+    main_method => This option is defining main method that the routes defined by controller() method for main route of the controller.
+    paths => Controllers and Middlewares paths of your Application.
+    namespaces => Controllers and Middlewares namespaces of your Application.
+
+Methods
+İzni Burak Demirtaş edited this page on 21 Aug 2018 · 1 revision
+
+PHP Router supports GET, POST, PUT, DELETE, OPTIONS, PATCH, HEAD, AJAX and ANY request methods.
+Usage
+
+# GET Request
+$router->get('/get-request', function()
+{
+  echo 'Hello World.';
+});
+
+# POST Request
+$router->post('/post-request', function()
+{
+  echo 'Hello World.';
+});
+
+# PUT Request
+$router->put('/put-request', function()
+{
+  echo 'Hello World.';
+});
+
+# DELETE Request
+$router->delete('/delete-request', function()
+{
+  echo 'Hello World.';
+});
+
+# AJAX Request
+$router->ajax('/ajax-request', function()
+{
+  echo 'Hello World.';
+});
+
+# AJAXP Request (Post & Ajax)
+$router->ajaxp('/ajaxp-request', function()
+{
+  echo 'Hello World.';
+});
+
+# ANY Request (It accepts all requests.)
+$router->any('/any-request', function()
+{
+  echo 'Hello World.';
+});
+
+You can define more than one method at one time for a request.
+
+Example:
+
+$router->add('GET|POST', '/request', function()
+{
+  echo "Hello World. I'm working GET or POST method.";
+});
+
+NOTE:
+
+A post value must be sent in an object named "_method" for the Put, Delete, Patch, Options, Head methods.
+
+Example:
+
+# curl -X PUT http://localhost:3000/put-request
+# OR 
+# curl -X POST http://localhost:3000/put-request -d _method=put
+
+$router->put('/put-request', function()
+{
+  echo 'Hello World.';
+});
+
+
+4. Parameter Patterns
+İzni Burak Demirtaş edited this page 28 days ago · 2 revisions
+
+The patterns defined in PHP-Router are:
+
+    {a} => All chars without '/' char.
+    {d} => Digits.
+    {i} => Digits.
+    {s} => Alphabetic characters.
+    {w} => Alphanumeric characters.
+    {u} => URL format characters for SEO. (Alphanumeric characters, _ and -)
+    {*} => All characters
+
+or
+
+    :all => All characters
+    :any => All chars without '/' char
+    :id => Digits
+    :number => Digits
+    :string => Alphanumeric characters
+    :slug => URL format characters for SEO. (Alphanumeric characters, _ and -)
+
+single pattern
+
+# get request -> localhost/hello/{s}
+$router->get('/hello/{s}', function($value)
+{
+  echo 'Hello, ' . $value;
+});
+
+# OR
+
+$router->get('/hello/:string', function($value)
+{
+  echo 'Hello, ' . $value;
+});
+
+# Output:
+# /hello/burak ---> Hello, burak
+# /hello/php ---> Hello, php
+# /hello/ ---> Error!!!
+
+multi pattern
+
+# get request -> localhost/post/{i}/{u}
+$router->get('/post/{i}/{u}', function($id, $slug)
+{
+  echo "Post ID: " . $id . "<br />";
+  echo "Post Slug: " . $slug;
+});
+
+# OR
+
+$router->get('/post/:id/:slug', function($id, $slug)
+{
+  echo "Post ID: " . $id . "<br />";
+  echo "Post Slug: " . $slug;
+});
+
+# Output:
+# /post/5/hello-world ---> Post ID: 5 <br />Post Slug: hello-world
+# /post/17/php-router ---> Post ID: 17 <br />Post Slug: php-router
+# /post/foo/bar ---> Error!!! ({i} params cannot be string.)
+
+optional pattern - add default value
+
+# get request -> localhost/page/{u}
+$router->get('/page/{u?}', function($page = 'home')
+{
+  echo "Page: " . $page;
+});
+
+# OR
+
+$router->get('/page/:slug?', function($page = 'home')
+{
+  echo "Page: " . $page;
+});
+
+# Output:
+# /page/contact ---> Page: contact
+# /page/about-us ---> Page: about-us
+# /page ---> Page: home
+
+custom pattern - create own pattern
+
+$router->pattern('{lowercase}', '[a-z]+');
+$router->pattern(':uppercase', '[A-Z]+');
+
+$router->get('/demo/{lowercase}', function($value)
+{
+  echo "Value: " . $value;
+});
+
+# Output:
+# /demo/burak ---> Value: burak 
+# /demo/php ---> Value: php
+# /demo/Router ---> Error!!!
+
+$router->get('/demo/:uppercase', function($value)
+{
+  echo "Value: " . $value;
+});
+
+# Output:
+# /demo/burak ---> Value: BURAK 
+# /demo/php ---> Value: PHP
+# /demo/Router ---> Error!!!
+
+To define multiple patterns at once, you can use this method:
+
+$patterns = [':lowcase' => '[a-z]+', ':upcase' => '[A-Z]+'];
+
+$router->pattern($patterns);
+
+Great! That's it. :)
+
+
+7. Grouping
+İzni Burak Demirtaş edited this page on 21 Aug 2018 · 1 revision
+
+If you want you can group the routes you create.
+
+Example:
+
+$router->group('admin', function($r)
+{
+  $r->get('foo', function(){ echo 'page: admin/foo'; });
+  $r->get('bar', function(){ echo 'page: admin/bar'; });
+  $r->get('baz/php', function(){ echo 'page: admin/baz/php'; });
+  $r->post('login', function(){ echo 'page: admin/login'; });
+});
+
+# Created Routes:
+/*
+- GET /admin/foo
+- GET /admin/bar
+- GET /admin/baz/php
+- POST /admin/login
+*/
+
+

@@ -1,0 +1,251 @@
+interface VehicleInterface {
+public function forward();
+public function reverse();
+...
+}
+class Bike implements VehicleInterface {
+public function forward() {
+$this->pedal();
+}
+public function reverse() {
+$this->backwardSteps();
+}
+protected function pedal() {
+...
+}
+protected function backwardSteps() {
+...
+}
+...
+}
+class Car implements VehicleInterface {
+protected $gear = 'N';
+public function forward() {
+$this->setGear(1);
+$this->pushPedal();
+}
+public function reverse() {
+$this->setGear('R');
+$this->pushPedal();
+}
+protected function setGear($gear) {
+$this->gear = $gear;
+}
+protected function pushPedal() {
+...
+}
+...
+}
+
+Constantes de classes
+
+class MathValues {
+const PI = M_PI;
+const PHI = 1.61803;
+}
+$area = MathValues::PI * $radius * $radius;
+
+No PHP 7 agora constanes declaradas com define agora podem cnteer arrays
+
+define("BAZ", array('baz'));
+
+function bar() { return 2; };
+define('BAR', bar());
+class Foo {
+const BAR = BAR; // OK
+}
+
+
+abstract class AbstractWorker implements Worker {
+    protected $pdo;
+    protected $logger;
+    public function __construct(PDO $pdo, Logger $logger) {
+        $this->pdo = $pdo;
+        $this->logger = $logger;
+    }
+
+    public function run() {
+        try {
+            $this->setMemoryLimit($this->getMemoryLimit());
+            $this->logger->log("Preparing main");
+            $this->prepareMain();
+            $this->logger->log("Executing main");
+            $this->main();
+        } catch (Throwable $e) {
+            // Catch and rethrow all errors so they can be logged by the worker
+            $this->logger->log("Worker failed with exception: {$e->getMessage()}");
+            throw $e;
+        }
+    }
+    private function setMemoryLimit($memoryLimit) {
+        ini_set('memory_limit', $memoryLimit);
+        $this->logger->log("Set memory limit to $memoryLimit");
+    }
+
+    abstract protected function getMemoryLimit();
+    abstract protected function prepareMain();
+    abstract protected function main();
+}
+
+class TranscactionProcessorWorker extends AbstractWorker {
+    private $transactions;
+    protected function getMemoryLimit() {
+        return "512M";
+    }
+
+    protected function prepareMain() {
+        $stmt = $this->pdo->query("SELECT * FROM transactions WHERE processed = 0 LIMIT 500");
+        $stmt->execute();
+        $this->transactions = $stmt->fetchAll();
+    }
+
+    protected function main() {
+        foreach ($this->transactions as $transaction) {
+            // Could throw some PDO or MYSQL exception, but that is handled by the
+            AbstractWorker
+            $stmt = $this->pdo->query("UPDATE transactions SET processed = 1 WHERE id = {$transaction['id']} LIMIT 1");
+            $stmt->execute();
+        }
+    }
+}
+
+
+interface Animal {
+    public function makeNoise();
+}
+
+class Cat implements Animal {
+    public function makeNoise
+    {
+        $this->meow();
+    }
+...
+}
+
+class Dog implements Animal {
+    public function makeNoise {
+    $this->bark();
+    }
+    ...
+}
+
+class Person {
+    const CAT = 'cat';
+    const DOG = 'dog';
+    private $petPreference;
+    private $pet;
+
+    public function isCatLover(): bool {
+        return $this->petPreference == self::CAT;
+    }
+
+    public function isDogLover(): bool {
+        return $this->petPreference == self::DOG;
+    }
+
+    public function setPet(Animal $pet) {
+        $this->pet = $pet;
+    }
+
+    public function getPet(): Animal {
+        return $this->pet;
+    }
+}
+
+if($person->isCatLover()) {
+    $person->setPet(new Cat());
+} else if($person->isDogLover()) {
+    $person->setPet(new Dog());
+}
+
+$person->getPet()->makeNoise();
+
+Ver:
+- interface
+- herança
+- abstract
+- final
+- this
+- 
+
+Getters e Setters
+
+class Base
+{
+    protected $id;
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+}
+
+class Customer extends Base
+{
+    protected $name;
+
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function setName($name)
+    {
+       $this->name = $name;
+    }
+}
+
+class Base
+{
+    protected $id;
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+}
+
+class Customer extends Base
+{
+    protected $name;
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+}
+
+class Member extends Customer
+{
+    protected $membership;
+    public function getMembership()
+    {
+        return $this->membership;
+    }
+
+    public function setMembership($memberId)
+    {
+        $this->membership = $memberId;
+    }
+}
+
+Visibilidade:
+private
+protected
+public
+
+

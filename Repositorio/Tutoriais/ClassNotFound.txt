@@ -1,0 +1,81 @@
+"Class 'aqui o nome da sua classe' not found" error
+
+De tanto esta mensagem aparecer eu cheguei a pensar em abandonar o uso de namespace e voltar para os requires. Mas eu resolvi fazer uma boa pesquisa e anotar algumas observações que eu sabia que poderiam causar isso. E resultou neste documento que resolvi compartilhar no GitHub. Bem, conhecendo melhor sobre namespace estas mensagens parecerão em menor quantidade.
+
+Quando se está usando o autoload com psr-4 e composer precisamos ficar atentos a alguns detalhes algumas vezes resulta na mensagem de erro:
+Fatal error: Uncaught Error: Class '\App\Controllers\ClientesController()' not found in ... line 18
+Esta é particularmente a minha classe: \App\Controllers\ClientesController()
+
+Algumas Possibilidades para solucionar o erro e também algumams dicas:
+- Verifique es está importando o vendor/autoload
+	require_once 'vendor/autoload.php';
+- Verificar com cuidado o namespace completo da classe que está acusando erro
+- Verificar o composer.json, o path dos namespaces na seção autoload com psr-4, se for o caso. Aqui está assim:
+	"App\\": "App/",
+	"Core\\": "Core/"
+	Namespace usa duas barras \\ contrárias. Diretórios usam apenas uma barra /
+- Verificar permissões de arquivos em sistemas UNIX
+- Cuidado com o case, pois minúsculas são diferentes de maiúsculas
+- Verifique se o namespace está declarado na classe que não está sendo encontrada
+- Lembre de a cada alteração do composer.json executar:
+	composer dumpautoload
+	E por segurança, em caso de problemas execute
+- Somente podemos usar/importar
+		use App\Controller\ClientesController;
+		De uma classe que tenha o namespace definido. Não usamos use em arquivos que não contenham classe.
+- Verifique atentamente o case dos diretórios e namespace, especialmente se seu sistema não é case sensitivo.
+- Eu estava recebendo o erro de classe not found aqui, depois descobri, que eram os parênteses ao final
+	$default = '\\App\\Controllers\\'.ucfirst(DEFAULT_CONTROLLER).'Controller()';		
+	Após remover os parênteses o erro desapareceu	    
+
+Verifique se o arquivo existe. Exemplo:
+
+if(file_exists('App/Controllers/ClientesController.php')){
+	print 'sim';		    
+}else{
+	print 'nao';
+}
+exit;
+
+var_dump(file_exists("App/Controllers/ClientController.php"));
+
+Testar se a classe existe. Exemplo:
+
+if(class_exists('\\App\\Controllers\\ClientesController')){
+	print 'sim';		    
+}else{
+	print 'não';
+}
+exit;
+
+Exemplo bem definido de criação de instância com namespace
+$clientes = new \App\Controllers\ClientesController();
+
+Lembre que as barras do namespace são o contrário das de diretórios:
+use Core\Controller\ClientesController;
+Diretório: Core/Controllers/ClientesController
+
+Sugestão: crie os nomes dos namespaces idênticos aos dos diretórios, como:
+	"App\\": "App/",
+Isso facilita.
+
+Outra dica:
+
+Ao usar um require ou include precisamos incluir a extensão .php ao final.
+require_once 'Core/Controllers/ClientesController.php';
+
+Ao usar namespace o use não se inclui a extensão:
+use Core\Controller\ClientesController;
+
+Podemos instanciar uma classe diretamente através do seu namespace:
+
+$cli = new \Core\Controller\ClientesController;
+
+E também podemos criar uma string com seu namespace:
+
+$default = 'App\\Controllers\\ClientesController';
+$cli = new $default;
+
+
+Referência
+https://dev.to/dechamp/php---how-to-fix-class--not-found-error-1gp9	

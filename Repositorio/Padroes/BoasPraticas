@@ -1,0 +1,83 @@
+Boas Práticas de Codificação
+
+Codificar usando exibição de erros E_ALL e display_error = On
+
+Quando não tiver acesso aos arquivos do servidor, usar nos arquivos PHP:
+ini_set()
+ini_set('error_reporting', E_ALL);
+ini_set('display_errors', 1);
+
+Nunca camufle erros com @ e evite usar include e include_once,
+Prefira require_once
+
+Para métodos de formulários evitar o uso de GET. Prefira o POST
+
+Utilize sempre as tags completas:
+Em arquivos com somente código PHP, não usar a tag de fechamento
+<?php
+...
+?>
+
+E também a sintaxe reduzida nas views:
+<?=$teste?>
+
+Indentação
+Usar 4 espaços para a indentação e não tab
+
+Não começar o código já na linha da tag de abertura, mas uma linha abaixo:
+
+<?phpif($x==0){
+
+<?php
+
+if($x==0){
+
+Usar sempre na primeira linha de código, para forçar a declaração explícita de tipos
+declare(strict_types = 1);
+
+Nomes de arquivos
+	Tudo em minúsculas, separados por sublinhado para palavras compostas. Ex: nome_arquivo.php
+	Arquivos de classes devem ter o mesmo nome da classe e usar CamelCase. Ex: ClientesController.php e classe ClientesController()
+
+Cada classe com um arquivo exclusivo e nunca duas ou mais classes em um único arquivo
+Usar parêntesis ao final do nome da classe, ao instanciar
+$obj = new NomeClasse();
+
+Nomes de classes
+	CamelCase
+
+Propriedades - sempre declaradas no início da classe
+Nomes de métodos e propriedades
+	camelCase
+
+Nomes de constantes
+	TUDO_MAIUSCULA
+
+Uso de chaves:
+
+class Nome
+{
+
+}
+
+Métodos
+
+public function nome()
+{
+
+}
+
+Laços
+
+foreach()
+{
+
+}
+
+if
+
+if($x == 0) {
+
+}
+
+

@@ -1,0 +1,22 @@
+Vantagens do PHP
+
+- Ao meu ver a maior vantagem do PHP é sua facilidade de aprendizado, que permite um aprendizado rápido e que alguém com pouco tempo de estudo consegue fazer algo útil
+- É uma linguagem bem rica em recursos para a programação web
+    https://www.php.net/manual/pt_BR/
+    https://www.php.net/manual/pt_BR/resource.php
+- Tem a maior comunidade de desenvolvedores do mundo
+- A maior base instalada de sites e aplicativos do mundo
+- Atualmente temos muitos bons, maduros e modernos frameworks, CMS e outros softwares criados com PHP, que formam uma base que elevam o nível do que é produzido em PHP: Facebook, Wikipedia, Wordpress (40.9% - https://w3techs.com/technologies/overview/content_management), Joomla, Drupal, Magento, Opencart, CakePHP, Laravel, Yii, FuelPHP e muitos outrps
+- Também contamos atualmente com um forte movimento no sentido de modernizar o PHP, o que levou ao surgimento o grupo PHP-FIG, que é um site/grupo formado por representantes de grandes frameworks em PHP com a divulgação de boas práticas e padrões a serem usados pela comunidade. Assim todos os programadores PHP agora contam com um conjunto de boas práticas e boas recomendações dos programadores experientes e com isso passam a desenvolver da mesma forma. O que um produz o outro consegue ler sem dificuldade. PHP Framework Interop Group! O grupo foi inicializado por vários desenvolvedores de framework no php | tek em 2009. https://www.php-fig.org/
+Isso ajuda a que todos os programadores possam estar usando as mesmas e melhores práticas usadas por grandes e conhecidos frameworks. 
+- Paralelamente surgem o composer, o Packagist e o Github que agilizam a instalação e o controle de dependências de pacotes de terceiros em PHP. Permitindo o compartilhamento muito prático de componentes prontos. O Git também ajuda muito nesta hora, assim como o VSCode.
+- Temos também um site muito importante, com informações muito úteis, que é o PHP do Jeito Certo - http://br.phptherightway.com/
+- Em consequência apareceu o livro PHP Moderno:
+    https://www.amazon.com.br/PHP-Moderno-Novos-Recursos-Pr%C3%A1ticas/dp/857522428X (PHP Moderno, do autor do Slim Framework e do PHP do Jeito Certo, está fazendo muito sucesso)
+- Algo que tem injetado bastante ânimmo ao PHP foi a adoção do mesmo pelo Facebook e suas consequências. Muitas melhorias criadas pelo Facebook estão sendo adotadas
+- O PHP tem avançado e melhorado muito desde a versão 7. Já estamos na versão 8 (desde 12/2020).
+- O recurso mais aclamado que vem com o PHP 8 é o compilador Just-in-time (JIT). Do que se trata o JIT?
+- Um teste de desempenho feito entre várias linguagens, o PHP fica em primeiro lugar entre as linguagens web, superando até mesmo o Node. Parece que isso vem do JIT, recurso criado pelo Facebook e que vem sendo adotado
+
+https://kinsta.com/pt/blog/php-8/
+

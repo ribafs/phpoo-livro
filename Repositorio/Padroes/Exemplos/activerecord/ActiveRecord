@@ -1,0 +1,183 @@
+Original
+https://alexandrebbarbosa.wordpress.com/2018/01/08/php-padrao-de-projeto-active-record-orm/
+
+ActiveRecord - este padrão consiste em mapear um objeto a uma tabela do banco de dados.
+Uma classe do aplicativo representa uma tabela no banco de dados.
+
+Vamosc riar uma classe abstrata, que não pode ser instanciada, apenas estendida.
+Cada uma das classes que a estendem pode representar uma tabela diferente. Estas classes que estendem ActiveRecor são classes models.
+É nestas classes que deve ficar toda a lógica de negócio e validações. Parece as classes Table do CakePHP.
+A classe ActiveRecord não poderá ser usada diretamente, mas somente através de outras que a estendam, nunca instanciada.
+
+Na classe que estende ActiveRecord podemos sobrescrever algumas propriedades, caso desejemos alterar seus nomes:
+protected $table = 'tb_clientes';
+protected $idField = 'codigo';
+protected $logTimestamp = FALSE;
+
+O método mágico __set($parameter, $value) interceptará todas as vezes que tentarmos adicionar dados ao objeto desta maneira $objeto->nome = “Cliente 1”.
+Automaticamente ele entende que $parameter significa o ‘nome’, já $value será ‘Cliente 1’. Então podemos pegar estes dados e fazermos o que for necessário com eles. Em nosso método, estamos atribuindo ao array $content:
+$this->content[$parameter] = $value. Assim criamos um array associativo, pois nesse caso seria o mesmo que atribuir: $this->content[‘nome’] = ‘Cliente 1’. Se você gostou da idéia, pode ler mais a respeito dos métodos mágicos em http://php.net/manual/pt_BR/language.oop5.magic.php.
+
+Não usarei $logTimestamp
+
+Para adicionar outras tabelas:
+- Adicionar qualquer tabela e apenas adicionar os campos created_at e updated_at
+- Copiar a classe Cliente para outra com o nome da nova tabela e adaptar
+
+O método save() na classe ActiveRecord fará o insert ou o update. Se encontrar um campo "id" ele fará o update, caso contrário fará o insert.
+
+Como user o insert:
+
+$cliente = new Customer();
+$cliente->name = 'Fátima EF';
+$cliente->birthday = '1970-01-21';
+$cliente->phone = '3491.2786';
+$cliente->observation = 'Obs';
+$cliente->save();
+
+Corresponde a:
+insert into cliente (name, birthday, phone, observation) values('Fátima EF', '1970-01-21', '3491.2786', 'Obs');
+
+Como usar o update:
+
+$cliente = new Cliente;
+ 
+$cliente->nome = "Cliente 1";
+$cliente->endereco = "Rua Principal";
+$cliente->telefone = "1199999999";
+$cliente->id = 1;
+ 
+$cliente->save();
+
+Corresponde a:
+update cliente set nome="Cliente 1", endereco="Rua Principal", telefone="1199999999" where id=1;
+
+Como usar o delete:
+
+$cliente = Cliente::find(1);
+$cliente->delete();
+
+como usar o select *
+
+$todos = Cliente::all();
+ 
+echo "
+<pre>";
+var_dump($todos);
+echo "</pre>
+
+Como usar o select com where?
+
+//Recuperando o cliente com id=1
+$customer = Customer::find(2);
+print $customer->name.'-'.$customer->birthday.'-'.$customer->phone;
+
+// Pelo name
+$customer = Customer::findFisrt("name = 'Austin S. Wall'");
+
+foreach($customer as $c){
+    print $c->phone;
+} 
+
+
+== Número de registros:
+echo Customer::numTotal();
+
+============
+for ($c = 11; $c <= 20; $c++)
+{
+ $cliente = new Cliente;
+ $cliente->nome = "Cliente {$c}";
+ $cliente->endereco = "Rua do Cliente {$c}";
+ 
+   if ($cliente->save()) {
+        echo "Registro {$c} salvo!";
+    } else {
+        echo "Registro <b>NÃO FOI</b> salvo!";
+    }
+}
+ 
+$cliente12 = Cliente::find(12);
+ 
+echo "<pre>";
+var_dump($cliente12);
+echo "</pre><hr>";
+ 
+sleep(2);
+$cliente12->nome = "Cliente 12 Atualizado";
+$cliente12->save();
+ 
+$cliente12upd = Cliente::find(12);
+echo "
+<pre>";
+var_dump($cliente12upd);
+echo "</pre>";
+
+=========
+$cliente = new Cliente;
+$cliente->nome = "Cliente 1";
+$cliente->endereco = "Rua Principal";
+$cliente->telefone = "1199999999";
+/*
+echo "<pre>";
+var_dump($cliente);
+echo "</pre>";
+*/
+echo $cliente->toJson();
+echo '<pre>';
+print_r($cliente->toArray());
+echo '</pre>';
+
+É bom fazer:
+
+if ($connection = Connection::getInstance('./configdb.ini'
+    return $connection->exec($sql);
+} else {
+    throw new Exception("Não há conexão com Banco de dados!"
+}
+
+==========
+nclude_once 'ActiveRecord.php';
+include_once 'Cliente.php';
+include_once 'Connection.php';
+for ($c = 1; $c <= 10; $c++) {
+$cliente = new Cliente; $cliente->nome = "Cliente {$c}"
+$cliente->endereco = "Rua do Cliente {{$c}}";
+}
+if ($cliente->save()) {
+echo "Registro {$c} salvo!";
+} else {
+echo "Registro <b>NÃO FOI</b> salvo!";
+}
+$todos = Cliente::all();
+echo "<pre>";
+var_dump($todos);
+echo "</pre>";
+
+==============
+include_once 'ActiveRecord.php';
+include_once 'Cliente.php';
+include_once 'Connection.php';
+for ($c = 11; $c <= 20; $c++) { $cliente = new Cliente;
+$cliente->endereco = "Rua do Cliente {$c}";
+";
+";
+}
+if ($cliente->save()) {
+echo "Registro {$c} salvo!
+} else {
+echo "Registro <b>NÃO FOI</b> salvo!
+}
+$cliente12 = Cliente::find(12);
+echo "<pre>";
+var_dump($cliente12);
+echo "</pre>
+";
+echo "<hr>";
+sleep(2);
+$cliente12->nome = "Cliente 12 Atualizado";
+$cliente12->save();
+
+==========
+É muito bom criarmos nossas próprias classes para entendermos mais profundamente o funcionamento.
+

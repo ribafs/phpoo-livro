@@ -1,0 +1,22 @@
+SOLID é um acrônimo para os seguintes cinco princípios:
+
+• S: Princípio da responsabilidade única (SRP)
+• O: Princípio aberto/fechado (OCP)
+• L: Princípio da substituição de Liskov (LSP)
+• I: Princípio de Segregação de Interface (ISP)
+• D: Princípio de inversão de dependência (DIP)
+
+Com mais de uma década, a idéia dos princípios do SOLID está longe de ser obsoleta, pois está no coração do bom design de classe.
+
+S - que as classes lidem com pouca coisa, um único assunto.
+
+O - uma classe deve ser aberta para extensão mas fechada para modificação
+
+L - este princípio fala sobre herança. Objetos em um programa devem ser substituíveis por instâncias de seus subtipos
+sem alterar a correção desse programa.
+
+I - muitas interfaces específicas do cliente são melhores que uma interface de uso geral
+
+D - Deve-se depender de abstrações. Não dependa de concreções.
+
+

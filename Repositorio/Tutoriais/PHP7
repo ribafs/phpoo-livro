@@ -1,0 +1,153 @@
+Context-Sensitive lexer
+
+Permite o uso de palavras-chave como nome de propriedades, métodos e constantes dentro de classes, interfaces e traits.
+
+Isso quer dizer que o PHP vai ter apenas uma palavra-chave reservada, ‘class’, e somente no contexto de constante da classe.
+
+Veja abaixo a lista de palavras-chave que você poderá utilizar como propriedade, função e nomes de constantes:
+
+callable, and, include, function, trait, global, include_once, if, extends, goto, throw, endswitch, implements, instanceof, array, finally, static, insteadof, print, for, abstract, interface, echo, foreach, final, namespace, require, declare, public, new, require_once, case, protected, or, return, do, private, or, else, while, const, try, elseif, as, enddeclare, use, default, catch, endfor, var, break, die, endforeach, exit, continue, self, endif, list, switch, parent, endwhile, clone, yield, class.
+
+A única exceção é não poder usar ‘const class’, pois entra em conflito com o nome da constante mágica do PHP 5.5.
+
+Classe Anônima
+
+Classes anônimas, proavelmente, são o mais perto que chegaremos de uma sintaxe literal de objetos no PHP. Para criar uma classe anônima você simplesmente combina a nova classe, seguida de uma definição de classe padrão.
+
+A classe anônima é sempre instanciada durante a criação, dando-lhe um objeto dessa classe.
+
+$object = new class("bar") {
+    public $foo;
+
+    public function __construct($arg)
+    {
+        $this->foo = $arg;
+    }
+};
+
+https://blog.umbler.com/br/php-7-mudancas-programacao-orientada-a-objetos/
+
+Type Hiting
+
+Com a sugestão de tipo/type hiting, podemos especificar o tipo de dados esperado (arrays, objetos, interface, etc.) para um argumento em uma declaração de função. Essa prática pode ser mais vantajosa porque resulta em melhor organização do código e mensagens de erro aprimoradas.
+
+Este tutorial vai começar explicando o assunto de dicas de tipo para arrays e objetos que são suportados tanto no PHP5 quanto no PHP7.
+Ele também explicará o assunto da sugestão de tipo para tipos de dados básicos (inteiros, flutuantes, strings e booleanos) que só é suportado no PHP7.
+
+Como fazer dicas de tipo de array?
+
+Quando queremos forçar uma função a obter apenas argumentos do array de tipo, podemos colocar o array de palavras-chave antes do nome do argumento, com a seguinte sintaxe:
+
+function functionName (array $ argumentName)
+{
+  //código
+}
+
+No exemplo a seguir, a função calcNumMilesOnFullTank () calcula o número de milhas que um carro pode ser dirigido com um tanque cheio de gasolina usando o volume do tanque, bem como o número de milhas por galão (mpg). Esta função aceita apenas array como argumento, como podemos ver pelo fato de que o nome do argumento é precedido pela palavra-chave array.
+
+// A função só pode obter array como um argumento.
+function calcNumMilesOnFullTank (array $models)
+{
+  foreach ($models as $ item)
+  {
+    echo $carModel = $item [0];
+    echo ":";
+    echo $numberOfMiles = $item [1] * $item [2];
+    echo "<br />";
+   }
+}
+Primeiro, vamos tentar passar para a função um argumento que não seja um array para ver o que pode acontecer nesse caso:
+ 1calcNumMilesOnFullTank ("Toyota");
+
+Resultado:
+Erro fatal capturável: o argumento 1 passado para calcNumMilesOnFullTank () deve ser do tipo array, string fornecida
+
+Este erro é uma descrição precisa do que deu errado com nosso código. A partir disso, podemos entender que a função esperava uma variável de array, e não uma string.
+Vamos reescrever o código e passar para a função uma matriz com os itens esperados, incluindo os nomes dos modelos, os volumes do tanque e o mpg (milhas por galão).
+
+$models = matriz (
+  array ('Toyota', 12, 44),
+  array ('BMW', 13, 41)
+);
+ 
+calcNumMilesOnFullTank ($models);
+
+Resultado:
+Toyota: 528
+BMW: 533
+
+Agora está funcionando porque passamos para a função o array que ela esperava obter.
+
+Como fazer dicas de tipo de objeto?
+
+A sugestão de tipo também pode ser usada para forçar uma função a obter um argumento do tipo Object. Para isso, colocamos o nome da classe antes do nome do argumento na função.
+
+No exemplo a seguir, o construtor da classe só pode obter objetos que foram criados a partir da classe Driver. Garantimos isso colocando a palavra Driver antes do nome do argumento no construtor.
+
+class Car {
+  protegido $ driver;
+        
+  // O construtor só pode obter objetos Driver como argumentos.
+  função pública __construct (Driver $driver)
+  {
+    $this->driver = $driver;
+  }
+}
+ 
+ 
+classe Driver{}
+ 
+ 
+$driver1 = novo driver();
+$car1 = novo carro ($driver1);
+
+O PHP suporta dicas de tipo para tipos de dados básicos?
+
+Depende.
+
+Enquanto o PHP5 não permite dicas de tipo para tipos de dados básicos (inteiros, flutuantes, strings e booleanos), o PHP7 oferece suporte a dicas de tipo escalar.
+PHP5 não suporta dicas de tipo para tipos de dados básicos como inteiros, booleanos ou strings. Então, quando precisamos validar que um argumento pertence a um tipo de dados básico, podemos usar uma das funções da família "is_" do PHP. Por exemplo:
+
+    • is_bool - to find out whether a variable is a boolean (true or false). 
+    • is_int - to find out whether a variable is an integer. 
+    • is_float - to find out whether a variable is a float (3.14, 1.2e3 or 3E-10). 
+    • is_null - to find out whether a variable is null. 
+    • is_string - to find out whether a variable is a string. 
+
+Por outro lado, o PHP7 suporta dicas de tipo escalar. Os tipos suportados são: inteiros, flutuantes, strings e booleanos.
+O exemplo de código a seguir só pode funcionar em PHP7.
+
+class car {
+  protected $model;
+  protected $hasSunRoof;
+  protected $numberOfDoors;
+  protected $price;
+
+  // string type hinting
+  public function setModel(string $model)
+  {
+    $this->model = $model;
+  }
+
+  // boolean type hinting
+  public function setHasSunRoof(bool $value)
+  {
+    $this->hasSunRoof = $value;
+  }
+
+  // integer type hinting
+  public function setNumberOfDoors(int $value)
+  {
+    $this->numberOfDoors = $value;
+  }
+
+  // float type hinting
+  public function setPrice(float $value)
+  {
+    $this->price = $value;
+  }        
+}
+
+https://phpenthusiast.com/object-oriented-php-tutorials
+
+

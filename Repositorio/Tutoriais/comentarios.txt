@@ -1,0 +1,18 @@
+O comentário abaixo é o que se utiliza num phpdoc.
+
+  /**
+  * adds an array of numbers and returns the value
+  *
+  * @param array $numbers An array of numbers to add
+  *
+  * @access private
+  *
+  * @return int Returns sum of numbers
+  * 
+  */
+  private function sumNumbers($numbers){
+    // return the sum of the $numbers array
+    return array_sum($numbers);
+  }
+
+

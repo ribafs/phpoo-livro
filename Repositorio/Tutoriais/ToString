@@ -1,0 +1,59 @@
+<?php
+/*
+Convertendo objeto em String
+Para evitar que aconteça um erro quando – e se – algum script tentar mostrar a classe MyClass como uma string, existe outro método mágico, chamado __toString().
+Sem o método __toString(), tentar mostrar um objeto como uma string resulta em um erro fatal. Tente mostrar um objeto, usando echo, sem o método mágico:
+*/
+
+class MyClass
+{
+  public $prop1 = "Sou uma propriedade de classe!";
+
+  public function __construct()
+  {
+      echo 'A classe "', __CLASS__, '" foi instanciada!<br />';
+  }
+
+  public function __destruct()
+  {
+      echo 'A classe "', __CLASS__, '" foi destruída.<br />';
+  }
+
+  public function __toString()
+  {
+      echo "Usando o método toString: ";
+      return $this->getProperty();
+  }
+
+  public function setProperty($newval)
+  {
+      $this->prop1 = $newval;
+  }
+
+  public function getProperty()
+  {
+      return $this->prop1 . "<br />";
+  }
+}
+
+// Cria um novo objeto
+$obj = new MyClass;
+
+// Mostra o objeto como uma string
+echo $obj;
+
+// Destrói o objeto
+unset($obj);
+
+// Mostra uma mensagem ao final do arquivo
+echo "Fim do arquivo.<br />";
+
+/*
+Nesse caso, tentar converter o objeto em string resulta numa chamada ao método getProperty(). Execute o código, recarregando a página no seu navegador, e veja o resultado:
+A classe "MyClass" foi instanciada!
+Usando o método toString: Sou uma propriedade de classe!
+A classe "MyClass" foi destruída.
+Fim do arquivo.
+Dica — Além dos métodos mágicos discutidos nessa seção, inúmeros outros estão disponíveis. Para uma lista completa, com todos os métodos mágicos, veja a respectiva página do manual do PHP.
+*/
+?>

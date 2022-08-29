@@ -1,0 +1,33 @@
+#!/usr/bin/env php
+<?php
+use Symfony\Component\Console\Application;
+use wapmorgan\PhpCodeFixer\PhpCodeFixer;
+use wapmorgan\PhpCodeFixer\ScanCommand;
+
+function init_composer($rootDir) {
+    static $paths = [
+        // as a root package or phar
+        '/../vendor/autoload.php',
+        // as a dependency from bin
+        '/../autoload.php',
+        // as a dependency from package folder
+        '/../../../autoload.php',
+    ];
+
+    foreach ($paths as $path) {
+        if (file_exists($rootDir.$path)) {
+            require_once $rootDir.$path;
+            return true;
+        }
+    }
+    return false;
+}
+if (!init_composer(__DIR__)) die('Run `composer install` firstly.'.PHP_EOL);
+
+$version = file_exists(__DIR__.'/version.txt') ? trim(file_get_contents(__DIR__.'/version.txt')) : PhpCodeFixer::VERSION;
+
+$app = new Application('phpcf', $version);
+$command = new ScanCommand();
+$app->add($command);
+$app->setDefaultCommand($command->getName(), true);
+$app->run();

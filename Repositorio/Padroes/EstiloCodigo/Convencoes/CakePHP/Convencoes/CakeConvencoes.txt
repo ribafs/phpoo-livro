@@ -1,0 +1,108 @@
+Convenções no CakePHP 3
+
+Controllers - nomes de classes tipo Controller devem estar no plural, CamelCase e terminam com Controller.
+
+Exemplos: ClientesController, PeopleController e LatestArticlesController
+
+Métodos public nos controllers são chamados de actions e são mostrados no browser através de views. 
+Um exemplo: a view src/Template/Clientes/index.ctp é mapeado para o action Clientes/Controller/index()
+Métodos protected ou private não podem ser acessados via Routing.
+
+Considerações sobre URL para nomes de controllers
+
+ClientesController que está no arquivo ClientesController.php é chamado no navegador com:
+http://localhost/aplicacao/clientes
+
+Nomes de controllers com palavras compostas podem ficar assim:
+• /redApples
+• /RedApples
+• /Red_apples
+• /red_apples
+
+Todos resolverão com o controller RedApples.
+
+/red-apples/go-pick resolve para o action RedApplesController::goPick()
+
+Criar links:
+
+$this->Html->link('link-title', [
+	'prefix' => 'MyPrefix' // CamelCased
+	'plugin' => 'MyPlugin', // CamelCased
+	'controller' => 'ControllerName', // CamelCased
+	'action' => 'actionName' // camelBacked
+]
+
+Namespaces
+
+Todas as classes do core do CakePHP agora (3.x) usam namespaces e seguem as especificações de autoload (auto-carregamento) do PSR-4. Por exemplo src/Cache/Cache.php tem o namespace Cake\Cache\Cache. Constantes globais e métodos de helpers como __() e debug() não usam namespaces por questões de conveniência.
+
+
+Nomes de arquivos e Classes:
+
+Classe KissesAndHugsController está no arquivo KissesAnd-HugsController.php
+
+
+Convenções para Model e Bancos de Dados
+
+Nomes de classes Table são no plural e CamelCase
+
+Nomes válidos: Clientes, Pelople, BigPeople e ReallyBigPeople
+
+Nomes de tabelas são no plural e palavras compostas separadas por sublinhado.
+Nomes de tabelas para os acima: clientes, people, big_people e really_big_people
+
+Nomes de campos são em minúsculas e quando compostos por palavras compostas são separados por sublinhado.
+Tabela users levam vantagem se tiverem campos com nomes: username e password
+Exemplos: primeiro_nome
+
+Obs.: quando usar authenticação use o tamanho do campo password com varchar(255).
+Também ajuda adicionar um campo chamado role na tabela users.
+
+Relacionamentos
+Chave estrangeira nos relacionamentos hasMany, belongsTo ou hasOne são reconhecidas por default com o nome (singular) da tabela relacionada seguida de "_id".
+
+Relacionamentos
+Um - Muitos (hasMany)
+Se relacionamos Articles com User, inserimos um campo user_id em articles.
+No model UsersTable 
+Um Users pode conter muitos (hasMany) Articles
+Muitos Articles belongsTo Users
+Ver documentação...
+
+Relacionamento Muitos para Muitos
+Exemplo: Para relacionamento muitos para muitos de platillos com cocineros, criaremos a tabela
+
+create table cocineros_platillos(
+	id int unsigned auto_increment primary key,
+	cocinero_id int(11) not null,
+	platillo_id int(11) not null
+);
+
+Para uma classe Bakers teremos uma chave estrangeira assim: baker_id.
+Para uma tabela como category_types a chave estrangeira será category_type_id.
+
+Nomes de campos especiais:
+title
+created
+modified
+
+Convenções para as Views
+
+O método getReady() do conroller PeopleController está associado ao template/view src/Template/People/get_ready.ctp.
+
+Exemplo geral:
+
+• Database table: “people”
+• Table class: “PeopleTable”, found at src/Model/Table/PeopleTable.php
+• Entity class: “Person”, found at src/Model/Entity/Person.php
+• Controller class: “PeopleController”, found at src/Controller/PeopleController.php
+• View template, found at src/Template/People/index.ctp
+
+Usando essas convenções o CakePHP sabe que uma requisição para http://localhost/aplicativo/people mapeia para uma chamada da função index() do PeopleController, onde o model Person está automaticamente disponível (e automaticamente vinculado à tabela people do banco) e renderizada para um arquivo. Nenhum desses relacionamentos precisa ser configurado por qualquer meio mas apenas pela criação de arquivos e classes que precisamos criar sempre. 
+
+Arquivos da Aplicação
+Todos os arquivos da aplicação que criamos ficam na pasta src.
+
+Criptografia
+Por padrão o CakePHP 3.x usa a criptografia bcrypt para proteger as senhas.
+

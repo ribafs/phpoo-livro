@@ -1,0 +1,64 @@
+Erros e Exceções
+Erros
+Em muitas linguagens de programação que fazem o uso generalizado das exceções, sempre que algo dá errado uma exceção é lançada. Esta é certamente uma forma viável de fazer as coisas, mas o PHP é uma linguagem que utiliza menos exceções. Mesmo que elas existam e mais membros do núcleo de desenvolvimento estejam começando a usá-las quando trabalhando com objetos, o PHP irá na maioria das vezes tentar manter a linha de processamento independentemente do que aconteça, a não ser que ocorra um erro fatal.
+
+php -a
+php > echo $foo;
+Notice: Undefined variable: foo in php shell code on line 1
+Este é apenas um notice error e o PHP irá continuar a excecução. 
+
+<?php
+error_reporting(E_ERROR | E_WARNING);
+
+@ - não é uma boa prática usar supressores de erros como o @. Melhor é tratar os prováveis erros
+
+A função isset() é uma boa aliada no tratamento de erros.
+
+echo isset($foo['bar']) ? $foo['bar'] : '';
+
+Ambientes de desenvolvimento
+
+É importante que a exibição de erros
+
+display_errors esteja ativa assim como o error_reporting e o xdebug também.
+
+try/catchs
+
+$email = new Fuel\Email;
+$email->subject('My Subject');
+$email->body('How the heck are you?');
+$email->to('guy@example.com', 'Some Guy');
+
+try
+{
+    $email->send();
+}
+catch(Fuel\Email\ValidationFailedException $e)
+{
+    // A validação falhou
+}
+catch(Fuel\Email\SendingFailedException $e)
+{
+    // O driver não pode enviar o e-mail
+}
+finally
+{
+    // Executado independentemente de se uma exceção foi acionada e antes de retomar a execução normal
+}
+
+php ini:
+display_errors = On
+display_startup_errors = On
+error_reporting = -1
+log_errors = On
+
+Em produção
+
+Produção
+Para esconder os erros no seu ambiente de produção, configure seu php.ini assim:
+display_errors = Off
+display_startup_errors = Off
+error_reporting = E_ALL
+log_errors = On
+
+

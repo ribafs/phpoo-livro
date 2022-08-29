@@ -1,0 +1,51 @@
+PHPDoc
+PHPDoc é um padrão informal para comentar código PHP. Há um monte de diferentes tags disponíveis. A lista completa de tags e exemplos podem ser encontrados no Manual do PHPDoc.
+Abaixo está um exemplo de como você pode documentar uma classe com alguns métodos;
+<?php
+/**
+ * @author Um nome <a.name@example.com>
+ * @link http://www.phpdoc.org/docs/latest/index.html
+ * @package helper
+ */
+class DateTimeHelper
+{
+    /**
+     * @param mixed $anything Tudo que podemos converter para um objeto \DateTime
+     *
+     * @return \DateTime
+     * @throws \InvalidArgumentException
+     */
+    public function dateTimeFromAnything($anything)
+    {
+        $type = gettype($anything);
+
+        switch ($type) {
+            // Algum código que tenta retornar um objeto \DateTime
+        }
+
+        throw new \InvalidArgumentException(
+            "Failed Converting param of type '{$type}' to DateTime object"
+        );
+    }
+
+    /**
+     * @param mixed $date Tudo que podemos converter para um objeto \DateTime
+     *
+     * @return void
+     */
+    public function printISO8601Date($date)
+    {
+        echo $this->dateTimeFromAnything($date)->format('c');
+    }
+
+    /**
+     * @param mixed $date Tudo que podemos converter para um objeto \DateTime
+     */
+    public function printRFC2822Date($date)
+    {
+        echo $this->dateTimeFromAnything($date)->format('r');
+    }
+}
+A documentação para a classe como um todo, em primeiro lugar tem a tag @author, esta tag é usada para documentar o autor do código e pode ser repetido para documentar vários autores. Em segundo lugar é a tag @link, usada para conectar-se a um site que indica uma relação entre o site eo código. Em terceiro lugar, tem a tag @package, usada para categorizar o código.
+Dentro da classe, o primeiro método tem uma tag @param usada para documentar o tipo, nome e descrição do parâmetro sendo passado para o método. Além disso, ele tem as tags @return e @throws para documentar o tipo de retorno e todas as exceções que podem ser lançadas respectivamente.
+O segundo e terceiro métodos são muito semelhantes e têm uma única marcação @param, assim como o primeiro método. A diferença de importação entre o segundo eo terceiro método é bloco doc é a inclusão/exclusão da tag @return. @return void nos informa explicitamente que não há retorno, historicamente omitir a declaração @return void também resulta na mesma ação (sem retorno).

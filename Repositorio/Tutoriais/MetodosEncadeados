@@ -1,0 +1,217 @@
+Métodos encadeados
+
+Utilizar métodos encadeados é uma maneira de se trabalhar de forma mais limpa e dinâmica, chamando um método após o outro sem a necessidade de chamar o objeto de instância da classe.
+
+Entendendo um pouco como funciona o método $this é possível trabalhar com métodos encadeados facilmente, considere a seguinte classe: 
+class ClassA
+{
+    private $name;
+
+    public function receiveString($name)
+    {
+        $this->name = $name;
+        return $this;
+    }
+
+    public function toUpper()
+    {
+        $this->name = strtoupper($this->name);
+        return $this;
+    }
+
+    public function toLower()
+    {
+        $this->name = strtolower($this->name);
+        return $this;
+    }
+
+    public function ucFirst()
+    {
+        $this->name = ucfirst($this->name);
+        return $this;
+    }
+
+    public function trim()
+    {
+        $this->name = trim($this->name);
+        return $this;
+    }
+
+    public function printThis()
+    {
+        var_dump($this);
+    }
+
+    public function toArray($separator)
+    {
+        $this->name = explode($separator,$this->name);
+        return $this;
+    }
+
+    public function toJson()
+    {
+        $this->name = json_encode($this->name);
+        echo $this->name;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
+    }
+}
+
+include_once('ClassA.php');
+$classA = new ClassA();
+
+echo $classA->receiveString('Ewerton Melo')->toUpper();
+
+Nesse pequeno exemplo, fiz a inclusão da classe, fiz sua instância e, para que os métodos pudessem ser encadeados, passei um valor em receiveString() para que ela possa ser manipulada pelos outros métodos da classe. Nesse exemplo, encadeei com o método toUpper() que fará com a variável a mesma coisa que a função strtoupper() do PHP. Na real, internamente, ele usa a funçãostrtoupper(). 
+
+Ponto de entrada e de saída
+
+Hoje, os frameworks usam, principalmente, esse modelo de encadeamento para deixar a codificação de uma forma mais fluida, porém, é importante dizer que sempre existe um ponto de entrada e um ponto de saída de dados. 
+
+Para que os métodos não retornem erro, é importante passar uma string usando receiveString(). Dessa forma, é possível manipular a string passada nos outros métodos. 
+
+echo $classA->receiveString()->toUpper();
+
+//Resultado
+Warning: Missing argument 1 for ClassA::receiveString()
+
+E se omitirmos o método __toString() no final do código? 
+echo $classA->receiveString('Ewerton Melo')->toUpper();
+
+//Resultado
+Catchable fatal error: Object of class ClassA could not be converted to string
+
+Neste caso, para ser acessado, teríamos que usar o var_dump() ou print_r(). 
+var_dump($classA->receiveString('Ewerton Melo')->toUpper());
+
+//Resultado
+object(ClassA)[1]
+    private 'name' => string 'EWERTON MELO' (length=12)
+
+Sinta-se a vontade em receber uma string através do método receiveString() e manipular a mesma através dos métodos toUpper(), toLower(), ucFirst() e trim(). Porém, como toda string, ela precisa de um ponto de saída, o que pode ser feito através dos métodos toArray(), toJson(). Caso não usemos esses dois, uma string será sempre retornada devido ao método mágico__toString(). 
+
+Vejamos: 
+echo $classA->receiveString('Ewerton Melo')->toLower()->toArray();
+
+//Resultado
+Catchable fatal error: Method ClassA::__toString() must return a string value
+
+Porém, se fizermos: 
+var_dump($classA->receiveString('Ewerton Melo')->toLower()->toArray(' '));
+
+//Resultado
+object(ClassA)[1]
+    private 'name' => 
+        array (size=2)
+            0 => string 'ewerton' (length=7)
+            1 => string 'melo' (length=4)
+Ou se fizermos: 
+var_dump($classA->receiveString('Ewerton Melo')->toLower()->toJson());
+
+//Resultado
+"ewerton melo"
+
+É importante conhecer tais técnicas para simplificar sua codificação. 
+Espero que tenham gostado!!! 
+https://blog.justdigital.com.br/metodos-encadeados-no-php-o-this-da-questao/
+
+
+Na verdade, é bastante simples: você tem uma série de métodos mutadores que retornam os objetos originais (ou outros), para que você possa continuar chamando métodos no objeto retornado.
+<?php
+class fakeString
+{
+    private $str;
+    function __construct()
+    {
+        $this->str = "";
+    }
+
+    function addA()
+    {
+        $this->str .= "a";
+        return $this;
+    }
+
+    function addB()
+    {
+        $this->str .= "b";
+        return $this;
+    }
+
+    function getStr()
+    {
+        return $this->str;
+    }
+}
+
+
+$a = new fakeString();
+
+
+echo $a->addA()->addB()->getStr();
+Isso gera "ab"
+https://qastack.com.br/programming/3724112/php-method-chaining
+
+
+$data = $pdo->query('SELECT * FROM TABELA')->fetchAll();
+
+Para facilitar a construção da Cesta, vamos implementar uma calsse builder:
+class CestaBuilder {
+    private $itens = array();
+    static public function create() {
+        return new static;
+    }
+    public function adicionar($item) {
+        $this->itens[] = $item;
+        return $this;
+    }
+    public function build() {
+        return new Cesta($this->itens);
+    }
+}
+O nosso builder permite a composição dos itens em sua própria instância e em algum ponto o método build é chamado para retornar uma instância de Cesta com os itens coletados.
+Exemplo de uso:
+$minha_cesta = CestaBuilder::create()
+    ->adicionar("Pão")
+    ->adicionar("Queijo")
+    ->adicionar("Mortadela")
+    ->build();
+
+<?php
+ 
+class Car {
+ 
+  //the private access modifier denies access to the method from outside the class’s scope
+  private $model;
+ 
+  //the public access modifier allows the access to the method from outside the class
+  public function setModel($model)
+  {
+    $this -> model = $model;
+  }
+  
+  public function getModel()
+  {
+    return "The car model is  " . $this -> model;
+  }
+}
+ 
+$mercedes = new Car();
+//Sets the car’s model
+$mercedes -> setModel("Mercedes benz");
+//Gets the car’s model
+echo $mercedes -> getModel();
+ 
+?>
+Result:
+The car model is Mercedes benz 
+
+https://stackoverflow.com/questions/3724112/php-method-chaining
+
+https://www.codecheef.org/article/php-method-chaining-explanation-with-example
+
+https://programmingdive.com/how-to-use-method-chaining-in-php/
+

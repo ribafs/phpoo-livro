@@ -1,0 +1,3 @@
+O front controller analisa o URL do pedido e carrega um controlador específico para realmente lidar com o pedido.
+
+

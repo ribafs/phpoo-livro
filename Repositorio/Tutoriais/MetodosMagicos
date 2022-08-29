@@ -1,0 +1,288 @@
+Métodos mágicos
+
+Métodos mágicos são métodos com funcionalidades específicas e que podem ser utilizados de acordo com as nossas necessidades. Continuaremos a utilizar o nosso exemplo das classes de notícias.
+
+Para usar esses métodos mágicos em nosso projeto PHP, precisamos conhecer a seguinte lista de pontos:
+     • Os nomes dos métodos mágicos do PHP são limitados a alguma lista de palavras-chave suportadas pelo PHP, como construir, destruir e etc.
+     • E esses nomes são reservados. Portanto, não devemos definir nenhuma função com o nome de métodos mágicos do PHP.
+     • Os métodos mágicos do PHP devem ser iniciados com o símbolo (__).
+     • Para definir o método mágico com (__) seguido por um nome diferente, além da lista de palavras-chave de nomenclatura suportadas pelo PHP, precisamos simular a funcionalidade mágica do PHP.
+     • Essas funções especiais devem ser definidas pelo usuário. Mas não há necessidade de chamá-los explicitamente. Em vez disso, ele será chamado na ocorrência de evento apropriado. Por exemplo, class __construct () será chamado durante a instanciação da classe.
+     • Os métodos mágicos do PHP devem ser definidos dentro da classe.
+
+Os nomes de função __construct(), __destruct(), __call(), __callStatic(), __get(), __set(), __isset(), __unset(), __sleep(), __wakeup(), __serialize(), __unserialize(), __toString(), __invoke(), __set_state(), __clone() e __debugInfo() são mágicos nas classes do PHP. Não deve-se ter funções com esses nomes em nenhuma de suas classes a não ser que queira a funcionalidade mágica associada a eles. 
+https://www.php.net/manual/pt_BR/language.oop5.magic.php
+
+__construct() / __destruct() - Já vimos o suficiente sobre esses dois métodos mágicos ao discutir construtores e destruidores, que é um dos recursos orientados a objetos suportados no PHP.
+
+__get() / __set() - Estes são getters e setters mágicos para obter e colocar valores para propriedades de classe criadas dinamicamente pela sobrecarga de propriedade do PHP.
+
+• __isset() - Este método mágico será invocado automaticamente enquanto verifica se uma propriedade sobrecarregada necessária está definida ou não, usando a função isset () do PHP.
+     • __unset() - Similarmente, quando chamamos a função unset () do PHP em tais propriedades criadas dinamicamente, este método mágico será automaticamente invocado.
+     • __call() / __callStatic() - Esses dois métodos mágicos são dedicados a acessar métodos criados dinamicamente, mas invisíveis na sobrecarga de métodos PHP. Eles são diferentes, onde __call() invocará métodos normais de PHP sobrecarregados e __callStatic () invocará métodos estáticos
+
+__set : Este método pode ser declarado em qualquer classe e será executado toda vez que for atribuído algum valor à alguma propriedade do objeto. Ou seja, ele intercepta a atribuição de valores à propriedades de um objeto. Porém, para que este método funcione, estas propriedades devem estar definidas como protected ou private. Digamos que o título e o texto das nossas notícias devam seguir um tamanho pré-definido. Como fazer esta verificação e atribuir o valor correto nas propriedades automaticamente?
+
+https://phppot.com/php/php-magic-methods/
+
+__CLASS__ retorna o nome da classe na qual foi usado; isso é o que chamaos de constante mágica. Há inúmeras constantes mágicas disponíveis e você pode ler mais sobre elas no manual do PHP.
+
+Um uso comum é com o padrão de projetos ActiveRecord.
+
+Verificando a validando o tamanho dos campos das propriedades $titulo e $texto da classe Noticia:
+
+<?php
+# noticia_metodo_magico_1.php
+
+class Noticia
+{
+    protected $titulo;
+    public $texto;
+
+    public function __set($propriedade, $valor)
+    {
+        if ( ($propriedade == 'titulo') && (strlen($valor) > 40) )
+        {
+            echo "A propriedade <b>$propriedade</b> deve conter
+            no máximo 40 caracteres<p>";
+        }
+
+        if ( ($propriedade == 'texto' && strlen($valor) > 100) )
+        {
+            echo "A propriedade <b>$propriedade</b> deve conter no máximo 100 caracteres<p>";
+        }
+    }
+
+    public function exibeNoticia()
+    {
+        $ret = "<center>";
+        $ret .= "<b>". $this->titulo ."</b><p>";
+        $ret .= $this->texto;
+        $ret .= "</center><p>";
+
+        return $ret
+    }
+}
+$titulo = 'Vestibular da Unicamp termina nesta quarta-feira';
+$texto = 'Um dos maiores vestibulares do país acaba nesta quarta-feira...';
+$c_tit = strlen($titulo);
+echo "Titulo: ".$c_tit."<p>";
+$c_txt = strlen($texto);
+echo "Texto: ".$c_txt."<p>";
+
+$not = new Noticia;
+$not->titulo = $titulo;
+$not->texto = $texto;
+$not->exibeNoticia();
+
+print $not;x''
+
+
+__get : Este método pode ser declarado em qualquer classe e será executado toda vez que for solicitado o retorno do valor de alguma propriedade de um objeto. Como em 
+
+__set(), este método funciona apenas com as propriedades que estiverem definidas como protected ou private.
+
+Retornando o valor da propriedade $titulo com o método __get():
+
+<?php
+// noticia_metodo_magico_2.php
+
+class Noticia
+{
+    protected $titulo;
+
+    public function __get($propriedade)
+    {
+        if ( ($propriedade == 'titulo') )
+        {
+            echo "Retornando o valor da propriedade <b>$propriedade</b>!";
+            return $this->titulo;
+        }
+    }
+
+    public function setTitulo($valor)
+    {
+        $this->titulo = $valor;
+    }
+}
+
+$titulo = 'Vestibular da Unicamp termina nesta quarta-feira';
+$not = new Noticia;
+$not->setTitulo($titulo);
+print "<p>Título: " . $not->titulo . "</p>";
+
+
+
+__clone : Criar uma cópia de um objeto com propriedades totalmente replicadas nem sempre é o comportamento desejado. Caso a instância de um objeto seja apenas atribuída à uma variável (Exemplo 1.8.5), o objeto não será clonado, será apenas criada uma nova referência a esse objeto 
+
+Criação de uma referência para um objeto:
+
+$not = new Noticia;
+$not_2 = $not;
+
+Exemplo com a Classe Noticia:
+
+<?php
+# noticia_metodo_magico_5.php
+
+class Noticia
+{
+    public $titulo;
+    public $texto;
+
+    public function exibeNoticia()
+    {
+        $ret = "<center>";
+        $ret .= "<b>". $this->titulo ."</b><p>";
+        $ret .= $this->texto;
+        $ret .= "</center><p>";
+
+        return $ret;
+    }
+}
+
+$not = new Noticia;
+$not->titulo = "Unicamp 40 anos";
+$not->texto = "No ano de 2006 a Unicamp completou 40 anos de história!";
+$not->exibeNoticia();
+
+echo "<center><b>===============================================</b></center>";
+$not2 = $not; // Criada a referência para o objeto contido em $not
+$not2->titulo = "Economia debate finanças mundiais e estratégias";
+$not2->texto = "Começa hoje, no auditório do Instituto de Economia da Unicamp..";
+$not2->exibeNoticia();
+
+echo "<center><b>===============================================</b></center>";
+$not->exibeNoticia();
+echo "<pre>";
+print_r($not);
+echo "</pre><p>";
+
+echo "<pre>";
+print_r($not2);
+echo "</pre><p>";
+
+
+Para que o objeto seja realmente clonado, é necessário utilizar a palavra-chave clone. E caso o método __clone() esteja definido na classe deste objeto,
+ele será executado durante esta clonagem:
+
+Executando o método mágico __clone() de Noticia:
+
+<?php
+# noticia_metodo_magico_6.php
+
+class Noticia
+{
+    public $titulo;
+    public $texto;
+
+    public function exibeNoticia()
+    {
+        $ret = "<center>";
+        $ret .= "<b>". $this->titulo ."</b><p>";
+        $ret .= $this->texto;
+        $ret .= "</center><p>";
+
+        return $ret;
+    }
+
+    public function __clone()
+    {
+        echo "<p>Obj. com o título <b>" . $this->titulo . "</b> Clonado</p>";
+    }
+}
+
+$not = new Noticia;
+$not->titulo = "Unicamp 40 anos";
+$not->texto = "No ano de 2006 a Unicamp completou 40 anos de história!";
+$not->exibeNoticia();
+
+echo "<center><b>================================================</b></center>";
+$not2 = clone $not;
+$not2->titulo = "Economia debate finanças mundiais e estratégias";
+$not2->texto = "Começa hoje, no auditório do Instituto de Economia da Unicamp..";
+$not2->exibeNoticia();
+
+echo "<center><b>===============================================</b></center>";
+$not->exibeNoticia();
+echo "<pre>";
+print_r($not);
+echo "</pre><p>";
+
+echo "<pre>";
+print_r($not2);
+echo "</pre><p>";
+
+
+__toString : O método __toString() é chamado toda vez que se invoca a função print ou echo para um objeto. Nesses casos o php retornará um erro. É aí que entra o método __toString, que pode imprimir informações relevantes ao objeto. O print_r($objeto) também pode ser utilizado.
+
+Esse método permite que uma classe decida como se comportar quando convertida para uma string:
+
+Utilizando o método __toString():
+
+<?php
+# noticia_metodo_magico_7.php
+
+class Noticia
+{
+    public $titulo;
+    public $texto;
+
+    public function exibeNoticia()
+    {
+        $ret = "<center>";
+        $ret .= "<b>". $this->titulo ."</b><p>";
+        $ret .= $this->texto;
+        $ret .= "</center><p>";
+
+        return $ret;
+    }
+
+    public function __toString()
+    {
+        return "<p>Classe <b>Noticia</b></p>";
+    }
+}
+
+$not = new Noticia;
+echo $not;
+
+
+
+__call : Esse método será chamado toda vez que for solicitada a execução de algum método inexistente em determinada classe: Exemplo 1.8.9 – Utilizando o método __call(): 
+
+<?php
+# noticia_metodo_magico_8.php
+
+class Noticia
+{
+    public $titulo;
+
+    public function exibeNoticia()
+    {
+        $ret = "<center>";
+        $ret .= "<b>". $this->titulo ."</b><p>";
+        $ret .= $this->texto;
+        $ret .= "</center><p>";
+
+        return $ret;
+    }
+
+    public function __call($metodo, $arg)
+    {
+        $this->titulo = $arg[0];
+        $this->texto = $arg[1];
+
+        $ret = "Método Chamado: <b>$metodo</b><br>";
+        $ret .= "Adicionado a <b>Titulo</b>, o valor " . $arg[0] . "<br>";
+        $ret .= "Adicionado a <b>Texto</b>, o valor " . $arg[1];
+
+        return $ret;
+    }
+}
+
+$not = new Noticia;
+$not->setTituloTexto('Titulo Adicionado','Texto Adicionado');
+echo "<pre>";
+print_r($not);
+echo "</pre><p>";

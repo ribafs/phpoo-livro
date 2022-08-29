@@ -1,0 +1,26 @@
+UML
+
+https://umbrello.kde.org/installation.php
+
+https://community.linuxmint.com/software/view/umbrello
+
+sudo snap install umbrello
+
+
+StartUML
+
+wget http://staruml.io/download/releases/StarUML-3.2.2.AppImage -O staruml.appimage
+
+chmod +x staruml.appimage
+
+./staruml.appimage
+
+
+https://www.eclipse.org/papyrus/
+
+
+https://plantuml.com/download
+
+https://sourceforge.net/projects/violet/files/latest/download
+
+

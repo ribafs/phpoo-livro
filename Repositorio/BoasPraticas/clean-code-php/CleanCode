@@ -1,0 +1,126 @@
+It's time for a few more tips to make your code clean and readable :)
+Let's dive right in.
+
+
+Tip #1: use strict comparison
+
+The standard "loose" comparison operator (==) can be confusing.
+For example:
+
+$a = TRUE;
+$b = 12;
+
+if ($a == $b)
+{
+   echo “a and b are equal!”;
+}
+
+Even if $a and $b are indeed quite different, the "==" operator considers them equal, because of the PHP automatic type conversion called type juggling.
+
+Type juggling can be handy at times, but it can make your code poorly readable and error prone.
+
+It's better to use the strict operator === instead of == whenever possible to make your code cleaner and safer.
+
+
+Tip #2: keep functions short
+
+A function should do only one, specific operation (and do it well).
+The shorter a function is, the better.
+
+For example:
+
+public function setRgbColor(string $color, int $value)
+{
+   if (($color === ‘R’) || ($color === ‘G’) || ($color === ‘B’))
+   {
+      if (($value >= 0) && ($value <= 255))
+      {
+         $this->colors[$color] = $value;
+      }
+   }
+}
+
+This function does three different operations: checks the color, checks the value and finally sets the color.
+Instead, the color check and the value check should be done by other functions, and the above function should become like this:
+
+public function setRgbColor(string $color, int $value)
+{
+   if ($this->checkRgbColor($color) && $this->checkRgbValue($value))
+   {
+      $this->colors[$color] = $value;
+   }
+}
+
+
+Tip #3: use explicit return values
+
+Your functions will be more readable if you make clear what they return.
+
+The best way to do it is to define an explicit return value.
+Look how it can improve the code readability.
+
+From this...
+
+public function getRgbColor(string $color)
+{
+   if (isset($this->colors[$color]))
+   {
+      return $this->colors[$color];
+   }
+   else
+   {
+      return 0;
+   }
+}
+
+...to this:
+
+public function getRgbColor(string $color)
+{
+   $value = 0;
+   
+   if (isset($this->colors[$color]))
+   {
+      $value = $this->colors[$color];
+   }
+
+   return $value;
+}
+
+Much better, isn't it?
+
+
+Tip #4: avoid using raw values
+
+Values that are not assigned to a variable can be hard to understand.
+
+For example:
+
+for ($i = 0; $i < 15; $i++)
+{
+   /* do something */
+}
+
+What is the meaning of 15? It's a string length, an array count, or a limit?
+
+It's much better if you use a meaningful variable name to make crystal clear what that number is:
+
+$maxTableRows = 15;
+
+for ($i = 0; $i < $maxTableRows; $i++)
+{
+   /* do something */
+}
+
+
+All right, that's all for today.
+I hope these tips will help you make your PHP code even better.
+
+Now I want to hear from you: what do you think about these tips? Do you have some other tips to share?
+
+I'm waiting for your reply.
+
+
+
+Talk soon,
+Alex

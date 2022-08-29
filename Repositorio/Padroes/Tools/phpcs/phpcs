@@ -1,0 +1,103 @@
+sudo apt install php-codesniffer
+
+wget https://raw.githubusercontent.com/squizlabs/PHP_CodeSniffer/master/src/Standards/PSR2/ruleset.xml
+mv ruleset.xml phpcs.xml
+
+ou
+
+sudo pear channel-update pear.php.net
+sudo pear install PHP_CodeSniffer
+
+phpcs --help
+
+phpcs --standard=<?php standard-name&gt; path-to-your-PHP-source-file&gt;
+phpcs --standard=Zend file_name.php
+phpcs --standard=PEAR file_name.php
+
+https://github.com/squizlabs/PHP_CodeSniffer/wiki/Advanced-Usage
+https://github.com/squizlabs/PHP_CodeSniffer/wiki/Coding-Standard-Tutorial
+
+
+Getting Started With PHP CodeSniffer
+PHP
+
+phpcs -i
+
+People often develop different coding styles, but it is good if we can all get on the "same page" to make collaboration easier. Hence the desire for coding standards such as PSR-2. PHP CodeSniffer is a tool that can automatically detect violations of the standards you configure, and sometimes automatically fix them. This is especially useful for open source projects where anybody might be making a contribution, but you want a consistent look.
+Install CodeSniffer
+
+There are many ways to install the CodeSniffer tool. Since I just want to install it permanently to my machine and use across projects, I would either install through Pear, or using the Ubuntu packages as shown below. However, you could have it as a dependency of your project with composer if you wanted to.
+Using Pear
+
+    Install pear.
+
+    Run the following command to install the toll through pear.
+
+sudo pear install PHP_CodeSniffer
+
+Ubuntu 16.04 - Native Packages
+
+Ubuntu 16.04 users should also be able to install it with:
+
+sudo apt install php-codesniffer
+
+Configuration
+
+Different people had different styles of programming. E.g. do you have your { on the same line as an if statement or not? The CodeSniffer tool needs to be configured to take this into accoun.
+
+Add a configuration to your project called phpcs.xml, which will define your project's coding standards. If you just want to use PSR2, then you can just download this example:
+
+wget https://raw.githubusercontent.com/squizlabs/PHP_CodeSniffer/master/src/Standards/PSR2/ruleset.xml
+mv ruleset.xml phpcs.xml
+
+
+If you use Zend coding standard, I believe this file may be of use instead.
+Usage
+
+Once you have created your phpcs.xml file, you can run the codesniffer against the files in the current working directory with:
+
+phpcs .
+
+
+Alternatively, if you just wish to evaluate a single file, then run:
+
+phpcs /path/to/file
+
+Output
+
+Once you have run the tool, you should get a chunk of output for each file like so:
+
+FILE: /path/to/my/file.php
+---------------------------------------------------------------------------------------------
+FOUND 5 ERRORS AND 1 WARNING AFFECTING 6 LINES
+---------------------------------------------------------------------------------------------
+ 10 | ERROR   | [x] Expected 1 space after comma in function call; 4 found
+ 19 | ERROR   | [x] Whitespace found at end of line
+ 20 | ERROR   | [x] Whitespace found at end of line
+ 21 | WARNING | [ ] Line exceeds 120 characters; contains 165 characters
+ 29 | ERROR   | [x] Whitespace found at end of line
+ 70 | ERROR   | [x] TRUE, FALSE and NULL must be lowercase; expected "true" but found "TRUE"
+---------------------------------------------------------------------------------------------
+PHPCBF CAN FIX THE 5 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+---------------------------------------------------------------------------------------------
+
+Automatically Fixing Issues
+
+You will notice the following line from the example output:
+
+PHPCBF CAN FIX THE 5 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+
+Well that sounds awesome*, lets do it!
+
+PHPCBF stands for PHP Code Beautifier and can be run just like the previous command:
+
+phpcbf /path/to/file/or/folder
+
+Conclusion
+
+I hope you find this tool useful. It will certainly help prevent "styling wars" by keeping everyone on the same page. Going further, you may be interested in this post to find out about a "PHP Mess Detector" (phpmd) and an alternative to CodeSniffer called "PHP Coding Standards Fixer" (php-cs-fixer).
+References
+
+    dev.to - How to master your code through your project lifecycle (1/2)
+    https://www.youtube.com/watch?v=tKih3UZuwXw
+

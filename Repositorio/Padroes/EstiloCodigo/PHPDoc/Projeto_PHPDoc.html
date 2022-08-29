@@ -1,0 +1,260 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+  
+
+
+  <head>
+    <title>
+      Projeto/PHPDoc – Projeto Expresso Livre
+    </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="search" href="/search" />
+        <link rel="help" href="/wiki/TracGuide" />
+        <link rel="alternate" href="/wiki/Projeto/PHPDoc?format=txt" type="text/x-trac-wiki" title="Plain Text" /><link rel="alternate" href="/wiki/Projeto/PHPDoc?format=odt" type="text/x-trac-wiki" title="OpenDocument" />
+        <link rel="up" href="/wiki/Projeto" title="View parent page" />
+  </head>
+  <body>
+
+          <div id="wikipage"><h1 id="DocumentaçãodeCódigo">Documentação de Código</h1>
+<p>
+O phpDocumentor é o mais utilizado para auto-documentação da linguagem PHP. Similar ao Javadoc, e desenvolvido em PHP, pode ser usado da linha de comando ou através de uma interface web para criar documentação profissional para códigos-fonte PHP. phpDocumentor oferece suporte para relacionar documentações, incorporando documentos de usuário como tutoriais e a criação de código-fonte com destaque visual com referência cruzada para documentação genérica do PHP.
+</p>
+<p>
+phpDocumentor usa um sistema completo de templates para mudar os comentários do seu código-fonte em formatos mais legíveis e, portanto, úteis. Este sistema permite a criação de documentações de fácil leitura em 15 estilos prontos em versões HTML, PDF, CHM e XML. Você também pode criar seus próprios templates para obter um visual mais próximo do seu projeto.
+</p>
+<h2 id="Elementosdocumentáveis">Elementos documentáveis</h2>
+<p>
+O phpDocumentor é capaz de documentar automaticamente comandos include, define, funções, páginas procedurais, classes, seus atributos e métodos. Todos podem conter as tags padrão.
+</p>
+<h2 id="Tagspadrão">Tags padrão</h2>
+<p>
+Dentre as tags disponíveis no phpDocumentor, estas seriam as mais relevantes no contexto do projeto Expresso Livre:
+</p>
+<ul><li>@author [nome_autor]: Autor do elemento atual
+</li></ul><ul><li>@copyright [string]: informações sobre direitos autorais
+</li></ul><ul><li>@deprecated [version/info string]: Elementos abandonados que não devem mais ser usados, podendo ser removidos em futuras versões
+</li></ul><ul><li>@example [arquivo]: Incluir um arquivo externo de exemplo com coloração de sintaxe
+</li></ul><ul><li>@filesource: Similar a @example, porém voltado a arquivos internos
+</li></ul><ul><li>@ignore: Evita a documentação de um elemento
+</li></ul><ul><li>@internal [descrição]: Define descrição de elemento como privada, interna ao projeto e que não deve ser exibida na documentação final
+</li></ul><ul><li>@link [URL link text, URL, URL, URL...]: Mostra um link dentro da documentação
+</li></ul><ul><li>@see [file.ext|elementname|class::methodname()|class::$variablename|functionname()|function functionname Número ilimitado de valores separados por vírgulas]: Link para a documentação de um elemento
+</li></ul><ul><li>@since [version/info string]: Versão a partir da qual um elemento passou a integrar um pacote
+</li></ul><ul><li>@todo [information string]: Modificações a serem feitas
+</li></ul><ul><li>@tutorial [package/ subpackage/ tutorialname.ext #section.subsection description]: Mostra um link para a documentação de um pacote
+</li></ul><ul><li>@uses [file.ext|elementname|class::methodname()|class::$variablename|functionname()|function functionname]: descrição de como o elemento é usado
+</li></ul><ul><li>@version [versionstring]: Versão de um elemento
+</li></ul><pre class="wiki">    Exemplo:
+    /**
+     * Gerencia o processo básico
+     * 
+     * @author Carlos Eduardo Nogueira Gonçalves
+     * @package  Workflow
+     * @license http://www.gnu.org/copyleft/gpl.html GPL 
+     */
+</pre><h2 id="Tagsinline">Tags inline</h2>
+<p>
+Diferentemente das tags normais, as tags inline podem ser usadas em qualquer lugar dentro do bloco de comentários.
+</p>
+<ul><li>inline {@link}: Exibe um link para uma URL ou a documentação de algum elemento
+</li></ul><blockquote>
+<blockquote>
+<p>
+{@link  URL  description }
+</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>
+{@link element description }
+</p>
+</blockquote>
+</blockquote>
+<ul><li>inline {@tutorial}: Exibe um link para um tutorial
+</li></ul><blockquote>
+<blockquote>
+<p>
+{@tutorial package/ subpackage/ tutorialname.ext #section.subsection description}
+</p>
+</blockquote>
+</blockquote>
+<ul><li>inline {@source}: Exibe o código-fonte de uma função ou método na descrição longa
+</li></ul><blockquote>
+<blockquote>
+<p>
+{@source startline number of lines}
+</p>
+</blockquote>
+</blockquote>
+<ul><li>inline {@inheritdoc}: Usada para que as subclasses herdem a descrição detalhada de suas superclasses
+</li></ul><blockquote>
+<blockquote>
+<p>
+{@inheritdoc}
+</p>
+</blockquote>
+</blockquote>
+<pre class="wiki">    Exemplo:
+    /**
+     * Text with a normal @tutorial tag
+     * @tutorial phpDocumentor/phpDocumentor.pkg
+     */
+
+    Exemplo:
+    /**
+     * inline tags demonstration
+     *
+     * this function works heavily with {@link foo()} to rule the world. If I want
+     * to use the characters "{@link" in a docblock, I just use "{@}link."  If
+     * I want the characters "{@*}" I use "{@}*}"
+     */
+
+</pre><h2 id="Elementosprocedurais">Elementos procedurais</h2>
+<p>
+São considerados elementos procedurais: comandos include, define, funções, e páginas procedurais.
+</p>
+<h3 id="Blocodecomentárioemníveldepágina">Bloco de comentário em nível de página</h3>
+<p>
+Um bloco de página pode ter qualquer uma das tags padrão, e deve obrigatoriamente:
+</p>
+<ul><li>Ser o primeiro bloco em um arquivo;
+</li></ul><ul><li>Conter uma tag @package.
+</li></ul><h3 id="Comandosincluderequireinclude_oncerequire_once">Comandos include/require/include_once/require_once</h3>
+<p>
+phpDocumentor extrai o nome do arquivo e tenta ligar a documentação para o respectivo arquivo se possível. Comandos include podem apenas ter as tags padrão.
+</p>
+<p>
+phpDocumentor tentará localizar o arquivo incluído na lista de arquivos analisados, encontrando-o fará uma ligação para a documentação do arquivo.
+</p>
+<h3 id="Comandosdefine">Comandos define</h3>
+<p>
+O bloco de comentários de uma declaração define poderá conter qualquer tag padrão do phpDocumentor, acrescido da tag:
+</p>
+<ul><li>@name [nome_var]: Especifica um apelido para uma página procedural ou variável global
+</li></ul><pre class="wiki">    Exemplo:
+    /**
+     * Prefixo das tabelas do workflow
+     * @name GALAXIA_TABLE_PREFIX
+     */
+
+     define('GALAXIA_TABLE_PREFIX', 'egw_wf_');
+</pre><h3 id="Variáveisglobais">Variáveis globais</h3>
+<ul><li>@global (obrigatória): [datatype  $globalvariablename, datatype  description]
+</li></ul><ul><li>@name [nome_var]: Especifica um apelido para uma página procedural ou variável global
+</li></ul><pre class="wiki">    Exemplo
+    /**
+     * Special global variable declaration DocBlock
+     * @global integer $GLOBALS['_myvar'] 
+     * @name $_myvar
+     */
+
+    $GLOBALS['_myvar'] = "myval";
+</pre><h3 id="Declaraçãodefunções">Declaração de funções</h3>
+<ul><li>@global [datatype  $globalvariablename, datatype  description]
+</li></ul><ul><li>@param [datatype $paramname description]: Parâmetro de função ou método
+</li></ul><ul><li>@return [datatype description]: Tipo de retorno de função ou método
+</li></ul><ul><li>@staticvar [datatype description]: Uso de uma variável estática dentro de uma função ou método
+</li></ul><ul><li>inline {@source}
+</li></ul><pre class="wiki">    Exemplo:
+    /**
+     * Includes files from the process folder.
+     * @param string $file_name File's name to be included.
+     * @return void
+     * @license http://www.gnu.org/copyleft/gpl.html GPL
+     * @access public
+     */
+
+    function wf_include( $file_name )
+</pre><h2 id="Classes">Classes</h2>
+<ul><li>@package [nome_pacote]: Agrupa classes, funções e constantes
+</li></ul><ul><li>@subpackage [nome_subpacote]: Agrupa classes, funções e constantes de um pacote
+</li></ul><ul><li>@category [nome_categoria]: Organizar o pacote do elemento documentado
+</li></ul><ul><li>@static: Classe ou método estático
+</li></ul><ul><li>@abstract: Documenta uma classe abstrata, atributo ou método
+</li></ul><ul><li>@license [URL name of license]: Mostra um link para a URL da licença
+</li></ul><blockquote>
+<p>
+Os blocos de comentários são herdados pelas classes filhas, variáveis e métodos. As regras para herança são:
+</p>
+</blockquote>
+<ul><li>As tags @author, @version e @copyright são automaticamente herdadas a não ser explicitamente especificado em contrário;
+</li></ul><ul><li>Embora as tags @package e @subpackage sejam herdadas automaticamente, é recomendado que sejam usadas explicitamente para todas as classes para evitar problemas de conflitos;
+</li></ul><ul><li>Em caso de ausência de descrição breve, ela será herdada;
+</li></ul><ul><li>Em caso de ausência de descrição longa, ela será herdada;
+</li></ul><ul><li>Em caso de haver uma descrição longa e ainda se quiser herdar a descrição da superclasse, use inline {@inheritdoc}
+</li></ul><pre class="wiki">    Exemplo:
+    /**
+     * Criptografia simples e segura baseada em funções hash   
+     * @author	Marc Wöhlken, woehlken@quadracom.de
+     * @author	Carlos Eduardo Nogueira Gonçalves
+     * @version 1.0
+     * @license http://www.gnu.org/copyleft/gpl.html GPL
+     * @package Workflow
+     */
+
+    class wf_crypt
+
+    Exemplo usando descrição breve e descrição longa:
+
+    /**
+     * short desc
+     *
+     * long desc
+     * @package test
+     * @author me
+     * @version 1.0
+     * @abstract
+     * @copyright never
+     */
+</pre><h3 id="Atributos">Atributos</h3>
+<p>
+O bloco de comentário de atributos pode conter qualquer tag padrão e obrigatóriamente a tag @var
+</p>
+<ul><li>@var [datatype $varname descrição]: Um atributo
+</li></ul><ul><li>@access [private, protected, public]: Controle de acesso para um elemento
+</li></ul><pre class="wiki">    Exemplo:
+    /**
+     * @var	string $hash_key Versão embaralhada da chave de criptografia fornecida pelo usuário
+     * @access public
+     */
+
+    var $hash_key;
+</pre><h3 id="Métodos">Métodos</h3>
+<ul><li>@access [private, protected, public]: Controle de acesso para um elemento
+</li></ul><ul><li>@global [datatype $globalvariablename, datatype  description]
+</li></ul><ul><li>@param [datatype $paramname description]: Parâmetro de função ou método
+</li></ul><ul><li>@return [datatype description]: Tipo de retorno de função ou método.(Caso retorne mixed especificar quais os tipos possíveis na descrição)
+</li></ul><ul><li>@static: Classe ou método estático
+</li></ul><ul><li>@staticvar [datatype description]: Uso de uma variável estática dentro de uma função ou método
+</li></ul><ul><li>@final: Método que não deve ser sobrescrito nas subclasses
+</li></ul><ul><li>inline {@source}
+</li></ul><pre class="wiki">    Exemplo:
+    /**
+     * Usado para definir a chave de criptografia e descriptografia
+     * @param	string	$key	Chave secreta usada para criptografia e descriptografia
+     * @param	boolean	$base64	Usar codificação base64
+     * @return void 
+     * @access public
+     */
+
+    function setKey($key, $base64 = true) 
+</pre><h1 id="Referências">Referências</h1>
+<p>
+<a class="ext-link" href="http://www.phpdoc.org/manual.php"><span class="icon"> </span>Manual</a>
+</p>
+<p>
+<a class="ext-link" href="http://www.phpdoc.org/tutorial.php"><span class="icon"> </span>Tutorial</a>
+</p>
+</div>
+        
+        
+      </div>
+      
+
+    </div>
+    <div id="altlinks">
+
+  </body>
+</html>

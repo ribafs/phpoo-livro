@@ -1,0 +1,8 @@
+A classe de conexão usará o padrão de projeto Singleton.
+O O construtor será declarado como private.
+
+Uma classe model contém todos os métodos relacionados à logica de negócios.
+
+O controller Contatos deve ter métodos que realizam ações relacionadas aos contatos, tais como salvar, excluir, listar, atualizar.
+
+

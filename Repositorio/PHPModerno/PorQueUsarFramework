@@ -1,0 +1,16 @@
+Um framework é um conjunto de códigos comuns abstraídos de vários projetos com o objetivo de prover funcionalidades genéricas em um projeto que utilize esse framework. Através de programação, ele permite a customização dessas funcionalidades para torná-las mais específicas de acordo com a exigência de cada aplicação.
+De forma resumida o framework é uma estrutura, uma fundação para você criar a sua aplicação. Em outras palavras o framework te permite o desenvolvimento rápido de aplicações (RAD), o que faz economizar tempo, ajuda a criar aplicações mais sólidas e seguras além de reduzir a quantidade de código repetido. 
+
+Os desenvolvedores utilizam frameworks por vários motivos, e o maior deles é para agilizar o processo de desenvolvimento. A re-utilização de código em vários projetos vai economizar muito tempo e trabalho… Isso é garantido pois o framework já traz uma série de módulos pré-configurados (e funcionando) para fazer as mais variadas e comuns tarefas como envio de e-mails, conexão com o banco de dados, sanitização (limpeza) de dados e proteção contra ataques.
+
+Não recomendado para:
+- Programadores iniciantes
+- Projetos pequenos
+
+Pontos fortes:
+- Qualidade do código do aplicativo
+- Segurança
+- Produtividade
+- Fácil manutenção do código
+- Documentação e material online fartos
+- Pequeno tempo de desenvolvimento

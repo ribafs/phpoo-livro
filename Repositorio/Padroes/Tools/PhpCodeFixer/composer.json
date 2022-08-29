@@ -1,0 +1,38 @@
+{
+    "name": "wapmorgan/php-code-fixer",
+    "description": "A scanner that checks compatibility of your code with new interpreter versions.",
+    "type": "package",
+    "license": "BSD-3-Clause",
+    "require": {
+        "php": ">=5.4",
+        "ext-tokenizer":"*",
+        "ext-json": "*",
+        "symfony/console": "^3.4"
+    },
+    "suggest": {
+        "ext-json": "Allows to store report in json-format"
+    },
+    "autoload": {
+        "psr-4": {
+            "wapmorgan\\PhpCodeFixer\\": "src/"
+        },
+        "files": ["src/functions.php"]
+    },
+    "bin": ["bin/phpcf"],
+    "extra": {
+        "phar-builder": {
+            "compression": "BZip2",
+            "name": "phpcf-dev.phar",
+            "output-dir": "./",
+            "entry-point": "bin/phpcf",
+            "include": ["bin", "data"],
+            "events": {
+                "command.package.start" : "git describe --tags > bin/version.txt",
+                "command.package.end": "cp phpcf-dev.phar phpcf-`cat bin/version.txt`.phar && chmod +x phpcf.phar && rm bin/version.txt"
+            }
+        }
+    },
+    "scripts": {
+        "build": "phar-builder package composer.json"
+    }
+}

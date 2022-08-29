@@ -1,0 +1,3 @@
+# Só os arquivos de imagens, css, javascript e a página index.php podem ser acessados.
+RewriteEngine on
+RewriteRule !\.(js|ico|txt|gif|jpg|png|css|doc|log|pdf|rtf|odt|xls)$ index.php

@@ -1,0 +1,154 @@
+this - palavra chave $this
+
+O objeto $this é uma pseudo-variável que fica disponível para acesso quando um método é chamado dentro de um contexto de objeto. Porém, o que isso quer dizer? 
+O $this nada mais é do que um objeto chamador, ele fica disponível a partir do momento que a classe é criada e ele é o objeto responsável por armazenar as próprias informações correspondentes a classe e suas respectivas propriedades e métodos. 
+
+É  uma chamada de si mesmo e de suas propriedades e métodos.
+
+Quando criamos uma classe em PHP, internamente, ela cria um objeto $this para podermos manipular as propriedades dentro dela mesmo. 
+
+<?php
+
+class Foo
+{
+    private $a;
+
+    private function bar()
+    {
+        //Usei o $this para chamar uma propriedade pertencente a essa mesma classe
+        //dentro de um método dela mesma.
+        $this->a = 'Foobar';
+    }
+
+    public function foobar()
+    {
+        //Usa-se o $this para chamar um método da própria classe, dentro dela mesma.
+        $this->bar();
+    }
+}
+
+• Por que usar a palavra-chave $this?
+• Como usar a palavra-chave $this para abordar as propriedades e métodos da própria classe de dentro da classe?
+
+A palavra-chave $this
+
+A palavra-chave $this indica que usamos os próprios métodos e propriedades da classe e nos permite ter acesso a eles dentro do escopo da classe.
+
+A palavra-chave $this nos permite abordar as propriedades e os métodos da classe de dentro da classe usando a seguinte sintaxe:
+
+• Apenas a palavra-chave $this começa com o sinal $, enquanto os nomes das propriedades e métodos não começam com ele.
+
+$this->propertyName;
+$this->methodName();
+
+A palavra-chave $this indica que usamos os próprios métodos e propriedades da classe e nos permite ter acesso a eles dentro do escopo da classe.
+Vamos ilustrar o que acabamos de dizer sobre a classe Carro. Vamos habilitar o método hello() para abordar as propriedades da própria classe usando a palavra-chave $this.
+
+A fim de abordar a propriedade $comp da classe. Nós usamos:
+  $this->comp;
+
+Para abordar a propriedade $color da classe. Nós usamos:
+$this->color
+
+É assim que o código se parece:
+
+class Car {
+
+    // The properties
+    public $comp;
+    public $color = 'beige';
+    public $hasSunRoof = true;
+ 
+    // The method can now approach the class properties
+    // with the $this keyword
+    public function hello()
+    {
+      return "Beep I am a <i>" . $this -> comp . "</i>, and I am <i>" .
+        $this->color;
+    }
+}
+
+class Car {
+
+    // The properties
+    public $comp;
+    public $color = 'beige';
+    public $hasSunRoof = true;
+ 
+    // The method that says hello
+    public function hello()
+    {
+      return "Beep I am a <i>" . $this -> comp . 
+         "</i>, and I am <i>" . $this -> color;
+    }
+}
+
+
+
+final - A palavra-chave 'final'
+
+Classes definidas com a palavra-chave final não podem ser herdadas por outras classes. Quando um método é definido com final, as subclasses que o herdarem não poderão sobrescrevê-los.
+
+<?php
+
+final class Noticia
+{
+    protected $titulo;
+    protected $texto;
+
+    public function setTitulo($valor)
+    {
+        $this->titulo = $valor;
+    }
+
+    public function setTexto($valor)
+    {
+        $this->texto = $valor;
+    }
+
+    public function exibeNoticia()
+    {
+        $ret = "<center>";
+        $ret .= "<b>". $this->titulo ."</b><p>";
+        $ret .= $this->texto;
+        $ret .= "</center><p>";
+        return $ret;
+    }
+}
+
+
+<?php
+// noticia_final.php
+include_once 'Noticia.php';
+
+class NoticiaPrincipal extends Noticia
+{
+    private $imagem;
+    public function setImagem($valor)
+    {
+        $this->imagem = $valor;
+    }
+
+    public function exibeNoticia()
+    {
+        $ret = "<center>";
+        $ret .= "<img src=\"". $this->imagem ."\"><p>";
+        $ret .= "<b>". $this->titulo ."</b><p>";
+        $ret .= $this->texto;
+        $ret .= "<p></center>";
+        return $ret;
+    }
+}
+
+$titulo = 'Vestibular da Unicamp termina nesta quarta-feira';
+$texto = 'Um dos maiores vestibulares do país acaba nesta quarta-feira,';
+$texto .= 'com número recorde de inscritos';
+$imagem = 'img_unicamp.jpg';
+
+$not = new NoticiaPrincipal;
+$not->setTitulo($titulo);
+$not->setTexto($texto);
+$not->setImagem($imagem);
+$not->exibeNoticia();
+
+print $not;

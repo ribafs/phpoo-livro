@@ -1,0 +1,344 @@
+Namespaces
+
+Napespaces surgiram no PHP 5.3
+
+São mais indicados para grandes projetos, com uma grande quantidade de classes, mas também podem ser usado em pequenos projetos.
+
+Namespaces possibilitam o agrupamento de classes, interfaces, funções e constantes, visando evitar o conflito entre seus nomes, atuando como um encapsulador para estes itens. Seu funcionamento é equivalente ao de diretórios em sistemas operacionais, onde dois arquivos de mesmo nome não podem existir em um único diretório, mas nada impede a existência de dois arquivos de mesmo nome localizados em diretórios distintos. Este mesmo princípio é aplicado no PHP através de namespaces, ao utilizar este recurso temos mais liberdade na hora de criar classes, funções e etc, não sendo mais necessário utilizar prefixo para diferenciar seus nomes.
+
+Duas classes Produto convivendo sem conflito, mas cada uma em seu próprio namespace:
+
+require 'classes/produto.php';
+require 'models/produto.php';
+
+// Com namespaces
+
+$produtom = new \models\Produto();
+$produtoc = new \classes\Produto();
+$produto->mostrarDetalhes();
+
+
+Imagine que temos duas classes Book, a primeira no namespace Bookstore\Domain e a segunda no Library\Domain . 
+Para resolver o conflito, podemos fazer assim:
+
+use Bookstore\Domain\Book;
+use Library\Domain\Book as LibraryBook;
+
+Duas classes Book mas uma com um alias, ambas convivendo sem conflitos graças ao namespace  
+
+
+É definido usando a palavra-chave namespace no topo do arquivo. Deve ser o primeiro comando do arquivo e nada antes dele, com uma única exceção que é a função declare().
+
+Mesmo que seja possível usar mais de um namespace por arquivo evite, pois é confuso e não é uma boa prática.
+
+Geralmente o nome do namespace é o nome do próprio projeto.
+
+Usar apenas um namespace por arquivo
+
+<?php
+namespace NomeProjeto\PrimeiraParte;
+
+class Clientes{
+    
+}
+
+// Em outro arquivo
+use \NomeProjeto\PrimeiraParte;
+
+$clientes = new Clientes();
+
+ou
+$clientes = new \NomeProjeto\PrimeiraParte\Clientes();
+
+
+
+<html>
+<?php
+namespace MyProject; // fatal error - namespace must be the first statement in the script
+?>
+
+/projeto
+
+<?php
+
+namespace MeuProjeto;
+
+Subnamespaces
+
+O PHP permite isso. Veja exemplos:
+
+    MyProject\SubName
+    MyProject\Database\MySQL
+    CompanyName\MyProject\Common\Widget
+
+<?php
+// application library 1
+namespace App\Lib1;
+
+const MYCONST = 'App\Lib1\MYCONST';
+
+function MyFunction() {
+	return __FUNCTION__;
+}
+
+class MyClass {
+	static function WhoAmI() {
+		return __METHOD__;
+	}
+}
+?>
+
+Chamando
+
+<?php
+header('Content-type: text/plain');
+require_once('lib1.php');
+
+echo \App\Lib1\MYCONST . "\n";
+echo \App\Lib1\MyFunction() . "\n";
+echo \App\Lib1\MyClass::WhoAmI() . "\n";
+?>
+
+Importando namespaces
+
+lib2.php:
+
+
+<?php
+// application library 2
+namespace App\Lib2;
+
+const MYCONST = 'App\Lib2\MYCONST';
+
+function MyFunction() {
+	return __FUNCTION__;
+}
+
+class MyClass {
+	static function WhoAmI() {
+		return __METHOD__;
+	}
+}
+?>
+
+Podemos usar a palavra chave "use" para importar classes, interfaces ou namespaces
+Funções e constantes não podem ser importadas usando somente use. Tendo se tornado possíve na versão 5.6 do PHP com a seguinte sintaxe:
+
+use func Projeto\FuncaoNome;
+FuncaoNome();
+
+use constant Projeto\ConstanteNome;
+echo ConstanteNome;
+
+
+<?php
+use App\Lib2;
+
+require_once('lib1.php');
+require_once('lib2.php');
+
+header('Content-type: text/plain');
+echo Lib2\MYCONST . "\n";
+echo Lib2\MyFunction() . "\n";
+echo Lib2\MyClass::WhoAmI() . "\n";
+?>
+
+Alias
+
+<?php
+use App\Lib1 as L;
+use App\Lib2\MyClass as Obj;
+
+header('Content-type: text/plain');
+require_once('lib1.php');
+require_once('lib2.php');
+
+echo L\MYCONST . "\n";
+echo L\MyFunction() . "\n";
+echo L\MyClass::WhoAmI() . "\n";
+echo Obj::WhoAmI() . "\n";
+?>
+
+<?php
+namespace App\Lib1;
+echo __NAMESPACE__; // outputs: App\Lib1
+?>
+
+<?php
+namespace App\Lib1;
+
+class MyClass {
+	public function WhoAmI() {
+		return __METHOD__;
+	}
+}
+
+$m = new namespace\MyClass;
+echo $m->WhoAmI(); // outputs: App\Lib1\MyClass::WhoAmI
+?>
+
+__autoload() - deprecated na versão 7.2
+
+
+Nome qualificado, ex: $var = new Model\User();
+
+Caso o namespace atual seja Project, será solicitado Project\Model\User. Se o código for global, ou seja, sem namespace definido, irá solicitar Model\User.
+	
+// Example - Namespace scope
+namespace Project;
+$var = new Model\User;
+// Resultado: Project\Model\User
+ 
+// Example - Global scope
+$var = new Model\User;
+// Resultado: Model\User
+
+
+The keyword 'use' has two different applications, but the reserved word table links to here.
+
+It can apply to namespace constucts:
+
+file1:
+<?php namespace foo;
+  class Cat {
+    static function says() {echo 'meoow';}  } ?>
+
+file2:
+<?php namespace bar;
+  class Dog {
+    static function says() {echo 'ruff';}  } ?>
+
+file3:
+<?php namespace animate;
+  class Animal {
+    static function breathes() {echo 'air';}  } ?>
+
+file4:
+<?php namespace fub;
+  include 'file1.php';
+  include 'file2.php';
+  include 'file3.php';
+  use foo as feline;
+  use bar as canine;
+  use animate;
+  echo \feline\Cat::says(), "<br />\n";
+  echo \canine\Dog::says(), "<br />\n";
+  echo \animate\Animal::breathes(), "<br />\n";  ?>
+
+Note that
+felineCat::says()
+should be
+\feline\Cat::says()
+(and similar for the others)
+but this comment form deletes the backslash (why???)
+
+The 'use' keyword also applies to closure constructs:
+
+<?php function getTotal($products_costs, $tax)
+    {
+        $total = 0.00;
+       
+        $callback =
+            function ($pricePerItem) use ($tax, &$total)
+            {
+               
+                $total += $pricePerItem * ($tax + 1.0);
+            };
+       
+        array_walk($products_costs, $callback);
+        return round($total, 2);
+    }
+?>
+
+
+---------------
+Tested on PHP 7.0.5, Windows
+The line "use animate;" equals the line "use animate as animate;"
+but the "use other\animate;" equals "use other\animate as animate;"
+
+file1:
+<?php namespace foo;
+  class Cat {
+    static function says() {echo 'meoow';}  } ?>
+
+file2:
+<?php namespace bar;
+  class Dog {
+    static function says() {echo 'ruff';}  } ?>
+
+file3:
+<?php namespace other\animate;
+  class Animal {
+    static function breathes() {echo 'air';}  } ?>
+
+file4:
+<?php namespace fub;
+  include 'file1.php';
+  include 'file2.php';
+  include 'file3.php';
+  use foo as feline;
+  use bar as canine;
+  use other\animate;       //use other\animate as animate;
+  echo feline\Cat::says(), "<br />\n";
+  echo canine\Dog::says(), "<br />\n";
+  echo \animate\Animal::breathes(), "<br />\n";  ?>
+
+
+Exemplo simples:
+
+james1.php
+<?php
+
+namespace Cantores\Metal;
+
+class James{
+    private $canta;
+    private $banco;
+
+    public function __construct($canta){
+        $this->canta = $canta;
+        // Para usar uma classe que não esteja no namespace, por exemplo PDO, use a barra ao contrário:
+        $this->banco = new \PDO ('mysql: host=localhost;dbname=testes','root', 'root');
+    }
+
+    public function dizOi(){
+        echo 'Oi eu sou o James Metal '.$this->canta.'<br>';
+    }
+}
+
+james2.php
+
+<?php
+
+namespace Cantores\Gospel;
+
+class James{
+    private $canta;
+
+    public function __construct($canta){
+        $this->canta = $canta;
+    }
+
+    public function dizOi(){
+        echo 'Oi eu sou o James Gospel '.$this->canta;
+    }
+}
+
+index.php
+<?php
+
+require_once 'james1.php';
+require_once 'james2.php';
+
+use \Cantores\Metal\James as JamesMetal;
+use \Cantores\Gospel\James as JamesGospel;
+
+$JamesMetal = new JamesMetal('Metal');
+$JamesMetal->dizOi();
+
+$JamesGospel = new JamesGospel('Gospel');
+$JamesGospel->dizOi();
+
+//https://www.youtube.com/watch?v=Ed8A5JnQXxA
+
+

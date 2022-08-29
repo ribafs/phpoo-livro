@@ -1,0 +1,46 @@
+Templates
+Os templates fornecem uma forma conveniente de separar seu controlador e a camada de domínio da sua camada de apresentação.
+Eles contém geralmente o HTML de sua aplicação, mas também podem ser usados para outros formatos, como o XML.
+São muitas vezes referidos como a camada de visão que faz parte do segundo componente do padrão de arquitetura de software modelo-visão-controlador (MVC)
+
+Benefícios
+O principal benefício de se utilizar templates é a clara separação que eles criam entre a lógica de apresentação e o resto da sua aplicação. Templates têm a responsabilidade exclusiva de exibir o conteúdo formatado. Eles não são responsáveis por pesquisa de dados, persistência ou outras tarefas mais complexas. Isto leva a código mais limpo, mais legível que é especialmente útil em um ambiente de equipe, onde os desenvolvedores trabalham no código do lado do servidor (controladores, modelos) e designers trabalham no código do lado do cliente (markup).
+Os templates também melhoram a organização do código de apresentação. Os templates são normalmente colocados em uma pasta “views”, cada um definido dentro de um único arquivo. Essa abordagem incentiva a reutilização de código, onde grandes blocos de código são quebrados em pequenos pedaços reutilizáveis, chamados frequentemente de partials. Por exemplo, o cabeçalho e o rodapé do site de cada um pode ser definido como templates, que são então incluídos antes e depois de cada template de página.
+Finalmente, dependendo da biblioteca que você usa, os templates podem oferecer mais segurança ao escapar automaticamente o conteúdo gerado pelo usuário. Algumas bibliotecas oferecem até mesmo sand-boxing, onde os criadores de templates só têm acesso à white-listed (lista branca) de variáveis e funções.
+Templates Simples em PHP
+Templates Simples em PHP são templates que usam código nativo do PHP. Eles são uma escolha natural já que o PHP é na realidade um linguagem de template por si só. Isso significa simplesmente que você pode combinar código PHP dentro de outro código, como HTML. Isso é benéfico para os desenvolvedores de PHP pois não há uma nova sintaxe para aprender, eles sabem as funções disponíveis e seus editores de código PHP já tem syntax highlighting and auto-completion embutidos. Além disso, estes templates tendem a ser muito mais rápido já que não é necessária a fase de compilação.
+Cada framework moderno PHP emprega algum tipo de sistema de templates, a maioria usam PHP simples por padrão. Fora dos frameworks, bibliotecas como Plates ou Aura.View tornam o trabalho mais fácil, oferecendo funcionalidade modernas ao template, tais como herança, layouts e extensões.
+Exemplo de um template simples em PHP
+Utilizando a biblioteca Plates.
+<?php // user_profile.php ?>
+
+<?php $this->insert('header', ['title' => 'User Profile']) ?>
+
+<h1>User Profile</h1>
+<p>Hello, <?=$this->escape($name)?></p>
+
+<?php $this->insert('footer') ?>
+Exemplo de um template simples em PHP usando herança
+Utilizando a biblioteca Plates.
+<?php // template.php ?>
+
+<html>
+<head>
+    <title><?=$title?></title>
+</head>
+<body>
+
+<main>
+    <?=$this->section('content')?>
+</main>
+
+</body>
+</html>
+<?php // user_profile.php ?>
+
+<?php $this->layout('template', ['title' => 'User Profile']) ?>
+
+<h1>User Profile</h1>
+<p>Hello, <?=$this->escape($name)?></p>
+
+

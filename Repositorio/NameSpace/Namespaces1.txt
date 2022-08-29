@@ -1,0 +1,405 @@
+Namespaces
+
+Napespaces surgiram no PHP 5.3
+
+autoload#
+
+Autoload mapping for a PHP autoloader.
+
+PSR-4 and PSR-0 autoloading, classmap generation and files includes are supported.
+
+PSR-4 is the recommended way since it offers greater ease of use (no need to regenerate the autoloader when you add classes).
+PSR-4#
+
+Under the psr-4 key you define a mapping from namespaces to paths, relative to the package root. When autoloading a class like Foo\\Bar\\Baz a namespace prefix Foo\\ pointing to a directory src/ means that the autoloader will look for a file named src/Bar/Baz.php and include it if present. Note that as opposed to the older PSR-0 style, the prefix (Foo\\) is not present in the file path.
+
+Namespace prefixes must end in \\ to avoid conflicts between similar prefixes. For example Foo would match classes in the FooBar namespace so the trailing backslashes solve the problem: Foo\\ and FooBar\\ are distinct.
+
+The PSR-4 references are all combined, during install/update, into a single key => value array which may be found in the generated file vendor/composer/autoload_psr4.php.
+
+Example:
+
+{
+    "autoload": {
+        "psr-4": {
+            "Monolog\\": "src/",
+            "Vendor\\Namespace\\": ""
+        }
+    }
+}
+
+If you need to search for a same prefix in multiple directories, you can specify them as an array as such:
+
+{
+    "autoload": {
+        "psr-4": { "Monolog\\": ["src/", "lib/"] }
+    }
+}
+
+If you want to have a fallback directory where any namespace will be looked for, you can use an empty prefix like:
+
+{
+    "autoload": {
+        "psr-4": { "": "src/" }
+    }
+}
+
+PSR-0#
+
+Under the psr-0 key you define a mapping from namespaces to paths, relative to the package root. Note that this also supports the PEAR-style non-namespaced convention.
+
+Please note namespace declarations should end in \\ to make sure the autoloader responds exactly. For example Foo would match in FooBar so the trailing backslashes solve the problem: Foo\\ and FooBar\\ are distinct.
+
+The PSR-0 references are all combined, during install/update, into a single key => value array which may be found in the generated file vendor/composer/autoload_namespaces.php.
+
+Example:
+
+{
+    "autoload": {
+        "psr-0": {
+            "Monolog\\": "src/",
+            "Vendor\\Namespace\\": "src/",
+            "Vendor_Namespace_": "src/"
+        }
+    }
+}
+
+If you need to search for a same prefix in multiple directories, you can specify them as an array as such:
+
+{
+    "autoload": {
+        "psr-0": { "Monolog\\": ["src/", "lib/"] }
+    }
+}
+
+The PSR-0 style is not limited to namespace declarations only but may be specified right down to the class level. This can be useful for libraries with only one class in the global namespace. If the php source file is also located in the root of the package, for example, it may be declared like this:
+
+{
+    "autoload": {
+        "psr-0": { "UniqueGlobalClass": "" }
+    }
+}
+
+If you want to have a fallback directory where any namespace can be, you can use an empty prefix like:
+
+{
+    "autoload": {
+        "psr-0": { "": "src/" }
+    }
+}
+
+Classmap#
+
+The classmap references are all combined, during install/update, into a single key => value array which may be found in the generated file vendor/composer/autoload_classmap.php. This map is built by scanning for classes in all .php and .inc files in the given directories/files.
+
+You can use the classmap generation support to define autoloading for all libraries that do not follow PSR-0/4. To configure this you specify all directories or files to search for classes.
+
+Example:
+
+{
+    "autoload": {
+        "classmap": ["src/", "lib/", "Something.php"]
+    }
+}
+
+Files#
+
+If you want to require certain files explicitly on every request then you can use the files autoloading mechanism. This is useful if your package includes PHP functions that cannot be autoloaded by PHP.
+
+Example:
+
+{
+    "autoload": {
+        "files": ["src/MyLibrary/functions.php"]
+    }
+}
+
+Exclude files from classmaps#
+
+If you want to exclude some files or folders from the classmap you can use the exclude-from-classmap property. This might be useful to exclude test classes in your live environment, for example, as those will be skipped from the classmap even when building an optimized autoloader.
+
+The classmap generator will ignore all files in the paths configured here. The paths are absolute from the package root directory (i.e. composer.json location), and support * to match anything but a slash, and ** to match anything. ** is implicitly added to the end of the paths.
+
+Example:
+
+{
+    "autoload": {
+        "exclude-from-classmap": ["/Tests/", "/test/", "/tests/"]
+    }
+}
+
+Optimizing the autoloader#
+
+The autoloader can have quite a substantial impact on your request time (50-100ms per request in large frameworks using a lot of classes). See the article about optimizing the autoloader for more details on how to reduce this impact.
+autoload-dev (root-only)#
+
+This section allows to define autoload rules for development purposes.
+
+Classes needed to run the test suite should not be included in the main autoload rules to avoid polluting the autoloader in production and when other people use your package as a dependency.
+
+Therefore, it is a good idea to rely on a dedicated path for your unit tests and to add it within the autoload-dev section.
+
+Example:
+
+{
+    "autoload": {
+        "psr-4": { "MyLibrary\\": "src/" }
+    },
+    "autoload-dev": {
+        "psr-4": { "MyLibrary\\Tests\\": "tests/" }
+    }
+}
+
+-----------
+
+Namespaces possibilitam o agrupamento de classes, interfaces, funções e constantes, visando evitar o conflito entre seus nomes, atuando como um encapsulador para estes itens. Seu funcionamento é equivalente ao de diretórios em sistemas operacionais, onde dois arquivos de mesmo nome não podem existir em um único diretório, mas nada impede a existência de dois arquivos de mesmo nome localizados em diretórios distintos. Este mesmo princípio é aplicado no PHP através de namespaces, ao utilizar este recurso temos mais liberdade na hora de criar classes, funções e etc, não sendo mais necessário utilizar prefixo para diferenciar seus nomes.
+
+É definido usando a palavra-chave namespace no topo do arquivo. Deve ser o primeiro comando do arquivo e nada antes dele, com uma única exceção que é a função declare().
+
+Mesmo que seja possível usar mais de um namespace por arquivo evite, pois é confuso e não é uma boa prática.
+
+Geralmente o nome do namespace é o nome do próprio projeto.
+
+Usar apenas um namespace por arquivo
+
+<?php
+namespace NomeProjeto\PrimeiraParte;
+
+class Clientes{
+    
+}
+
+// Em outro arquivo
+use \NomeProjeto\PrimeiraParte;
+
+$clientes = new Clientes();
+
+ou
+$clientes = new \NomeProjeto\PrimeiraParte\Clientes();
+
+
+
+<html>
+<?php
+namespace MyProject; // fatal error - namespace must be the first statement in the script
+?>
+
+/projeto
+
+<?php
+
+namespace MeuProjeto;
+
+Subnamespaces
+
+O PHP permite isso. Veja exemplos:
+
+    MyProject\SubName
+    MyProject\Database\MySQL
+    CompanyName\MyProject\Common\Widget
+
+<?php
+// application library 1
+namespace App\Lib1;
+
+const MYCONST = 'App\Lib1\MYCONST';
+
+function MyFunction() {
+	return __FUNCTION__;
+}
+
+class MyClass {
+	static function WhoAmI() {
+		return __METHOD__;
+	}
+}
+?>
+
+Chamando
+
+<?php
+header('Content-type: text/plain');
+require_once('lib1.php');
+
+echo \App\Lib1\MYCONST . "\n";
+echo \App\Lib1\MyFunction() . "\n";
+echo \App\Lib1\MyClass::WhoAmI() . "\n";
+?>
+
+Importando namespaces
+
+lib2.php:
+
+
+<?php
+// application library 2
+namespace App\Lib2;
+
+const MYCONST = 'App\Lib2\MYCONST';
+
+function MyFunction() {
+	return __FUNCTION__;
+}
+
+class MyClass {
+	static function WhoAmI() {
+		return __METHOD__;
+	}
+}
+?>
+
+Podemos usar a palavra chave "use" para importar classes, interfaces ou namespaces
+Funções e constantes não podem ser importadas usando somente use. Tendo se tornado possíve na versão 5.6 do PHP com a seguinte sintaxe:
+
+use func Projeto\FuncaoNome;
+FuncaoNome();
+
+use constant Projeto\ConstanteNome;
+echo ConstanteNome;
+
+
+<?php
+use App\Lib2;
+
+require_once('lib1.php');
+require_once('lib2.php');
+
+header('Content-type: text/plain');
+echo Lib2\MYCONST . "\n";
+echo Lib2\MyFunction() . "\n";
+echo Lib2\MyClass::WhoAmI() . "\n";
+?>
+
+Alias
+
+<?php
+use App\Lib1 as L;
+use App\Lib2\MyClass as Obj;
+
+header('Content-type: text/plain');
+require_once('lib1.php');
+require_once('lib2.php');
+
+echo L\MYCONST . "\n";
+echo L\MyFunction() . "\n";
+echo L\MyClass::WhoAmI() . "\n";
+echo Obj::WhoAmI() . "\n";
+?>
+
+<?php
+namespace App\Lib1;
+echo __NAMESPACE__; // outputs: App\Lib1
+?>
+
+<?php
+namespace App\Lib1;
+
+class MyClass {
+	public function WhoAmI() {
+		return __METHOD__;
+	}
+}
+
+$m = new namespace\MyClass;
+echo $m->WhoAmI(); // outputs: App\Lib1\MyClass::WhoAmI
+?>
+
+__autoload() - deprecated na versão 7.2
+
+
+Nome qualificado, ex: $var = new Model\User();
+
+Caso o namespace atual seja Project, será solicitado Project\Model\User. Se o código for global, ou seja, sem namespace definido, irá solicitar Model\User.
+	
+// Example - Namespace scope
+namespace Project;
+$var = new Model\User;
+// Resultado: Project\Model\User
+ 
+// Example - Global scope
+$var = new Model\User;
+// Resultado: Model\User
+
+
+-------------
+
+
+Esse tipo de implementação é corresponde a organização de pasta, o namespace deve ter o mesmo caminho da sua pasta, que não é o que acontece na sua pergunta, o correto seria criar o diretório de pasta da seguinte forma:
+
+/Foo/Bar/Bar.php
+
+e o seu namespace correspondente
+
+Foo/Bar
+
+no arquivo de configuração composer.json configure da seguinte forma:
+
+{
+    "name": "Virgilio/Pack",    
+    "autoload": {
+        "psr-4": {
+            "Foo\\Bar\\": "Foo/Bar"
+        }   
+    }
+}
+
+ou seja, a primeira chave é o namespace e a sua atribuição o caminho da pasta (ou pastas), rode agora o comando php composer.phar dump.
+
+Outro porém é que essa implementação é para load de classes e não de funções, o de funções é na chave files que deve ser implementado com o caminho do arquivo, exemplo:
+
+{
+    "name": "Virgilio/Pack",    
+    "autoload": {
+        "psr-4": {
+            "Foo\\Bar\\": "Foo/Bar"
+        },
+        "files": [
+            "Foo/Bar/Bar.php" 
+        ]
+    }
+}
+
+e rode o comando php composer.phar dump.
+
+Vale lembrar que nesse arquivo Bar.php o correto é só ter funções ou classes e também se for ter somente funções não precisa colocar namespace, mas, nada impede, acredito dificultar a digitação na hora da programação.
+
+Resumo configuraria assim:
+
+{
+    "name": "Virgilio/Pack",    
+    "autoload": {           
+        "files": {
+            "Foo/Bar/Bar.php" 
+        }   
+    }
+}
+
+e utilizaria como o namespace assim:
+
+echo \Foo\Bar\baz();
+
+ou retiraria esse namespace que julgo desnecessário no arquivo Bar.php e digitaria:
+
+echo baz();
+
+e tente fazer um código mais limpo e menos complicado para utilização.
+
+Outro exemplo básico: namespace com php (https://pt.stackoverflow.com/questions/163660/namespace-com-php/163662#163662) e uma leitura recomendavel The composer.json Schema - PSR-4# (https://getcomposer.org/doc/04-schema.md#psr-4)
+
+---------
+
+
+Eu ainda não entendi o porque de utilizar dessa forma, você quer apenas chamar a função correto? Se for isso seria mais fácil criar um helper e através dele você criar a função e chamar a mesma.
+
+Para isso, eu adicionei a seguinte linha no meu composer indicando o local do meu helper.
+
+"autoload": {
+    "files": [
+        "app/Helpers/helper.php"
+    ],
+    "psr-4": {
+        "App\\": "app/"
+    }
+}
+
+

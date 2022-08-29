@@ -1,0 +1,17 @@
+{
+    "name": "leonardo/mvc-example",
+    "description": "A MVC PHP example",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Leonardo Vilarinho",
+            "email": "leonardo-i@outlook.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\": "source"
+        }
+    },
+    "require": {}
+}

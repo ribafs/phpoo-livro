@@ -1,0 +1,3 @@
+Na PSR diz que funções estruturais (leia-se função fora de classes) devem seguir o padrão snake_case, assim como o próprio PHP.
+Métodos (leia-se funções em classes) devem usar o padrão camelCase.
+Por fim, classes e name spaces devem usar o padrão UpperCamelCase (ou StudlyCase, se preferir).

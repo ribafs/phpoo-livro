@@ -1,0 +1,75 @@
+Comentários com DocBlocks
+"O estilo de comentários DocBlock é um
+meio bem aceito para documentar classes."
+Embora não seja uma parte oficial da POO, os comentários DocBlock são um meio bem aceito para documentar classes. Além de prover um padrão para os
+desenvolvedores ao escreverem seus códigos, ele também foi adotado pela maioria dos kits de desenvolvimento de software (do inglês, software development kits - SDKs) populares, como o Eclipse e NetBeans, e serão usados para gerar dicas/indicações de códigos.
+Um DocBlock é definido como um bloco de comentário que começa com um asterisco adicional:
+/**
+ * Esse é um DocBlock bem básico
+ */
+O verdadeiro poder do DocBlocks vem com a possibilidade de usarmos as tags, que começam com o símbolo de localização (@) e são, imediatamente, seguidos dos nome e valor da tag. As tags do DocBlock permitem aos desenvolvedores definirem os autores de um arquivo, a licença que a classe usa, informações das propriedades e métodos e outras informações úteis.
+As tags mais usadas são:
+    • @author: Os autores do elemento atual (o qual pode ser uma classe, arquivo, método ou qualquer trecho de código) são listados usando essa tag. Múltiplas tags para autores podem ser usadas no mesmo DocBlock se precisar creditar mais de um autor. O formato para o nome do autor é Erick Patrick <erick.patrick@email.com>. 
+    • @copyright: Isso indica o ano e o nome de quem tem os direitos sobre o elemento atual. O formato é 2010 Nome da pessoa. 
+    • @license: Indicamos a licença usada no elemento atual. O formato para a informação da licença é
+http://www.example.com/path/to/license.txt Nome da licença. 
+    • @var: Isso indica o tipo e a descrição de uma variável ou de uma propriedade de classse. O formato é tipo do elemento descrição. 
+    • @param: Essa tag mostra o tipo e descrição de um parâmetro de uma função ou método. O formato é tipo $nome_do_elemento descrição do elemento. 
+    • @return: O tipo e descrição do valor retornado por uma função ou método. O formato é tipo descrição do valor retornado. 
+Uma classe exemplo, comentada com DocBlocks, parece-se com isso:
+<?php
+
+/**
+ * A classe simples
+ *
+ * Essa é uma descrição longa para essa classe,
+ * que pode tomar quantas linhas forem precisas. Não
+ * é necessária, porém a versão curta é necessária.
+ *
+ * Essa descrição também pode tomar vários parágrafos, se a
+ * descrição precisar ser tão verbosa.
+ *
+ * @author Erick Patrick <tutsplus@erickpatrick.net>
+ * @copyright 2014 Erick Patrick
+ * @license http://www.php.net/license/3_01.txt PHP License 3.01
+ */
+class SimpleClass
+{
+  /**
+   * Uma variável pública
+   *
+   * @var string guarda dados para a classe
+   */
+  public $foo;
+
+  /**
+   * Atribui um novo valor a $foo durante a instanciação da classe
+   *
+   * @param string $val é o valor requerido pela classe
+   * @return void
+   */
+  public function __construct($val)
+  {
+      $this->foo = $val;
+  }
+
+  /**
+   * Multiplica dois inteiros
+   *
+   * Aceita um par de números inteiros e retorna
+   * o produto dos dois.
+   *
+   * @param int $bat um número a ser multiplicado
+   * @param int $baz um número a ser multiplicado
+   * @return int o produto dos dois parâmetros
+   */
+  public function bar($bat, $baz)
+  {
+      return $bat * $baz;
+  }
+}
+
+?>
+Uma vez que você dá uma rápida olha na classe acima, os benefícios do DocBlock tornam-se visíveis: tudo está claramente definido, de forma que o próximo desenvolvedor possa pegar esse código e nunca precisar imagina o que uma certa parte de código faz ou deveria receber.
+
+https://code.tutsplus.com/pt/tutorials/object-oriented-php-for-beginners--net-12762

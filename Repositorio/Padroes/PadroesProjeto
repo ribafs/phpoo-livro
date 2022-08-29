@@ -1,0 +1,40 @@
+O que são padrões de projeto
+
+    Solução para problemas comuns de desenvolvimento
+    Arquiteturas e design de sucesso reutilizáveis
+    Linguagem comum para desenvolvedores
+
+Por que usar padrões de design?
+
+     Ajudá-lo a reutilizar arquiteturas e design de sucesso
+     Ajudá-lo a resolver problemas que você nunca viu antes
+     Forneça um vocabulário comum
+     Deixe você se comunicar de forma rápida e inequívoca
+     Tornar um sistema mais reutilizável
+
+Regras de ouro
+
+    Programe para uma interface, não uma implementação
+    Algumas linguagens levam essa regra para o próximo nível com Duck Typing
+    Favorecer a composição do objeto em vez da herança
+    Abordagem de caixa preta
+    Delegar
+
+ Como selecionar um padrão de projeto
+
+    Considere como criar padrões para resolver problemas de projeto
+    Estude como os padrões se inter-relacionam
+    Padrões de estudo com o mesmo objetivo
+    Examine uma causa de reprojeto
+    Considere o que deve ser variável em seu design
+
+Como usar um padrão de projeto
+
+    Leia o padrão uma vez para obter uma visão geral
+    Volte e estude as seções Estrutura, Participantes e Colaboração
+    Veja a seção Código de Amostra para ver um exemplo concreto do padrão no código
+    Escolha nomes para participantes do padrão que sejam significativos no contexto do aplicativo
+    Definir as classes
+    Definir nomes específicos do aplicativo para operações no padrão
+    Implementar as operações para executar as responsabilidades e colaborações nos padrões
+

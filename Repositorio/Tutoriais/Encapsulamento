@@ -1,0 +1,201 @@
+Encapsulamento
+
+Este recurso possibilita ao programador restringir ou liberar o acesso às propriedades e métodos das classes. A utilização deste recurso só se tornou possível à partir do PHP 5. Aplica-se este conceito através dos operadores: 
+
+✔ Public : Quando definimos uma propriedade ou método como public, estamos dizendo que suas informações podem ser acessadas diretamente por qualquer script, a qualquer momento. Até este momento, todas as propriedades e métodos das classes que vimos foram definidas dessa forma.
+
+✔ Protected : Quando definimos em uma classe uma propriedade ou método do tipo protected, estamos definindo que ambos só poderão ser acessados pela própria classe ou por seus herdeiros, sendo impossível realizar o acesso externo.
+
+✔ Private : Quando definimos propriedades e métodos do tipo private, só a própria classe pode realizar o acesso, sendo ambos invisíveis para herdeiros ou para classes e programas externos.
+
+Este é um conceito importante e que ajuda na segurança da aplicação.
+Basicamente, podemos dizer que esta técnica permite esconder determinadas propriedades do nosso objeto que não deveriam ser visíveis para outras partes do sistema que não deveriam ter acesso a elas.
+
+Um exemplo prático:
+
+Tendo em mente uma conta bancária, esta conta deve ter um saldo, porém faz sentido deixarmos o saldo acessível para todas as partes do sistema?
+
+<?php
+namespace Conta;
+
+class Conta 
+{
+    $saldo;
+    
+    /**
+     * Inicializa a conta com um saldo
+     */
+    function __construct($valor)
+    {
+        $this->saldo = $valor;
+    }
+
+    /**
+     * Deposita um valor na conta
+     */
+    function depositar($valor)
+    {
+        $this->saldo += $valor;
+    }
+
+    /**
+     * Saca um valor da conta
+     */
+    function sacar($valor)
+    {
+        // Verifica se existe saldo para realizar o saque
+        if($valor < $saldo) {
+            $this->saldo -= $valor;
+        }
+    }
+}
+
+Nas linhas que seguem, mudamos o estado desta classe de duas formas, a primeira chamando o método setAluno e a segunda associando as notas diretamente ao atributo (o que também não é recomendável, e falaremos mais a respeito no próximo post).
+
+Resumo da ópera, a propriedade pode ser acessada de qualquer jeito, por qualquer pessoa que que esteja desenvolvendo o sistema junto a gente, ou até mesmo por nós mesmos “sem querer”.
+
+O que aconteceria, por exemplo, se algum que estivesse utilizando o objeto fizesse o seguinte para realizar um saque:
+
+<?php
+$conta = new Conta(2500);
+$conta->saldo -= 5000;
+
+Note que em nosso objeto existe o método sacar, que faz uma validação para certificar que o usuário tenha saldo suficiente para realizar o saque, e neste caso, estamos ignorando o método sacar e fazendo o saque diretamente do saldo, o que gerará um problema, pois o saldo do cliente é bem menor que o valor a ser sacado.
+
+Então, acessar a propriedade diretamente é uma péssima ideia, como encapsulamos ela?
+
+Modificadores de acesso
+
+Toda propriedade ou método de uma classe (objeto) pode ter um modificador de acesso, mais do que isso, é uma recomendação da PSR-2 que todos os métodos sejam precedidos dos seus modificadores de acesso.
+
+Tanto para métodos quanto para propriedades, os modificadores de acesso que podemos utilizar são:
+    • public
+    • protected
+    • private
+
+O modificador public tem o mesmo efeito que se não informarmos um modificador, ou seja
+public $saldo;
+
+É o mesmo que:
+$saldo;
+
+O modificador private, limita o acesso a propriedade ou método somente ao objeto a qual pertence.
+Veja o exemplo abaixo, com a classe alterada e utilizando o modificador de acesso private:
+
+<?php
+namespace Conta;
+
+class Conta 
+{
+    private $saldo;
+    
+    /**
+     * Inicializa a conta com um saldo
+     */
+    public function __construct($valor)
+    {
+        $this->saldo = $valor;
+    }
+
+    /**
+     * Deposita um valor na conta
+     */
+    public function depositar($valor)
+    {
+        $this->saldo += $valor;
+    }
+
+    /**
+     * Saca um valor da conta
+     */
+    public function sacar($valor)
+    {
+        // Verifica se existe saldo para realizar o saque
+        if($valor < $saldo) {
+            $this->saldo -= $valor;
+        }
+    }
+}
+
+Código que consumirá o Objeto:
+
+<?php
+require 'conta.php';
+
+use Conta\Conta;
+$conta = new Conta(2500);
+$conta->saldo = 2700;
+
+Quando executamos este código, obtemos o seguinte erro:
+
+Já o modificador protected funciona de forma semelhante ao modificador private, ou seja, ele restringe o acesso direto a propriedade ou método de fora da classe a qual ela pertence, porém com uma particularidade, ela permite o acesso a esta propriedade/método quando as classes herdam a classe que ela pertence.
+
+Vejamos um exemplo da nossa classe conta um pouco mais completo:
+
+<?php
+namespace Conta;
+
+class Conta 
+{
+    protected $saldo;
+    
+    /**
+     * Inicializa a conta com um saldo
+     */
+    public function __construct($valor)
+    {
+        $this->saldo = $valor;
+    }
+
+    /**
+     * Deposita um valor na conta
+     */
+    public function depositar($valor)
+    {
+        $this->saldo += $valor;
+    }    
+}
+
+class ContaCorrente extends Conta
+{
+    /**
+     * Saca um valor da conta
+     */
+    public function sacar($valor)
+    {
+        // Verifica se existe saldo para realizar o saque
+        if($valor < $saldo) {
+            $this->saldo -= $valor;
+        }
+    }
+}
+
+
+class ContaPoupanca extends Conta
+{
+    private $limiteSaque;
+
+    public function __construct($saldo, $limiteSaque)
+    {
+        parent::__construct($saldo);
+        $this->limiteSaque = $limiteSaque;
+    }
+
+    /**
+     * Saca um valor da conta
+     */
+    public function sacar($valor)
+    {
+        // Verifica se existe saldo para realizar o saque
+        if($valor < $saldo && $valor < $limiteSaque) {
+            $this->saldo -= $valor;
+        }
+    }
+}
+No exemplo acima criamos duas classes que estendem a classe Conta, ou seja, que herdam as características e métodos da classe pai, podemos observar que definimos uma método sacar com uma uma regra de negócios distinta para cada tipo de conta.
+
+Além disso também criamos um novo atributo para a classe ContaPoupanca, e adicionamos ele a inicialização da classe (método __construct), então chamamos o __construct da classe pai e inicializamos os atributos da classe filha.
+
+https://blog.eximiaweb.com.br/4-conceitos-orientacao-a-objetos/
+
+

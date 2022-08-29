@@ -1,0 +1,6 @@
+Aplicando MVC em seu aplicativo PHP
+A arquitetura de software MVC atualmente dominou os grandes softwares em PHP, os frameworks, os CMS, etc. Ela anda junto com autoload, namespace, composer e rotas e isso torna mais complexo seu entendimento por quem está iniciando em PHP.
+Eu passei vários anos programando em php procedural. Aprendi o básico da orientação a objetos mas implementar MVC em um aplicativo meu deu bastante trabalho.
+Até que encontrei um pequneo aplicativo no GitHub que me permitiu entender a aplicação do MVC e cia em um aplicativo. Traduzi, alterei, simplifiquei algumas coisas e criei e publiquei o repositório mini-mvc, com a intenção de colaborar com quem também ainda tem dificuldade de entender o uso do MVC.
+https://github.com/ribafs/mini-mvc
+

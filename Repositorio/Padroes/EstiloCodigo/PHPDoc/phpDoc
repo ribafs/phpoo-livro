@@ -1,0 +1,49 @@
+
+
+Exemplo para php-doc
+
+<?php
+/**
+ * @author Um nome <a.name@example.com>
+ * @link http://www.phpdoc.org/docs/latest/index.html
+ * @package helper
+ */
+class DateTimeHelper
+{
+    /**
+     * @param mixed $anything Tudo que podemos converter para um objeto \DateTime
+     *
+     * @return \DateTime
+     * @throws \InvalidArgumentException
+     */
+    public function dateTimeFromAnything($anything)
+    {
+        $type = gettype($anything);
+
+        switch ($type) {
+            // Algum código que tenta retornar um objeto \DateTime
+        }
+
+        throw new \InvalidArgumentException(
+            "Failed Converting param of type '{$type}' to DateTime object"
+        );
+    }
+
+    /**
+     * @param mixed $date Tudo que podemos converter para um objeto \DateTime
+     *
+     * @return void
+     */
+    public function printISO8601Date($date)
+    {
+        echo $this->dateTimeFromAnything($date)->format('c');
+    }
+
+    /**
+     * @param mixed $date Tudo que podemos converter para um objeto \DateTime
+     */
+    public function printRFC2822Date($date)
+    {
+        echo $this->dateTimeFromAnything($date)->format('r');
+    }
+}

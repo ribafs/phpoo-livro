@@ -1,0 +1,56 @@
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: DesignPatternsPHP 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-05-29 12:18+0200\n"
+"PO-Revision-Date: 2019-01-29 09:19-0300\n"
+"Last-Translator: Pablo Juan Garcia <contato@pablogarcia.com.br>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: pt_BR\n"
+
+#: ../../Structural/Composite/README.rst:2
+msgid "`Composite`__"
+msgstr "`Composto (Composite)`__"
+
+#: ../../Structural/Composite/README.rst:5
+msgid "Purpose"
+msgstr "Objetivo"
+
+#: ../../Structural/Composite/README.rst:7
+msgid ""
+"To treat a group of objects the same way as a single instance of the object."
+msgstr ""
+"Tratar um grupo de objetos da mesma forma como uma única instância do objeto."
+
+#: ../../Structural/Composite/README.rst:11
+msgid "Examples"
+msgstr "Exemplos"
+
+#: ../../Structural/Composite/README.rst:13
+msgid ""
+"a form class instance handles all its form elements like a single instance "
+"of the form, when ``render()`` is called, it subsequently runs through all "
+"its child elements and calls ``render()`` on them"
+msgstr ""
+"uma instância de classe de formulário manipula todas os seus elementos de formulário como "
+"uma simples instância do formulário, quando ``render()`` é chamado, ele subsequentemente "
+"roda através de seus elementos filhos e chama ``render()`` neles."
+
+#: ../../Structural/Composite/README.rst:20
+msgid "UML Diagram"
+msgstr "Diagrama UML"
+
+#: ../../Structural/Composite/README.rst:27
+msgid "Code"
+msgstr "Código"
+
+#: ../../Structural/Composite/README.rst:29
+msgid "You can also find this code on `GitHub`_"
+msgstr "Você também pode encontrar este código no `GitHub`_"
+
+#: ../../Structural/Composite/README.rst:56
+msgid "Test"
+msgstr "Teste"

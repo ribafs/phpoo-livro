@@ -1,0 +1,117 @@
+CursoPHPOO
+https://www.youtube.com/watch?v=HKBfwqQzm84
+
+Pastas
+
+App
+    Model
+        Conexao.php
+        Produto.php
+        ProdutoDao.php
+
+Banco - pdo
+Tabela
+
+create table produtos(
+    id int primary key auto_increment,
+    nome varchar(100) not null,
+    descricao text
+);
+
+Conexao.php
+
+<?php
+
+namespace App\Model;
+
+Class Conexao{
+    // Usar singleton - manter somente uma instância da conexão
+    private static $instance;
+
+    public static function getCon(){
+        if(!isset($instance)){
+            self::$instance = new PDO('mysql:host=localhost;dbname=pdo;charset=utf8','root','root');          
+        }else{
+            return self::$instance;
+        }
+    }
+}
+
+Produto.php
+
+<?php
+
+namespace App\Model;
+
+Class Produto{
+    private $id, $nome, $descricao;
+
+    public function getId(){
+        return $this->id;
+    }
+
+    public function setId($i){
+        $this->id = $i;
+    }
+
+    public function getNome(){
+        return $this->nome;
+    }
+
+    public function setNome($n){
+        $this->nome = $n;
+    }
+
+    public function getDescricao(){
+        return $this->descricao;
+    }
+
+    public function setDescricao($d){
+        $this->descricao = $d;
+    }
+
+}
+
+ProdutoDao.php
+
+<?php
+
+namespace App\Model;
+
+Class ProdutoDao{
+    public function create(Produto $p){
+
+    }
+
+    public function read(){
+
+    }
+
+    public function update(Produto $p){
+
+    }
+
+    public function delete($id){
+
+    }
+
+}
+
+composer.json
+
+{
+    "autoload": {
+        "psr-4": {
+            "App\\": "App/"
+        }
+    }
+}
+
+composer dump-autoload
+
+index.php
+
+<?php
+
+require_once 'vendor/autoload.php';
+

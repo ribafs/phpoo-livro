@@ -1,0 +1,43 @@
+- Use apóstrofos (') ao invés de aspas (") para delimitar strings, pois são mais rápidos e mais seguros
+
+- Use sempre que possível a visibilidade private, que é mais segura. Na ordem do mais seguro para o menos:
+private
+protected
+public
+
+- Arquivos php que não contenham html, mas somente php não devem ter a tag de fechamento, que fica mais seguro
+
+Exemplo:
+
+<?php
+define("GOOD", false);
+if (defined("GOOD")) {
+print "GOOD is defined" ; // prints "GOOD is defined"
+if (GOOD) {
+print "GOOD is true" ; // does not print anything, since GOOD is false
+}
+}
+if (!defined("AWESOME")) {
+define("AWESOME", true); // awesome was not defined. Now we have defined it
+}
+
+
+Use echo ao invés de print sempre que puder. Também é um pouco mais rápido.
+
+Um comando por linha. Mesmo que seja possível escrever vários comandos, separados por ; numa única linha, não é recomendável, pois o código fica obscuro.
+Uma única classe por arquivo.
+Além de uma classe por arquivo, cada classe deve ser pequena. Quando ela cresce recomenda-se que seja dividida.
+Assim também com tabelas de bancos de dados. Evitemos tabelas muito grandes. Quando crescer dividir em duas ou mais e relacioná-las.
+
+Evitar uso de laços em consultas a bancos de dados.
+
+Evitar usar
+set_time_limit(0);
+
+Evitar usar
+@ no in ício de funções
+Ao invés tratar os error no código
+
+Nomes de classes, métodos, propriedades, constantes, etc devem ser bem claros e não abreviaturas ou muito reduzidos.
+
+

@@ -1,0 +1,69 @@
+Introdução ao MVC
+
+O MVC (Model View Controller) é um dos padrões de projetos mais utilizados atualmente. A maioria dos grandes frameworks e CMS o utilizam para separar o código em camadas lógicas. Cada camada  tem uma resposabilidade. Veja abaixo.
+
+== Model
+Representa a letra M do MVC. Nesta camada são realizadas as operações de validação, leitura e escrita de dados no banco de dados. É responsável por salvar e receber dados do banco de dados, como também efetua diversos processamentos com os dados.
+
+Basicamente qualquer coisa para ler, alterar, salvar ou excluir dados é nesta camada. A camada Model é a camada que sofreu a maior transformação na versão 3.
+
+Uma boa prática é trazer para esta camada tudo que diz respeito às regras de negócio, como cálculos ou validações de integridade de dados.
+
+== Controller
+É o responsável pela integração entre as camadas Model e View. Basicamente a View irá realizar uma solicitação para o Controller como por exemplo uma coleção de dados ou a solicitação de remover algum item do banco e o Controller, por sua vez, irá enviar a instrução para a camada Model executar.
+
+Controllers
+
+Os controllers correspondem ao ‘C’ no padrão MVC. Após o roteamento ter sido aplicado e o controller correto encontrado, a ação do controller é chamada. Seu controller deve lidar com a interpretação dos dados de uma requisição, certificando-se que os models corretos são chamados e a resposta ou view esperada seja exibida. Os controllers podem ser vistos como intermediários entre a camada Model e View. Você vai querer manter seus controllers magros e seus Models gordos. Isso lhe ajudará a reutilizar seu código e testá-los mais facilmente.
+
+Mais comumente, controllers são usados para gerenciar a lógica de um único model. Por exemplo, se você está construindo um site para uma padaria online, você pode ter um RecipesController e um IngredientsController gerenciando suas receitas e seus ingredientes. No CakePHP, controllers são nomeados de acordo com o model que manipulam. É também absolutamente possível ter controllers que usam mais de um model.
+
+Os controllers fornecem uma série de métodos que são chamados de ações. Ações são métodos em um controller que manipulam requisições. Por padrão, todos os métodos públicos em um controller são ações e acessíveis por urls.
+
+Nesta camada (Controller) também podemos realizar verificações que não se referem às regras de negócio, visto que a boa prática é manter as regras de
+negócio no Model.
+
+== View
+Representa a letra V do MVC. É a camada responsável por tudo que é visual, páginas, formulários, listagens, menus, o HTML em geral. Tudo aquilo que interage com o usuário deve estar presente nesta camada. Representadas por HTML.
+
+A View não realiza operações diretamente com o banco de dados nem trata diretamente com o Model. Ela as solicita e e exibe através do Controller, que
+intermedia suas solicitações com o Model.
+
+
+
+Fluxo das Informações no MVC 
+- Geralmente Nascem na View quando um usuário faz uma solicitação, clicando num botão submit ou num link ou entrando um link diretamente no navegador
+- Daí são enviadas para o Controller, que a filtra (se for o caso) e a envia para o Model
+- O Model analisa de acordo com a solicitação (uma consulta ao banco) e a devolve ao Controller
+- O Controler por sua vez devolve o resultado para a View
+- E a View renderiza o resultado e o mostra para o usuário
+
+Abordagem sobre as 3 camadas: [C]ontroller, [V]iew e [M]odel
+
+Um exemplo bem organizado de uso do MVC é o Framework CakePKP, que traz as 3 camadas bem definidas e organizadas.
+
+Model - representa os dados. A parte do código que manipula os dados para ler e escrever no banco.
+View - representa a visualização dos dados. A parte do código que mostra os dados para o usuário.
+Controller - manipula e roteia as requisições dos usuários. A parte do código que recebe as requisições do usuário através de um site (exemplo), processa, roteia e envia para o model, se for o caso. Também é responsável por receber dados do banco e devolver para a View.
+
+De forma mais completa o fluxo das informações entre as 3 camadas acontece assim no CakePHP:
+- O usuário clica num link para editar um registro
+- O dispatcher (expedidor) verifica a URL requisitada (/cakes/comprar) e redireciona ao controller correto;
+- O controller executa a lógica específica da aplicação. Por exemplo, verifica se o Ricardo está logado e tem acesso ao site;
+- O controller também usa os models para acessar os dados da sua aplicação. Muitas vezes, os models representam as tabelas do banco de dados, mas podem representar registros LDAP, feeds de RSS ou até mesmo arquivos do sistema. 
+- Neste exemplo, o controller usa o model para trazer ao usuário as últimas compras do banco de dados;
+- Depois que o controller fez sua mágica sobre os dados, ele repassa para a view. A view faz com que os dados fiquem prontos para a representação do usuário;
+- Uma vez que a view tenha usado os dados provenientes do controller para construir a página, o conteúdo é retornado ao browser do usuário.
+
+Benefícios
+
+Por que usar MVC? Porque é um verdadeiro padrão de projeto (design pattern) e torna fácil a manutenção da sua aplicação, com pacotes modulares de rápido desenvolvimento. Elaborar tarefas divididas entre models, views e controllers faz com que sua aplicação fique leve e independente. Novas funcionalidades são facilmente adicionadas e pode-se dar nova cara nas características antigas num piscar de olhos. O design modular e separado também permite aos desenvolvedores e designers trabalharem simultaneamente, incluindo a habilidade de se construir um rápido protótipo. A separação também permite que os desenvolvedores alterem uma parte da aplicação sem afetar outras.
+
+Se você nunca desenvolveu uma aplicação neste sentido, isso vai lhe agradar muito, mas estamos confiantes que depois de construir sua primeira aplicação em CakePHP, você não vai querer voltar atrás.
+
+Referências
+http://blog.ultimatephp.com.br/mvc-php-orientado-a-objetos/
+https://www.youtube.com/watch?v=VInLNcHm8tA&list=PLtxCFY2ITssBl_nihh4HC5-ZlnIPEpVQD - Curso de PHP + MVC grátis em 21 aulas
+https://www.youtube.com/watch?v=vvS7JgEcmic - PHP MVC Fácil
+https://www.youtube.com/watch?v=GlMZDMyy-jE&list=PLxNM4ef1Bpxiah1JPIqK1mkwi0h20EoQ1 - PHP7 com MVC
+https://www.youtube.com/watch?v=2dqI8o6bvjM&list=PLLfNZbkxufIUsLRzQCCGaek4PxQB4RLGe - Curso de MVC com PHP OO

@@ -1,0 +1,17 @@
+This is what you should focus on:
+• Use meaningful, coherent naming for variables, functions and classes
+• Comment everything: everyone should understand your code just by reading the comments
+• Use the most appropriate programming paradigm for each situation; if in doubt, OOP is usually
+the best choice
+• Avoid code duplication at all costs
+• Make your code easy to debug and analyse
+• Apply the Separation of Concern and Modularity principles: each element of your program
+(class, function...) should address only one specific problem (and do it well)
+• Keep your code readable: avoid too many nested loops, variable declarations inside
+conditional statements (IF...ELSE) and other bad practices that could make your code less
+understandable
+
+
+Escalabilidade é a capacidade de um aplicativo continuar funcionando adequadamente à medida que a carga de trabalho aumenta.
+
+

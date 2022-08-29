@@ -1,0 +1,22 @@
+language: php
+
+matrix:
+  include:
+  - php: 5.4
+  - php: 5.5
+  - php: 5.6
+  - php: 7.0
+  - php: 7.1
+  - php: 7.2
+  - php: 7.3
+
+sudo: false
+
+install:
+  - composer install
+
+before_script:
+  - php -S localhost:5000 tests/fixtures/server.php &
+
+script:
+  - vendor/bin/phpunit

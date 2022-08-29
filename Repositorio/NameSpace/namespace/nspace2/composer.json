@@ -1,0 +1,23 @@
+{
+    "name": "ribafs/namespace2",
+    "description": "Aplicativo usando namespace com PSR-4 e composer",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ribamar FS",
+            "email": "ribafs@gmail.com"
+        }
+    ],
+	"minimum-stability": "stable",
+    "require": {
+
+    },
+    "autoload":
+    {
+        "psr-4":
+        {
+            "Nspace\\" : "app/"
+        }
+    }
+}

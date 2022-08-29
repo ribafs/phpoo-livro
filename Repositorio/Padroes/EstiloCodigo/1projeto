@@ -1,0 +1,22 @@
+# Estilo de código do PHP
+
+## Alerta
+
+Idealmente sempre consulte o original em inglês:
+
+https://www.php-fig.org/psr/
+
+Pois nele está a versão oficial, sem erros e atualizada.
+
+Esta tradução para português, com a ajuda do Google Translator tem como objetivo ajudar os colegas que ainda não tem domínio do inglês e para mim também.
+
+Se você está entre os que ainda não dominam a leitura do inglês, considere aprender inglês como uma das suas prioridades, pois o inglês ajuda a entender melhor a programação e principalmente a documentação em inglês.
+
+CodingStyle
+
+https://www.php-fig.org/psr/
+
+A intenção deste guia é reduzir o atrito cognitivo ao digitalizar códigos de diferentes autores. Ele faz isso enumerando um conjunto compartilhado de regras e expectativas sobre como formatar o código PHP.
+
+Quando vários autores colaboram em vários projetos, é útil ter um conjunto de diretrizes a ser usado por todos esses projetos. Assim, o benefício deste guia não está nas regras em si, mas no compartilhamento dessas regras.
+

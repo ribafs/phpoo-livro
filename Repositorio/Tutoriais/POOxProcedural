@@ -1,0 +1,181 @@
+Comparando Código Orientado a Objetos e Código Procedural
+Não há maneira certo ou errada de programar. Isso dito, essa seção mostrar bons argumentos para adotar a abordagem orientada a objetos no desenvolvimento de software, especialmente em aplicações de grande porte.
+Razão 1: Facilidade de Implementação
+"Embora, inicialmente, pareça complicada, POO provê uma abordagem mais fácil para lidar com dados."
+Embora, inicialmente, pareça complicada, POO provê uma abordagem mais fácil para lidar com dados. Uma vez que objetos podem guardar dados internamente, variáveis não precisam ser passadas para funções para que elas funcionem corretamente.
+E como várias instâncias de uma mesma classe podem existir simultanemanete, lidar com conjuntos de dados grandes se torna infinitamente mais fácil. Por exemplo, imagine que há informações de duas pessoas sendo processadas ao mesmo tempo em um arquivo. Elas precisam de nomes, ocupações e idades.
+A Abordagem Procedural
+Eis a abordagem procedural para nosso exemplo:
+<?php
+
+function changeJob($person, $newjob)
+{
+  $person['job'] = $newjob; // Muda o emprego da pessoa
+  return $person;
+}
+
+function happyBirthday($person)
+{
+  ++$person['age']; // Adiciona 1 à idade da pessoa
+  return $person;
+}
+
+$person1 = array(
+  'name' => 'Tom',
+  'job' => 'Button-Pusher',
+  'age' => 34
+);
+
+$person2 = array(
+  'name' => 'John',
+  'job' => 'Lever-Puller',
+  'age' => 41
+);
+
+// Mostra os valores iniciais das pessoas
+echo "<pre>Person 1: ", print_r($person1, TRUE), "</pre>";
+echo "<pre>Person 2: ", print_r($person2, TRUE), "</pre>";
+
+// Tom foi promovido e fez aniversário
+$person1 = changeJob($person1, 'Box-Mover');
+$person1 = happyBirthday($person1);
+
+// John fez aniversário também
+$person2 = happyBirthday($person2);
+
+// Mostra os novos valores das pessoas
+echo "<pre>Person 1: ", print_r($person1, TRUE), "</pre>";
+echo "<pre>Person 2: ", print_r($person2, TRUE), "</pre>";
+
+?>
+Quando executado, o código mostrará o seguinte:
+Person 1: Array
+(
+  [name] => Tom
+  [job] => Button-Pusher
+  [age] => 34
+)
+Person 2: Array
+(
+  [name] => John
+  [job] => Lever-Puller
+  [age] => 41
+)
+Person 1: Array
+(
+  [name] => Tom
+  [job] => Box-Mover
+  [age] => 35
+)
+Person 2: Array
+(
+  [name] => John
+  [job] => Lever-Puller
+  [age] => 42
+)
+Apesar disso não estar tão ruim, tem muita coisa a ser lembrada de uma só vez. O conjunto de atributos da pessoa que foi afetado tem de ser passado e retornado de cada invocação de função, e isso possibilita o aparecimento de erros.
+Para melhorar esse exemplo, seria desejável deixar o mínimo para o programador quanto possível. Só a informação extremamente essencial para a operação atual é necessária ser passada para as funções.
+É aqui que a POO entra e ajuda você a ajustar as coisas.
+A Abordagem POO
+Eis a abordagem POO para nosso exemplo:
+<?php
+
+class Person
+{
+  private $_name;
+  private $_job;
+  private $_age;
+
+  public function __construct($name, $job, $age)
+  {
+      $this->_name = $name;
+      $this->_job = $job;
+      $this->_age = $age;
+  }
+
+  public function changeJob($newjob)
+  {
+      $this->_job = $newjob;
+  }
+
+  public function happyBirthday()
+  {
+      ++$this->_age;
+  }
+}
+
+// Cria duas novas pessoas
+$person1 = new Person("Tom", "Button-Pusher", 34);
+$person2 = new Person("John", "Lever Puller", 41);
+
+// Mostra seus valores iniciais
+echo "<pre>Person 1: ", print_r($person1, TRUE), "</pre>";
+echo "<pre>Person 2: ", print_r($person2, TRUE), "</pre>";
+
+// Tom foi promovido e fez aniversário
+$person1->changeJob("Box-Mover");
+$person1->happyBirthday();
+
+// John também fez aniversário
+$person2->happyBirthday();
+
+// Mostra os valores finais
+echo "<pre>Person 1: ", print_r($person1, TRUE), "</pre>";
+echo "<pre>Person 2: ", print_r($person2, TRUE), "</pre>";
+
+?>
+O seguinte seria mostrado no navegador:
+Person 1: Person Object
+(
+  [_name:private] => Tom
+  [_job:private] => Button-Pusher
+  [_age:private] => 34
+)
+
+Person 2: Person Object
+(
+  [_name:private] => John
+  [_job:private] => Lever Puller
+  [_age:private] => 41
+)
+
+Person 1: Person Object
+(
+  [_name:private] => Tom
+  [_job:private] => Box-Mover
+  [_age:private] => 35
+)
+
+Person 2: Person Object
+(
+  [_name:private] => John
+  [_job:private] => Lever Puller
+  [_age:private] => 42
+)
+É necessário um pouco mais de preparação na abordagem orientada a objetos, mas, uma vez definida a classe, criar e modificar pessoas é fácil; a informação de uma pessoa não precisa ser passada ou retornada para os métodos e só a informação essencial é passada para cada método.
+"POO reduzirá significantemente a carga de trabalho se implementada corretamente."
+A primeira vista, a diferença pode não parecer tanta, mas, de acordo com que sua aplicação cresce, POO reduzirá significanetemente a carga de trabalho se implementada corretamente.
+Dica — Nem tudo precisa ser implementado em orientação a objetos. Uma função rápida, que lida com algo pequeno em um único lugar dentro da aplicação, não precisa, necessariamente, estar envolta em uma classe. Use seu melhor julgamento quando precisar decidir entre as abordagens orientada a objetos ou procedural.
+Razão 2: Melhor Organização
+Outro benefício da POO é a facilidade de empacotamento e catalogação. Cada classe, geralmente, é mantida sozinha em seu próprio arquivo e, se uma convenção de nomenclatura for usada, acessar as classes será extremamente fácil.
+Assuma que você tem uma aplicação com 150 classes que são invocadas dinamicamente através de um arquivo controlador na pasta raiz da sua aplicação. Todas as 150 classes foram nomeadas como class._nome_da_classe_.inc.php e ficar dentro de um diretório chamado inc da sua aplicação.
+O controlador implementa a função __autoload() do PHP para carregar dinamicamente as classes que ele precisa executar, ao invés de incluir todas as 150 classes dentro do controlador ou, até mesmo, usar uma maneira "mais esperta" de incluir esses arquivos no seu código:
+<?php
+  function __autoload($class_name)
+  {
+      include_once 'inc/class.' . $class_name . '.inc.php';
+  }
+?>
+Ao termos cada classe separada em seu próprio arquivo, tornamo-as mais portáteis e fáceis de reusar em novas aplicações, sem precisar copiar e colar para todos os lados.
+Razão 3: Manutenção Mais Fácil
+Devido a natureza compacta do PHP quando programado corretamente, mudanças no código, geralmente, são mais fáceis de perceber e alterar que em uma implementação procedural gigantesca e spaghetti.
+Se um conjunto particular de informação ganha um novo atributo, códigos procedurais podem requerer (no pior dos casos) que o novo atributo seja adicionado a cada funcção que usa tal conjunto.
+Uma aplicação POO poderia, potencialmente, ser atualizada, bastando adicionar uma nova propriedade e os métodos relacionados que lidam com tal propriedade a uma classe.
+Vários benefícios cobertos nessa seção são produto da combinação de POO com práticas de programação DRY. Claro, é possível criar código procedural que seja fácil de manter e que não cause dores-de-cabeça, porém, é igualmente fácil criar código horroroso usando orientação a objetos. [Pro PHP and jQuery] tentará mostrar a combinação de boas práticas de programação com POO para gerar códigos claros e fáceis de ler e manter.
+Resumo
+A essa altura, espero que você se sinta confortável com o estilo de programação orientado a objetos. Aprender POO é uma ótima maneira de elevar o seu nível de programação. Quando implementada corretamente, POO gera código fácil de ler, manter e portátil, que salvará você (e os desenvolvedores que trabalham com você) horas de trabalho extra. Você está encucado com algo que não foi apresentado nesse artigo? Você já usa POO e tem algumas dicas para os iniciantes? Compartilhe nos comentários!
+Nota do Autor — Esse tutorial é um extrato do livro Pro PHP and jQuery (Apress, 2010).
+Seja o primeiro a saber sobre novas traduções–siga @tutsplus_pt no Twitter!
+
+https://code.tutsplus.com/pt/tutorials/object-oriented-php-for-beginners--net-12762
+

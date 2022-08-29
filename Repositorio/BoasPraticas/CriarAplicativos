@@ -1,0 +1,157 @@
+Today I'm sharing with you 9 steps to create your PHP applications from scratch.
+Let's dive in.
+
+
+1. Start from the problem (not the code).
+
+Let's say that you decided to build a music database portal.
+
+A common mistake is to start the project design from technical questions, like: "Which functionalities should I implement? How should I organize the code?"
+That would be mistake, because at this point it's impossible to find the right answers.
+
+Instead, start from the problem. Ask yourself: "Which problems I’m going to solve with this app?"
+The answer will give you a much clearer direction. Write down the reasons *why* you are building this app. For example:
+
+    People want to catalogue their music.
+    People want to search for music they like.
+    People want to buy and sell music albums.
+
+
+
+2. Identify the solutions.
+
+Now that you know the problems, you can identify the solutions.
+
+Let's keep using the music portal example.
+The solutions to the problems you have found can be:
+
+    Problem -> People want to catalogue their music.
+    Solution -> Provide a structured and indexed music catalogue.
+
+    Problem -> People want to search for music they like.
+    Solution -> Provide a search system based on genres, styles, etc.
+
+    Problem -> People want to buy and sell music albums.
+    Solution -> Integrate a music-related e-commerce.
+
+
+
+3. Turn solutions into functionalities.
+
+Now it's time to translate the solutions into specific functionalities.
+Each solution can be provided by one or more functionalities. For example:
+
+Solution: Provide a structured and indexed music catalogue.
+Functionalities:
+- Creation and editing of personal music lists.
+- Account management system.
+- Centralized music database.
+
+Solution: Provide a search system based on genres, styles, etc.
+Functionalities:
+- Centralized music database (shared with the previous solution).
+- Search system with attributes (album titles, genres, artists...), tagging and search optimization.
+- Browsing interface.
+
+... and so on.
+Put simply, the functionalities are what users expect to find on your website.
+
+Some functionalities can also be shared between different solutions, like the "Centralized music database".
+
+
+4. Turn functionalities into classes.
+
+Each functionality can be translated into one or more classes, depending on its complexity.
+For example:
+
+The "Music lists" functionality can be implemented as a MusicList class, which will handle the list creation, editing and display.
+
+The "Account management" functionality can be implemented as an Account class.
+
+The "Centralized music database" can be implemented as a MusicDatabase class, which will handle the music attributes (title, artist...), the search functions, the adding and removing operations and so on.
+
+At the end of this step, you will have a complete list of the main classes of your application.
+
+
+5. Define the class connections.
+
+Classes are often connected to each other. They share information and properties.
+
+For example, a list implemented as a MusicList object will be linked to a specific account ID, which is a property also used by the Account class.
+Music items are handled by the MusicList class as well as by the MusicDatabase class.
+
+Finding these connections will help you define the class methods and properties.
+
+
+6. Define the class methods.
+
+For each class, write down a complete list of all the operations the class must perform. These operations will be implemented as class methods.
+
+The MusicList class, for instance, will need to perform different operations including:
+- Create a new list.
+- Edit the list attributes (name, description...)
+- Save the list in the application database.
+- Add a music item to the list.
+- Remove a music item from the list.
+...and so on.
+
+Each operation can be implemented as a specific class methods, like this:
+- MusicList::createNewList();
+- MusicList::editList();
+- MusicList::saveList();
+- MusicList::addItem();
+- MusicList::removeItem();
+
+
+7. Define the class properties.
+
+Once you have defined the class methods, it's time to think about the class properties.
+
+If the class methods are the operations the class must perform, the properties are the information the class must handle.
+For example, the MusicList class will handle the following data:
+- The list ID (unique identifier of a specific list)
+- The account who owns the list.
+- The list name.
+- The list description.
+- The items inside the list.
+and so on.
+
+This data can be translated into class properties:
+- MusicList::listId;
+- MusicList::accountId;
+- MusicList::listName;
+- MusicList::listDescription;
+- MusicList::listItems;
+
+
+8. Apply the SOLID principle.
+
+The SOLID principle is a set of guidelines for writing high quality OOP code.
+In this step, two of them are particularly important:
+
+Single responsibility principle:
+Each of the class methods must perform one, specific task. Therefore, you will likely need to split each of the methods you have defined into multiple, more specific and smaller methods.
+For example, the editList() method (that changes a list's attributes) actually performs multiple operations, like validating the new attributes, updating the database and sending a message to the user.
+
+Open-closed principle
+Your classes, as well as your methods, should not be modified when a new feature is introduced.
+Instead, new classes should be derived or new interfaces should be implemented.
+Make sure you take this into consideration when defining classes and methods.
+
+
+9. Start coding.
+
+Now it's finally time to open your editor and start coding.
+Start from the smaller classes and the ones with fewer connections, then move on to the more complex ones.
+
+
+That's it.
+I hope this little guide can help you design and implement your PHP applications.
+What do you think? What is your app design and implementation process? Reply to this email and tell me your thoughts.
+
+
+
+Have a nice day,
+Alex
+
+ 

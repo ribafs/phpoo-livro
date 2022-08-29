@@ -1,0 +1,69 @@
+Instalação
+
+https://github.com/phpDocumentor/phpDocumentor2
+
+composer require --dev phpdocumentor/phpdocumentor dev-master
+
+Rodar
+php vendor/bin/phpdoc run -d <SOURCE_DIRECTORY> -t <TARGET_DIRECTORY>
+
+Help
+php vendor/bin/phpdoc run -h
+
+php vendor/bin/phpdoc run -f crud.php -t output
+
+https://www.sitepoint.com/introduction-to-phpdoc/
+
+Descrição de algumas tags especiais:
+
+@access Especifica o tipo de acesso (public, protected e private).  
+@author Especifica o autor do código/classe/função.  
+@copyright Especifica os direitos autorais.  
+@deprecated Especifica elementos que não devem ser usados.  
+@exemple Definir arquivo de exemplo, $path/to/example.php  
+@ignore Ignora código  
+@internal Documenta função interna do código  
+@link Link do código  
+@see Define uma referência a outro elemento ou uma URI  
+@since Define a partir de qual versão os elementos estruturais foram disponibilizados  
+@name Especifica o apelido (alias).  
+@package Especifica o nome do pacote pai, isto ajuda na organização das classes.  
+@param Especifica os paramêtros (muito usado em funções).  
+@return Especifica o tipo de retorno (muito usado em funções).  
+@subpackage Especifica o nome do pacote filho.  
+@version Especifica a versão da classe/função.  
+
+Tag 	Snippet
+@api 	@api
+@abstract 	@abstract
+@author 	@author ${1:{{name}}} <${2:{{email}}}>
+@category 	@category ${1:description}
+@copyright 	@copyright ${1:2018} ${2:Name}
+@deprecated 	@deprecated ${1:version}
+@example 	@example ${1:location} ${2:description}
+@filesource 	@filesource
+@final 	@final
+@group 	@group ${1:group}
+@global 	@global
+@ignore 	@ignore ${1:description}
+@inheritDoc 	@inheritDoc
+@internal 	@internal ${1:description}
+@license 	@license ${1:MIT}
+@link 	@link ${1:http://url.com}
+@method 	@method ${1:mixed} ${2:methodName()}
+@package 	@package ${1:category}
+@param 	@param ${1:mixed} $${2:name}
+@property 	@property ${1:mixed} $${2:name}
+@property-read 	@property-read ${1:mixed} $${2:name}
+@property-write 	@property-write ${1:mixed} $${2:name}
+@return 	@return ${1:mixed}
+@see 	@see ${1:http://url.com}
+@since 	@since ${1:1.0.0}
+@source 	@source ${1:location} ${2:description}
+@static 	@static
+@subpackage 	@subpackage ${1:category}
+@throws 	@throws ${1:Exception}
+@todo 	@todo ${1:Something}
+@uses 	@uses ${1:MyClass::function} ${2:Name}
+@var 	@var ${1:mixed}
+@version

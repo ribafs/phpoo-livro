@@ -1,0 +1,97 @@
+Vários frameworks PHP usam este padrão
+
+== Insert
+
+<?php
+ 
+namespace App\Http\Controllers;
+ 
+use App\Http\Controllers\Controller;
+use App\Models\Flight;
+use Illuminate\Http\Request;
+ 
+class FlightController extends Controller
+{
+    /**
+     * Store a new flight in the database.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        // Validate the request...
+ 
+        $flight = new Flight; 
+        $flight->name = $request->name;
+        $flight->save();
+    }
+}
+
+== Update
+
+use App\Models\Flight;
+ 
+$flight = Flight::find(1);
+ 
+$flight->name = 'Paris to London';
+ 
+$flight->save();
+
+
+== Delete
+
+use App\Models\Flight;
+ 
+$flight = Flight::find(1);
+ 
+$flight->delete();
+
+Flight::truncate();
+
+
+O tinker é uma ferramenta do Laravel para trabalhar com bancos de dados via model na linha de comando
+
+php artisan finker
+
+Mudar o name de um user
+
+$user = User::where('email', 'trycia.koelpin@example.org')->first();
+$user->name = 'Ribamar FS';
+$user->save();
+
+Em um único comando
+
+User::where('email', 'trycia.koelpin@example.org')->first()->update(['name' => 'Ribamar FS']);
+
+$user = new User
+$user->name = "John Doe"
+$user->email = "john.doe@foo.bar"
+$user->password = 'password'
+$user->save()
+
+Retornar todos os users
+
+User::all()
+  
+Adicionar dois users
+
+$user1 = new User
+$user2 = new User
+
+$user1->name = "John Doe2"
+$user1->email = "john.doe2@foo.bar"
+$user1->password = 'password'
+
+$user2->name = "John Doe3"
+$user2->email = "john.doe3@foo.bar"
+$user2->password = 'password'
+
+$user1->save()
+$user2->save()
+
+User 1
+
+$user1 = User::find(1)
+
+

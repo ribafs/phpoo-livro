@@ -1,0 +1,14 @@
+# https://www.youtube.com/watch?v=yv3UsXlwH7M
+
+# Reescrever a URL, precisa do mod_rewite ativo
+RewriteEngine On
+
+# ROUTER URL Rewrite - os dois abaixo consideram arquivos e diretórios e os abrirão caso existam
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Tudo que não existir nesta pasta será redirecionado para o index.php. Abertos os que existirem
+RewriteRule ^(.*)$ index.php [NC,L,QSA]
+
+# QSA - parâmetros passados serão encaminhados para o index.php. Exemplo categoria/produto/2
+# NC - não usa case sensitive, not case

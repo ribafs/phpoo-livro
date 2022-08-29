@@ -1,0 +1,10 @@
+crud-generator
+
+Lucas Marques Dutra
+Tem dezenas de problemas nesse repositório, tipo mtmtmtmt problema mesmo: fora de padrao de PSR, sem namespace, problemas de segurança, mistura de html dentro de php dando echo, funcionamento de controller errado, dados estaticos setados na classe, má formatação do código fonte, uso de variáveis superglobais, uso de <?= que é desaconselhado, classes com várias responsabilidades, entre vários outros... Parece que vários trechos de código foram copiados e colados da internet e foram se juntando
+
+Leo Cavalcante
+Acho muito muito nobre seu interesse genuíno de passar conteúdo, sério mesmo, sem demagogia, mas faço das palavras do Lucas as minhas.
+Se quiser levar seu nível de PHP pra um próximo passo, da uma olhada em PSRs, uma estudada em como estruturar melhor o código-fonte tipo deixando templates e regras de negócios separadas, Composer, coisas como Clean Code, Design Patterns, SOLID etc.
+
+

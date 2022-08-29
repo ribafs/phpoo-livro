@@ -1,0 +1,115 @@
+Orientação a Objetos
+
+Na orientação a objetos temos conceitos essenciais como Classe, Objetos/Instâncias, Atributos, Métodos, Herança, Encapsulamento, Associação, Composição, Agregação, Abstração, Polimorfismo e Interface. Esses são alguns dos conceitos essenciais, nesse primeiro artigo de POO. Porém, não falaremos de todos.
+
+Para muitos programadores PHP, orientação a objetos é um conceito amedrontador, cheio de sintaxes complicadas e pontos de paradas. Portanto para se livrar disso é importante conhecer os conceitos ligados à orientação a objetos e aprender a utilizar, assim entendendo o paradigme.
+
+Um dos maiores benefícios da programação DRY é que, se alguma informação é alterada em seu programa, geralmente, só uma mudança é necessária para atualizar o código. Um dos maiores problemas para os desenvolvedores é ter de manter códigos onde os dados são declarados e redeclarados, acabando num jogo de pique esconde, em busca de funcionalidades e dados duplicados pelo código.
+
+A orientação à objetos é uma maneira de programar que modela os processos de programação de uma maneira próxima à realidade, tratando a cada componente de um programa como um objeto, com suas características e funcionalidades. O tratamento de objetos no PHP 5 foi totalmente reescrito, permitindo a utilização de uma maior quantidade de recursos da POO, melhor performance e mais vantagens na implementação deste tipo de programação.
+
+A POO também possibilita uma maior otimização e reutilização do código.
+
+Programação Orientada à Objetos (POO) com PHP Diretoria de Transferência Tecnológica – Centro de Computação – Unicamp
+
+Classes e Objetos
+
+Classe é a estrutura mais fundamental para a criação de um objeto. Uma classe nada mais é do que um conjunto de variáveis (propriedades ou atributos) e funções (métodos), que definem o estado e o comportamento dos objetos. Quando criamos uma classe, temos como objetivo final a criação de objetos, que nada mais são do que representações dessa classe em uma variável do tipo objeto. 
+
+A programação orientada a objetos é um estilo de programação no qual é comum agrupar todas as variáveis e funções de um determinado tópico em uma única classe, ou seja, cada classe sobre um único assunto. A programação orientada a objetos é considerada mais avançada e eficiente do que o estilo procedural de programação. Essa eficiência decorre do fato de que oferece suporte a uma melhor organização de código, fornece modularidade e reduz a necessidade de nos repetir. Dito isso, podemos ainda preferir o estilo procedural em projetos pequenos e simples. No entanto, à medida que nossos projetos crescem em complexidade, é melhor usar o estilo orientado a objetos.
+
+Como criar classes?
+Para criar uma classe, agrupamos o código que trata de um determinado tópico em um único lugar. Por exemplo, podemos agrupar todo o código que trata os usuários de um blog em uma classe, todo o código que está envolvido com a publicação das postagens no blog em uma segunda classe e todo o código que é dedicado a comentários em uma terceira classe.
+
+Para nomear a classe, é comum usar um substantivo no singular que começa com uma letra maiúscula. Por exemplo, podemos agrupar um código que lida com usuários em uma classe User, o código que lida com postagens em uma classe Post e o código que é dedicado a comentários em uma classe Comment.
+
+O que são OOPs?
+Orientado a Objetos é uma abordagem de desenvolvimento de software que modela a aplicação em torno de objetos do mundo real, como funcionários, carros, contas bancárias, etc. Uma classe define as propriedades e métodos de um objeto do mundo real. Um objeto é uma ocorrência de uma classe.
+
+Os três componentes básicos da orientação a objetos são;
+    • Análise orientada a objetos - funcionalidade do sistema
+    • Projeto orientado a objetos - arquitetura do sistema
+    • Programação orientada a objetos - implementação do aplicativo
+
+Princípios de programação orientada a objetos
+
+Os três princípios principais de OOP são;
+    • Encapsulamento - trata de ocultar os detalhes de implementação e apenas expor os métodos. O principal objetivo do encapsulamento é;
+        ◦ Reduza a complexidade do desenvolvimento de software - ocultando os detalhes de implementação e apenas expondo as operações, o uso de uma classe torna-se mais fácil.
+        ◦ Proteja o estado interno de um objeto - o acesso às variáveis ​​da classe é feito por meio de métodos como get e set, o que torna a classe flexível e fácil de manter.
+        ◦ A implementação interna da classe pode ser alterada sem a preocupação de quebrar o código que usa a classe.
+    • Herança - diz respeito ao relacionamento entre as classes. O relacionamento assume a forma de pai e filho. O filho usa os métodos definidos na classe pai. O principal objetivo da herança é;
+        ◦ Reutilização– vários filhos podem herdar do mesmo pai. Isso é muito útil quando temos que fornecer uma funcionalidade comum, como adicionar, atualizar e excluir dados do banco de dados.
+    • Polimorfismo - trata de ter uma única forma, mas muitas maneiras de implementação diferentes. O principal objetivo do polimorfismo é;
+        ◦ Simplifique a manutenção de aplicativos e torne-os mais extensíveis.
+Conceitos OOPs em PHP
+PHP é uma linguagem de script orientada a objetos; ele apóia todos os princípios acima. Os princípios acima são alcançados via;
+
+    • Encapsulamento - por meio do uso dos métodos “get” e “set”, etc.
+    • Herança - por meio do uso da palavra-chave extends
+    • Polimorfismo - por meio do uso da palavra-chave implements
+Agora que temos o conhecimento básico de OOP e como ele é suportado no PHP, vamos dar uma olhada em exemplos que implementam os princípios acima
+
+https://www.guru99.com/object-oriented-programming.html
+
+Classes e objetos PHP
+
+Neste tutorial, você aprenderá como escrever código no estilo orientado a objetos em PHP.
+
+O que é programação orientada a objetos
+
+A Programação Orientada a Objetos (OOP) é ​​um modelo de programação baseado no conceito de classes e objetos. Ao contrário da programação procedural, onde o foco está em escrever procedimentos ou funções que realizam operações nos dados, na programação orientada a objetos o foco está nas criações de objetos que contêm dados e funções juntos.
+
+A programação orientada a objetos tem várias vantagens sobre o estilo de programação convencional ou procedural. Os mais importantes estão listados abaixo:
+    • Fornece uma estrutura modular clara para os programas.
+    • Ajuda você a aderir ao princípio "não se repita" (DRY) e, assim, tornar seu código muito mais fácil de manter, modificar e depurar.
+    • Torna possível criar um comportamento mais complicado com menos código e menor tempo de desenvolvimento e alto grau de reutilização.
+
+As seções a seguir descreverão como classes e objetos funcionam em PHP.
+
+Dica: A ideia por trás do princípio Don't Repeat Yourself (DRY) é reduzir a repetição de código abstraindo o código que é comum para o aplicativo e colocando-o em um único lugar e reutilizando-o em vez de repeti-lo.
+
+Compreendendo classes e objetos
+
+Classes e objetos são os dois aspectos principais da programação orientada a objetos. Uma classe é uma coleção autocontida e independente de variáveis ​​e funções que trabalham juntas para realizar uma ou mais tarefas específicas, enquanto os objetos são instâncias individuais de uma classe.
+
+Uma classe atua como um modelo ou projeto a partir do qual muitos objetos individuais podem ser criados. Quando objetos individuais são criados, eles herdam as mesmas propriedades e comportamentos genéricos, embora cada objeto possa ter valores diferentes para certas propriedades.
+
+Por exemplo, pense em uma classe como a planta de uma casa. A planta em si não é uma casa, mas é uma planta detalhada da casa. Enquanto, um objeto é como uma casa real construída de acordo com esse projeto. Podemos construir várias casas idênticas a partir da mesma planta, mas cada casa pode ter diferentes tintas, interiores e famílias em seu interior, como mostra a ilustração abaixo.
+
+Para declararmos uma classe, utilizamos a palavra-chave class.
+
+<?php
+    // noticia.class.php
+class Noticia
+{
+    public $titulo;
+    public $texto;
+
+    public function setTitulo($valor)
+    {
+        $this->titulo = $valor;
+    }
+
+    public function setTexto($valor)
+    {
+        $this->texto = $valor;
+    }
+
+    public function exibeNoticia()
+    {
+        $ret = "<center>";
+        $ret .="<b>". $this->titulo ."</b><p>";
+        $ret .= $this->texto;
+        $ret .= "</center><p>";
+        return $ret;
+    }
+}
+
+$not = new Noticia;
+$not->titulo = 'Novo curso de PHP Avançado';
+$not->texto = 'Este curso contém os seguinte tópicos: POO, XML, etc.';
+print $not->exibeNoticia();
+
+https://www.uniaogeek.com.br/poo-no-php-parte-1/
+
