@@ -2,6 +2,10 @@
 error_reporting(E_ALL ^ E_DEPRECATED);
 // FrontController, única entrada para o aplicativo
 
+if(!file_exists('../vendor')) {
+    die ('<h3>Precisa executar antes o comando<br>composer du</h3>');
+}
+
 define('DS', DIRECTORY_SEPARATOR);
 
 // Captura o path completo do aplicativo. DIRECTORY_SEPARATOR adiciona uma barra ao final do path
