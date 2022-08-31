@@ -1,0 +1,3 @@
+# Habilita o mod_rewrite e Redireciona todos os requests para o diretório public/
+RewriteEngine on
+RewriteRule ^(.*) public/$1 [L]

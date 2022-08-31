@@ -1,0 +1,77 @@
+Como funciona o namespace no PHP
+
+O objetivo principal do namespace é o de permitir que tenhamos duas ou mais classes com o mesmo nome sem conflito.
+
+Exemplo:
+
+Criar duas pastas:
+
+classes
+models
+
+Criar uma classe Produto em classes e models, em arquivos produto.php
+
+produto.php
+<?php
+
+class Produto{
+    public function mostrarDetalhes(){
+        echo 'Detalhes do produto da pasta classes';
+    }
+}
+
+e
+<?php
+
+class Produto{
+    public function mostrarDetalhes(){
+        echo 'Detalhes do produto da pasta models';
+    }
+}
+
+Criar no raiz um arquivo index.php
+
+No index.php incluir as duas classes:
+
+require 'classes/produto.php';
+require 'models/produto.php';  
+
+$produto = new Produto();
+
+Acusará erro.
+
+Então adicionar o namespace:
+
+<?php
+
+namespace classes;
+
+class Produto{
+    public function mostrarDetalhes(){
+        echo 'Detalhes do produto da pasta classes';
+    }
+}
+
+e
+
+<?php
+
+namespace models;
+
+class Produto{
+    public function mostrarDetalhes(){
+        echo 'Detalhes do produto da pasta models';
+    }
+}
+
+No index.php
+
+$produto = new \classes\Produto();
+
+e
+$produto = new \models\Produto();
+
+Referência
+Curso de PHPOO do Node Studio
+https://www.youtube.com/watch?v=o2CXLk74ggE&list=PLwXQLZ3FdTVEau55kNj_zLgpXL4JZUg8I&index=13
+

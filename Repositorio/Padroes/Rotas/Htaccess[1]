@@ -1,0 +1,70 @@
+# https://www.youtube.com/watch?v=yv3UsXlwH7M
+
+# Habilita a Reescrida da URL, precisa do mod_rewite ativo
+RewriteEngine On
+
+# ROUTER URL Rewrite - os dois abaixo consideram somente arquivos e diretórios existentes e os abrirão caso existam
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Tudo que não existir nesta pasta será redirecionado para o index.php e abertos os que existirem
+RewriteRule ^(.*)$ index.php [NC,L,QSA]
+
+# QSA - parâmetros passados serão encaminhados para o index.php. Exemplo categoria/produto/2
+# NC - não usa case sensitive, not case
+
+Esse arquivo diz para o Apache que é para ele enviar o que não encontrar para o meu arquivo index.php.
+
+Então quando o aplicativo receber uma requisição http://localhost/pagina
+Ela será processada como
+http://localhost/index.php/pagina
+
+
+Outro
+
+RewriteEngine On
+
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php [L]
+
+
+Outro
+
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews -Indexes
+    </IfModule>
+
+    <Files ~ "^.*\.(env|conf).*">
+        order allow,deny
+        deny from all
+        satisfy all
+    </Files>
+
+    RewriteEngine On
+
+    # Handle Authorization Header
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # Redirect Trailing Slashes If Not A Folder...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [L,R=301]
+
+    # Handle Front Controller...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
+    RewriteRule ^(app/|vendor/|storage/|config/|database/) - [F,L,NC]
+</IfModule>
+
+Para um certo diretório
+
+RewriteEngine On
+RewriteBase /testes/
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.+)$ index.php [QSA,L]

@@ -1,0 +1,13 @@
+Implementando namespace com PSR-4 em aplicativo PHP
+
+1 - Criar a estrutura de diretórios
+
+2 - Criar o composer.json com o autoload
+
+3 - Digitar o namespace em cada uma das classes do namespace
+
+4 - Adicionar ao index.php do raiz:
+require_once 'vendor/autoload.php';
+
+Concluir o aplicativo usando o namespace
+

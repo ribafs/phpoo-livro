@@ -1,0 +1,72 @@
+Create your own PHP Router the simplest possible way
+azeemhassni Azeem Hassni PHP , Snippets , Tooling , Web September 25, 2018
+
+Inspired from Laravel's router, lets build our very own PHP's router for managing our endpoints well for our next PHP project.
+
+Introduction
+
+Inspired from Laravel’s router, lets build our very own PHP’s router for managing our endpoints well for our next PHP project.
+Setting up
+
+Let’s make a new directory for our demo project & create couple of files we’re going to be using i.e. index.php & router.php.
+
+Basic flow would be like, in our index.php, we’ll setup our routes and endpoints & simply passing the data in the callbacks.
+
+In our router.php, paste the following code.
+
+<?php
+
+/**
+ * Holds the registered routes
+ *
+ * @var array $routes
+ */
+$routes = [];
+
+/**
+ * Register a new route
+ *
+ * @param $action string
+ * @param \Closure $callback Called when current URL matches provided action
+ */
+function route($action, Closure $callback)
+{
+    global $routes;
+    $action = trim($action, '/');
+    $routes[$action] = $callback;
+}
+
+/**
+ * Dispatch the router
+ *
+ * @param $action string
+ */
+function dispatch($action)
+{
+    global $routes;
+    $action = trim($action, '/');
+    $callback = $routes[$action];
+
+    echo call_user_func($callback);
+}
+
+As you can see, there are two main functions here, one is route(), which accepts an action & a callback. This route() method will determine the action will return the provided callback. The other function is dispatch() and it will only accept an action.
+
+Now inside of our index.php, we can simply call like.
+
+<?php
+
+require_once "router.php";
+
+route('/', function () {
+    return "Hello World";
+});
+
+route('/about', function () {
+    return "Hello form the about route";
+});
+
+$action = $_SERVER['REQUEST_URI'];
+dispatch($action);
+
+https://thewebtier.com/php/create-your-own-php-router-the-simplest-possible-way/

@@ -1,0 +1,69 @@
+PHP Moderno
+
+Recursos
+
+https://www.youtube.com/watch?v=ZQVztAwoHUA
+
+PSRs
+- https://www.php-fig.org/
+https://www.php-fig.org/psr/
+
+Composer
+https://getcomposer.org/
+
+composer.json
+
+composer.lock
+
+Packgist
+https://packagist.org/
+
+Git
+https://git-scm.com/
+
+GitHub
+https://github.com/
+
+PHPUnit
+https://phpunit.de/
+
+Monolog - ferramenta de logs
+https://github.com/Seldaek/monolog
+
+PHP so Jeito Certo - em vários idiomas
+http://br.phptherightway.com/
+
+Funções anônimas
+
+Traits - permite herança composta
+
+Templates - twigs e 
+
+Servidor web nativo para ambientes de desenvolvimento
+
+php -S localhost:8000
+
+Vagrant
+
+Docker
+
+Microfrfameworks
+Siles
+Lumen
+Slim
+
+PHP 7 e 8
+
+Types, null coalesce e spaceship operator
+
+DRY
+
+SOLLID
+
+Próximos recursos do PHP
+https://wiki.php.net/rfc
+
+Padrões de Projeto com PHP em português
+https://designpatternsphp.readthedocs.io/pt_BR/latest/README.html
+
+

@@ -1,0 +1,56 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: DesignPatternsPHP 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-05-29 12:18+0200\n"
+"PO-Revision-Date: 2016-04-04 08:02+0200\n"
+"Last-Translator: Dominik Liebler <liebler.dominik@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: de\n"
+"Language-Team: \n"
+"X-Generator: Poedit 1.8.7.1\n"
+
+#: ../../Structural/Registry/README.rst:2
+msgid "`Registry`__"
+msgstr "`Registry`__"
+
+#: ../../Structural/Registry/README.rst:5
+msgid "Purpose"
+msgstr "Zweck"
+
+#: ../../Structural/Registry/README.rst:7
+msgid ""
+"To implement a central storage for objects often used throughout the application, is typically "
+"implemented using an abstract class with only static methods (or using the Singleton pattern). "
+"Remember that this introduces global state, which should be avoided at all times! Instead "
+"implement it using Dependency Injection!"
+msgstr ""
+"Einen zentralen Speicher für Objekte zu implementieren, die oft "
+"innerhalb der Anwendung benötigt werden. Wird üblicherweise als "
+"abstrakte Klasse mit statischen Methoden (oder als Singleton) "
+"implementiert. Denke daran, dass hierdurch ein globaler Zustand "
+"eingeführt wird, der zu jeder Zeit vermieden werden sollte! "
+"Stattdessen sollte Dependency Injection implementiert werden!"
+
+#: ../../Structural/Registry/README.rst:12
+msgid "Examples"
+msgstr "Beispiele"
+
+#: ../../Structural/Registry/README.rst:20
+msgid "UML Diagram"
+msgstr "UML Diagramm"
+
+#: ../../Structural/Registry/README.rst:27
+msgid "Code"
+msgstr "Code"
+
+#: ../../Structural/Registry/README.rst:29
+msgid "You can also find this code on `GitHub`_"
+msgstr "Du findest den Code auch auf `GitHub`_"
+
+#: ../../Structural/Registry/README.rst:38
+msgid "Test"
+msgstr "Теst"

@@ -1,0 +1,52 @@
+[
+    {
+        "name": "izniburak/router",
+        "version": "v1.4.1",
+        "version_normalized": "1.4.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/izniburak/php-router.git",
+            "reference": "d19e5e8ead742e1bb31fae1fbe7b8c72354727c3"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/izniburak/php-router/zipball/d19e5e8ead742e1bb31fae1fbe7b8c72354727c3",
+            "reference": "d19e5e8ead742e1bb31fae1fbe7b8c72354727c3",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.4.0"
+        },
+        "require-dev": {
+            "guzzlehttp/guzzle": "^5.3",
+            "phpunit/phpunit": "^4.8 || ^5.7 || ^6.5 || ^7.0"
+        },
+        "time": "2019-07-18T21:00:07+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Buki\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "İzni Burak Demirtaş",
+                "email": "info@burakdemirtas.org",
+                "homepage": "http://burakdemirtas.org"
+            }
+        ],
+        "description": "simple router class for php",
+        "homepage": "https://github.com/izniburak/php-router",
+        "keywords": [
+            "Simple",
+            "php",
+            "route",
+            "router"
+        ]
+    }
+]

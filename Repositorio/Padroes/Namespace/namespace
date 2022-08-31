@@ -1,0 +1,14 @@
+Dicas sobre Namespaces
+
+Alternativas
+
+$home = new \App\Controller\HomeController;
+
+ou
+
+use App\Controller\HomeController;
+$home = new HomeController
+
+echo $home->index();
+
+

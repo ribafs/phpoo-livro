@@ -1,0 +1,59 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2015, Dominik Liebler and contributors
+# This file is distributed under the same license as the DesignPatternsPHP
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2016.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: DesignPatternsPHP 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-06-03 23:59+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.3.4\n"
+
+#: ../../Structural/Flyweight/README.rst:2
+msgid "`Flyweight`__"
+msgstr ""
+
+#: ../../Structural/Flyweight/README.rst:5
+msgid "Purpose"
+msgstr ""
+
+#: ../../Structural/Flyweight/README.rst:7
+msgid ""
+"To minimise memory usage, a Flyweight shares as much as possible memory "
+"with similar objects. It is needed when a large amount of objects is used"
+" that don't differ much in state. A common practice is to hold state in "
+"external data structures and pass them to the flyweight object when "
+"needed."
+msgstr ""
+"Um den Speicherverbrauch zu minimieren, teilt sich ein Flyweight so viel Speicher "
+"wie möglich mit ähnlichen Objekten. Es wird benötigt, wenn eine große Anzahl von "
+"Objekten verwendet wird, die sich im Zustand nicht sehr unterscheiden."
+"Eine gängige Praxis ist es, den Zustand in externen Datenstrukturen zu halten "
+"und sie bei Bedarf an das Flyweight-Objekt zu übergeben."
+
+
+#: ../../Structural/Flyweight/README.rst:12
+msgid "UML Diagram"
+msgstr ""
+
+#: ../../Structural/Flyweight/README.rst:19
+msgid "Code"
+msgstr ""
+
+#: ../../Structural/Flyweight/README.rst:21
+msgid "You can also find this code on `GitHub`_"
+msgstr "Du findest den Code auch auf `GitHub`_"
+
+#: ../../Structural/Flyweight/README.rst:42
+msgid "Test"
+msgstr ""
+
