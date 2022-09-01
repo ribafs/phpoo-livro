@@ -23,7 +23,7 @@ Que por cotna da sua clareza me permitiu entender como se cria um bom aplicativo
 Na pasta Repositório
 
 - Aplicativos
-    - [app-php-mvc](Repositorio/Aplicativos/app-php-mvc) (aplicativo criado no livro)
+    - [app-php-mvc](Repositorio/Aplicativos/app-php-mvc) (3 versões do aplicativo criado no livro)
     - app_phpoo
     
 - BoasPraticas
