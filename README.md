@@ -10,6 +10,14 @@ https://github.com/panique/mini3
 
 Que por cotna da sua clareza me permitiu entender como se cria um bom aplicativo em PHP usando MVC.
 
+## Atualizações
+
+Ficarei adicionando atualizações na pasta 
+
+[atualizacoes](atualizacoes)
+
+Acabo de adicionar um pequena classe de rotas simples que encontrei, para quem pretende estudar o assunto.
+
 ## Índice do Livro
 
 [indice.pdf](indice.pdf)
