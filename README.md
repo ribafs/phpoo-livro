@@ -18,7 +18,7 @@ Ficarei adicionando atualizações na pasta
 
 Adicionei uma pequena classe de rotas simples que encontrei, para quem pretende estudar o assunto.
 
-Acabo de adicionar a versão 4 do aplicativo.
+Acabo de adicionar a versão 4 do aplicativo com algumas atualizações:
 
 [app-php-mvc4](atualizacoes/app-php-mvc4)
 
