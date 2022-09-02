@@ -1,0 +1,14 @@
+.navbar-dark .navbar-nav .nav-link {
+    color: #a1e1ed;
+}
+.center-img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 20%;
+}
+
+.bg-gray{
+	background-color: #e8e3e3;
+}
+

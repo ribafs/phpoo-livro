@@ -1,0 +1,23 @@
+{
+    "name": "ribafs/app-php-mvc",
+    "description": "Aplicactivo com PHPOO usando MVC com rotas",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ribamar FS",
+            "email": "ribafs@gmail.com"
+        }
+    ],
+	"minimum-stability": "stable",
+  "require":{
+  },
+    "autoload":
+    {
+        "psr-4":
+        {
+            "App\\" : "App/",
+            "Core\\" : "Core/"
+        }
+    }
+}
