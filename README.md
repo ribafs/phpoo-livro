@@ -16,7 +16,11 @@ Ficarei adicionando atualizações na pasta
 
 [atualizacoes](atualizacoes)
 
-Acabo de adicionar um pequena classe de rotas simples que encontrei, para quem pretende estudar o assunto.
+Adicionei uma pequena classe de rotas simples que encontrei, para quem pretende estudar o assunto.
+
+Acabo de adicionar a versão 4 do aplicativo.
+
+[app-php-mvc4](atualizacoes/app-php-mvc4)
 
 ## Índice do Livro
 
