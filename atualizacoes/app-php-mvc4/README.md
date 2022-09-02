@@ -9,6 +9,7 @@ Para simplificar criei duas tabelas, clients e products, cada uma com apenas doi
 - Atualizei o bootstrap para a versão mais recente, 5.2
 - Adicionei uma solicitação de confirmação de exclusão dos registros em na views/clients/index
 - Fiz alguns ajustes no CSS
+- Organizei e comentei melhor a chasse Core/Router.php
 
 ## Criar um aplicativo com a arquitetura MVC partindo do mini3 
 https://github.com/panique/mini3
