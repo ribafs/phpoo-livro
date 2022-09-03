@@ -20,7 +20,7 @@ Adicionei uma pequena classe de rotas simples que encontrei, para quem pretende 
 
 Acabo de adicionar a versão 4 do aplicativo com algumas atualizações:
 
-[app-php-mvc4](atualizacoes/app-php-mvc4)
+[app-php-mvc4](atualizacoes/app-php-mvc4) - última atualização - 03/09/2022
 
 ## Índice do Livro
 
