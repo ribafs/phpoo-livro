@@ -5,7 +5,7 @@ define('URL_PROTOCOL', '//'); // //
 define('URL_DOMAIN', $_SERVER['HTTP_HOST']); // localhost
 define('URL_SUB_FOLDER', str_replace(URL_PUBLIC_FOLDER, '', dirname($_SERVER['SCRIPT_NAME'])));// Raiz do aplicativo - /appfolder
 define('URL', URL_PROTOCOL . URL_DOMAIN . URL_SUB_FOLDER);// /localhost/appfolder/
-define('APP_TITTLE', 'Mini MVC');
+define('APP_TITTLE', 'Aplicativo em PHP usando MVC');
 define('DEFAULT_CONTROLLER', 'clients');
 define('DEBUG', true);
 
