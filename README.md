@@ -10,17 +10,9 @@ https://github.com/panique/mini3
 
 Que por cotna da sua clareza me permitiu entender como se cria um bom aplicativo em PHP usando MVC.
 
-## Atualizações
+## Atualizações - visite para ver as últimas
 
-Ficarei adicionando atualizações na pasta 
-
-[atualizacoes](atualizacoes)
-
-Adicionei uma pequena classe de rotas simples que encontrei, para quem pretende estudar o assunto.
-
-Acabo de adicionar a versão 4 do aplicativo com algumas atualizações:
-
-[app-php-mvc4](atualizacoes/app-php-mvc4) - última atualização - 03/09/2022
+Ficarei atualizando nesta pasta [atualizacoes](atualizacoes)
 
 ## Índice do Livro
 
