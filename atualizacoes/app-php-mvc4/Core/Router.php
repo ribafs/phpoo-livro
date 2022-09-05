@@ -31,8 +31,9 @@ class Router
        		// Verifique se o parâmetro é vazio
             if (!empty($this->urlParams)) {
 
-          		// Se não for vazio chame o controller, o action e os paprâmetros
-                call_user_func_array(array($this->urlController, $this->urlAction), $this->urlParams);
+          	// Se não for vazio chame o controller, o action e os paprâmetros
+                // call_user_func_array(array($this->urlController, $this->urlAction), $this->urlParams);
+		$this->urlController->{$this->urlAction}(...$this->urlParams);
 
             // Caso os parâmetros sejam vazios, instancie o controller apenas com o action
             } else {
