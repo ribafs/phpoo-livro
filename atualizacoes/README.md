@@ -1,5 +1,7 @@
 # Atualizações
 
+- Atualização da classe Router.php no app-php-mvc4 (05/09/2022)
+
 - Adicionei uma pequena classe de rotas simples que encontrei, para quem pretende estudar o assunto.
 
 - Acabo de adicionar a versão 4 do aplicativo com algumas atualizações:
