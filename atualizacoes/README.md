@@ -2,7 +2,7 @@
 
 - Tentando melhorar o aplicativo eu fiz uma forte refatoração nele, tornando mais simples e fácil de entender - 07/09/2022
 
-[php-route2](php-route2)
+[php-routes2](php-routes2)
 
 - Atualização da classe Router.php no app-php-mvc4 (05/09/2022)
 
