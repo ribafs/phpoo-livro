@@ -24,12 +24,12 @@ https://github.com/panique/mini3
 
 ## Este repositório
 
-https://github.com/ribafs/mini-mvc
+https://github.com/ribafs/php-router
 
 ## Instalação
 
-- Faça o download e descompacte para mini-mvc
-- Cope para seu diretório web e acesse a pasta mini-mvc
+- Faça o download e descompacte para php-router
+- Cope para seu diretório web e acesse a pasta php-router
 - Execute
 
 composer du
@@ -44,7 +44,7 @@ db.sql
 
 ## Chame pelo navegador
 
-http://localhost/mini-mvc
+http://localhost/php-router
 
 
 ## Motivação
@@ -73,7 +73,7 @@ Como o autor alerta, o objetivo não é de tornar o mesmo seu framework de uso d
 
 MVC é uma arquitetura de software, muito confundido com um padrão de projeto, cujo principal objetivo é separar o código de um aplicativo em 3 camadas: Model, View e Controller, assim deixando o código mais organizado e de fácil manutenção.
 
-- Alguém clica no botão CLIENTES na view clientes/index, que chama o método com o mesmo nome, que é o index do controle cm o mesmo nome, Clientes
+- Alguém clica no botão CLIENTES na view clientes/index, que chama o método com o mesmo nome, que é o index do controle com o mesmo nome, Clientes
 - Então o método index do ClientesController é chamado
 - O método index do controller cria uma instância do model Cliente e através desta instância chama o  método getAllClientes do model Cliente
 - O método getAllClientes do model faz uma consulta ao banco para que devolva todos os registros da tabela clientes, então retorna todos os clientes para o método index do ClientesController
