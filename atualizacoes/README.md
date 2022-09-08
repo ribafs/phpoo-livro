@@ -1,5 +1,7 @@
 # Atualizações
 
+- Adicionei o fluxo das informações do MVC ao README.md do raiz juntamente com um diagrama - 08/09/2022
+
 - Tentando melhorar o aplicativo eu fiz uma forte refatoração nele, tornando mais simples e fácil de entender - 07/09/2022
 
 [php-routes2](php-routes2)
