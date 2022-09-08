@@ -42,6 +42,20 @@ Na pasta Repositório
 - PHPModerno
 - Tutoriais
 
+## Diagrama MVC
+
+### Pequeno diagrama do fluxo de informações do MVC
+
+- Usuário faz uma requisição através de um botão numa view ou diretamente por um link
+- O sistema de rotas recebe e encaminha para o action  de um específico controller
+- O conroller solicita do model as informações
+- O model requisita do banco de dados
+- O banco devolve para o model
+- O model devolve para o controller
+- O controller devolve para a view/usuário
+
+![](mvc.png)
+
 ## Sugestões
 
 Serão bem vindas. Use o forum para isso - [https://github.com/ribafs/phpoo-livro/discussions](https://github.com/ribafs/phpoo-livro/discussions)
