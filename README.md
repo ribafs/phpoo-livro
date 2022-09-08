@@ -44,15 +44,17 @@ Na pasta Repositório
 
 ## Diagrama MVC
 
-### Pequeno diagrama do fluxo de informações do MVC
+### Fluxo de informações do MVC
 
-- Usuário faz uma requisição através de um botão numa view, submetendo um form, clicando num link, ou insetindo uma URL no navegador
-- O sistema de rotas recebe e encaminha para o action  de um específico controller
-- O conroller solicita do model as informações
-- O model requisita do banco de dados
-- O banco devolve para o model
-- O model devolve para o controller
-- O controller devolve para a view/usuário
+- User
+- Front Controller
+- Router
+- Controller/action
+- Model/method
+- Database
+- Model/method
+- Controller/action
+- view
 
 ![](mvc.png)
 
