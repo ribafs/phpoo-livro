@@ -14,9 +14,7 @@ Que por cotna da sua clareza me permitiu entender como se cria um bom aplicativo
 
 Ao pesquisar projetos por php mvc ou framework mvc do zero, acontece muito de ao invés de usar o nome Route ou Router para a classe de rotas, o autor usar App ou Application. Alguns até recomendam por ser mais semântico e combinar melhor com sua função.
 
-## Atualizações - visite para ver as últimas
-
-Ficarei atualizando nesta pasta [atualizacoes](atualizacoes)
+## Atualizações - [visite para ver as últimas](atualizacoes)
 
 ## Índice do Livro
 
