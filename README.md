@@ -54,7 +54,7 @@ Na pasta Repositório
 - O model devolve para o controller
 - O controller devolve para a view/usuário
 
-![](mvc.png)
+![](mvc2.png)
 
 ## Sugestões
 
