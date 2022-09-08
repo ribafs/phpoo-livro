@@ -46,7 +46,7 @@ Na pasta Repositório
 
 ### Pequeno diagrama do fluxo de informações do MVC
 
-- Usuário faz uma requisição através de um botão numa view ou diretamente por um link
+- Usuário faz uma requisição através de um botão numa view, submetendo um form, clicando num link, ou insetindo uma URL no navegador
 - O sistema de rotas recebe e encaminha para o action  de um específico controller
 - O conroller solicita do model as informações
 - O model requisita do banco de dados
