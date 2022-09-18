@@ -44,15 +44,16 @@ Na pasta Repositório
 
 ### Fluxo de informações do MVC
 
-- User faz uma requisição
-- É recebida pelo Front Controller
-- Front controller envia para o Router 
-- Router envia para o Controller/action
-- O Controller/action solicita as informações do Model/method
+- Um usuário faz uma requisição (digitando uma URL no navegador, clicando num link, etc)
+- A requisição é recebida pelo Front Controller (public/index em nosso caso)
+- Front controller envia para o Router (Core/Router)
+- Router envia para o requisitado controller/action
+- O controller/action solicita as informações do model/method
 - Model/method solicita ao Database
-- Database devolve para o Model/method
-- Model/method devolve para o Controller/action
+- Database devolve para o model/method
+- Model/method devolve para o controller/action
 - Controller/action devolve para a respectiva view
+- Assim chega ao usuário
 
 ![](mvc.png)
 
