@@ -61,6 +61,12 @@ Na pasta Repositório
 
 Serão bem vindas. Use o forum para isso - [https://github.com/ribafs/phpoo-livro/discussions](https://github.com/ribafs/phpoo-livro/discussions)
 
+## Livro sobre o Laravel 9
+
+Este livro ainda não foi liebrado para download, foi o penúltimo que elaborei. Se interessar veja o índice abaixo
+
+[laravel9-indice.pdf](laravel9-indice.pdf)
+
 ## Licença
 
 MIT
