@@ -57,6 +57,14 @@ Na pasta Repositório
 
 ![](mvc.png)
 
+
+## Veja projetos criados após este e na mesma área:
+
+https://github.com/ribafs/simplest-router
+
+https://github.com/ribafs/micro-framework
+
+
 ## Sugestões
 
 Serão bem vindas. Use o forum para isso - [https://github.com/ribafs/phpoo-livro/discussions](https://github.com/ribafs/phpoo-livro/discussions)
