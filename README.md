@@ -69,6 +69,10 @@ https://github.com/ribafs/micro-framework
 
 Serão bem vindas. Use o forum para isso - [https://github.com/ribafs/phpoo-livro/discussions](https://github.com/ribafs/phpoo-livro/discussions)
 
+- https://alexandrebbarbosa.wordpress.com/2019/04/17/phpconstruir-um-sistema-de-rotas-para-mvc-primeira-parte/
+- https://alexandrebbarbosa.wordpress.com/2019/04/19/phpconstruir-um-sistema-de-rotas-para-mvc-segunda-parte/
+- https://alexandrebbarbosa.wordpress.com/2019/04/23/phpconstruir-um-sistema-de-rotas-para-mvc-terceira-parte/
+
 ## Livro sobre o Laravel 9
 
 Este livro ainda não foi liebrado para download, foi o penúltimo que elaborei. Se interessar veja o índice abaixo
